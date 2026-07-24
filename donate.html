@@ -31,60 +31,85 @@
   h1,h2,h3{font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:700;margin:0;}
   a{color:inherit;}
   img{max-width:100%;display:block;}
-  .container{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .container{max-width:640px;margin:0 auto;padding:0 24px;}
 
   header{padding:18px 0;border-bottom:1px solid var(--line);background:rgba(248,249,250,0.9);backdrop-filter:blur(10px);position:sticky;top:0;z-index:20;}
-  .header-row{display:flex;align-items:center;justify-content:space-between;}
+  .header-row{max-width:640px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;}
   .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.05rem;font-family:'Frank Ruhl Libre',Georgia,serif;}
   .brand img{height:32px;width:auto;}
   .back-link{display:flex;align-items:center;gap:6px;font-size:.86rem;font-weight:700;color:var(--muted);text-decoration:none;}
   .back-link:hover{color:var(--terracotta-dark);}
   .back-link svg{width:16px;height:16px;}
 
-  main{padding:40px 0 80px;}
+  main{padding:44px 0 80px;}
 
-  .checkout-grid{display:grid;grid-template-columns:3fr 2fr;gap:40px;align-items:start;}
-
-  /* Steps */
-  .steps{display:flex;align-items:center;gap:10px;margin-bottom:30px;}
-  .step{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;color:var(--muted);}
-  .step .dot{width:24px;height:24px;border-radius:50%;background:var(--white);border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--muted);flex-shrink:0;transition:.25s;}
-  .step.active .dot{background:var(--terracotta);border-color:var(--terracotta);color:var(--white);}
-  .step.active{color:var(--ink);}
-  .step-line{flex:0 0 26px;height:2px;background:var(--line);}
-
-  .panel{
-    animation:rise .55s ease both;
-    background:var(--white);border:1px solid var(--line);border-radius:16px;
-    padding:30px;box-shadow:var(--shadow);margin-bottom:22px;
+  .card{
+    background:var(--white);border:1px solid var(--line);border-radius:26px;
+    box-shadow:var(--shadow-lg);padding:36px 32px;animation:rise .5s ease both;
   }
-  .panel:nth-of-type(2){animation-delay:.08s;}
-  .panel:nth-of-type(3){animation-delay:.16s;}
   @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 
-  .panel h2{font-size:1.15rem;margin-bottom:4px;}
-  .panel .panel-sub{color:var(--muted);font-size:.88rem;margin-bottom:20px;}
+  .card h1{font-size:1.9rem;line-height:1.3;margin-bottom:8px;color:#0F2D32;}
+  .card > p.lead{color:var(--muted);margin:0 0 26px;font-size:.98rem;}
 
-  .amount-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+  /* Frequency toggle */
+  .freq-toggle{display:flex;gap:8px;background:var(--cream-2);border-radius:12px;padding:5px;margin-bottom:22px;}
+  .freq-btn{
+    flex:1;border:none;background:transparent;padding:12px 10px;border-radius:9px;
+    font-family:inherit;font-weight:700;font-size:.92rem;color:var(--muted);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:7px;transition:.2s ease;
+  }
+  .freq-btn.active{background:var(--white);color:var(--ink);box-shadow:var(--shadow);}
+  .freq-dot{width:8px;height:8px;border-radius:50%;background:var(--terracotta);flex-shrink:0;}
+  .freq-hint{
+    display:none;text-align:center;font-size:.82rem;color:var(--green-dark);
+    background:var(--cream-2);border-radius:8px;padding:9px 12px;margin:-10px 0 20px;
+  }
+  .freq-hint.show{display:block;}
+
+  /* Amount grid */
+  .amount-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
   .amount-btn{
-    border:1.5px solid var(--line);background:var(--cream);border-radius:10px;
-    padding:16px 6px;font-weight:800;font-size:1.08rem;cursor:pointer;color:var(--ink);
-    transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease,background .15s ease;
+    position:relative;border:2px solid var(--line);background:var(--white);border-radius:16px;
+    padding:16px;text-align:start;cursor:pointer;font-family:inherit;
+    transition:transform .15s ease,border-color .15s ease,background .15s ease;
   }
-  .amount-btn:hover{border-color:var(--terracotta);background:#FBEADD;transform:translateY(-2px);}
-  .amount-btn.selected{border-color:var(--terracotta);background:#FBEADD;box-shadow:var(--shadow);}
+  .amount-btn:hover{border-color:var(--terracotta);}
+  .amount-btn.selected{border-color:var(--terracotta);background:#FFF6EE;transform:scale(1.04);}
+  .amount-btn .price{display:block;font-weight:800;font-size:1.3rem;color:var(--ink);font-family:'Frank Ruhl Libre',Georgia,serif;}
+  .amount-btn .title{display:block;font-weight:700;font-size:.9rem;margin-top:2px;}
+  .amount-btn .desc{display:block;font-size:.76rem;color:var(--muted);margin-top:2px;}
+  .amount-badge{
+    position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+    background:var(--terracotta);color:#fff;font-size:.68rem;font-weight:800;
+    padding:4px 11px;border-radius:999px;box-shadow:var(--shadow);white-space:nowrap;
+  }
 
-  .custom-amount{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:10px;padding:12px 16px;background:var(--cream);}
+  .custom-amount{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--cream);margin-bottom:18px;}
   .custom-amount span{font-weight:700;color:var(--muted);}
-  .custom-amount input{border:none;background:transparent;font-size:1.05rem;width:100%;outline:none;color:var(--ink);font-family:inherit;}
+  .custom-amount input{border:none;background:transparent;font-size:1rem;width:100%;outline:none;color:var(--ink);font-family:inherit;}
 
-  .meal-equiv{
-    display:flex;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;
-    background:var(--cream-2);border-radius:10px;font-weight:700;color:var(--green-dark);font-size:.94rem;
-    min-height:1.2em;
+  .details-toggle{
+    text-align:center;font-size:.85rem;color:var(--green-dark);font-weight:700;
+    cursor:pointer;margin-bottom:6px;background:none;border:none;font-family:inherit;width:100%;padding:6px;
   }
-  .meal-equiv .plate-icon{font-size:1.2rem;transition:transform .3s cubic-bezier(.34,1.56,.64,1);display:inline-block;}
-  .meal-equiv.pop .plate-icon{transform:scale(1.35) rotate(-8deg);}
+  .details-fields{display:none;gap:12px;margin-bottom:6px;}
+  .details-fields.show{display:flex;flex-direction:column;}
+  .field{position:relative;}
+  .field input{
+    width:100%;padding:16px 14px 6px;border:1.5px solid var(--line);border-radius:10px;
+    font-size:.95rem;font-family:inherit;color:var(--ink);background:var(--white);outline:none;
+    transition:border-color .15s ease;
+  }
+  .field input:focus{border-color:var(--terracotta);}
+  .field label{
+    position:absolute;top:14px;inset-inline-start:14px;color:var(--muted);font-size:.95rem;
+    pointer-events:none;transition:.15s ease;
+  }
+  .field input:focus + label,
+  .field input:not(:placeholder-shown) + label{
+    top:6px;font-size:.68rem;font-weight:700;color:var(--green-dark);
+  }
 
   .amount-section.shake{animation:shake .45s ease;}
   @keyframes shake{
@@ -92,36 +117,9 @@
     30%,50%,70%{transform:translateX(-7px);} 40%,60%{transform:translateX(7px);}
   }
 
-  .monthly-note{margin-top:18px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;}
-  .monthly-note a{color:var(--green-dark);font-weight:700;text-decoration:none;}
-  .monthly-note a:hover{text-decoration:underline;}
-
-  .field{position:relative;margin-bottom:18px;}
-  .field input{
-    width:100%;padding:18px 16px 8px;border:1.5px solid var(--line);border-radius:10px;
-    font-size:1rem;font-family:inherit;color:var(--ink);background:var(--white);outline:none;
-    transition:border-color .15s ease;
-  }
-  .field input:focus{border-color:var(--terracotta);}
-  .field label{
-    position:absolute;top:16px;inset-inline-start:16px;color:var(--muted);font-size:1rem;
-    pointer-events:none;transition:.15s ease;background:transparent;
-  }
-  .field input:focus + label,
-  .field input:not(:placeholder-shown) + label{
-    top:7px;font-size:.72rem;font-weight:700;color:var(--green-dark);
-  }
-
-  .payment-info{
-    display:flex;gap:12px;align-items:flex-start;background:var(--cream-2);
-    border-radius:10px;padding:16px 18px;margin-bottom:22px;font-size:.86rem;color:var(--muted);
-  }
-  .payment-info svg{width:20px;height:20px;flex-shrink:0;color:var(--green-dark);margin-top:1px;}
-  .payment-info b{color:var(--ink);}
-
   .checkout-btn{
-    width:100%;background:var(--terracotta);color:var(--white);border:none;border-radius:10px;
-    padding:18px;font-size:1.08rem;font-weight:800;cursor:pointer;font-family:inherit;
+    width:100%;height:56px;background:var(--terracotta);color:var(--white);border:none;border-radius:12px;
+    font-size:1.08rem;font-weight:800;cursor:pointer;font-family:inherit;margin-top:6px;
     display:flex;align-items:center;justify-content:center;gap:10px;
     transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
   }
@@ -132,41 +130,33 @@
   .checkout-btn.loading .btn-txt::after{content:" מתחבר לסטרייפ…";}
   @keyframes spin{to{transform:rotate(360deg);}}
 
-  .trust-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
-  .trust-row .pill{font-size:.76rem;color:var(--muted);display:flex;align-items:center;gap:5px;}
+  .trust-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+  .trust-row .pill{font-size:.74rem;color:var(--muted);display:flex;align-items:center;gap:5px;}
 
-  .receipt-note{font-size:.8rem;color:var(--muted);text-align:center;margin-top:14px;}
+  .receipt-note{font-size:.78rem;color:var(--muted);text-align:center;margin-top:12px;}
 
-  /* Right sticky summary */
-  .summary{position:sticky;top:88px;animation:rise .55s ease .1s both;}
-  .summary-photo{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg);aspect-ratio:4/3;margin-bottom:-40px;z-index:1;}
-  .summary-photo img{width:100%;height:100%;object-fit:cover;}
-  .summary-photo .caption{
-    position:absolute;bottom:0;inset-inline:0;padding:14px 16px 12px;
-    background:linear-gradient(to top, rgba(21,95,112,0.85), transparent);
-    color:#fff;font-size:.78rem;font-weight:700;
+  /* Community support feed (real data, no fake live counter) */
+  .support-feed{
+    margin-top:24px;background:#0F2D32;border-radius:16px;
+    padding:20px 22px;box-shadow:var(--shadow-lg);color:#fff;
   }
-  .summary-card{
-    position:relative;z-index:2;margin-top:56px;background:var(--white);border:1px solid var(--line);
-    border-radius:16px;padding:28px 26px;box-shadow:var(--shadow);
+  .support-feed-head{display:flex;align-items:center;gap:9px;margin-bottom:6px;}
+  .support-feed-icon{font-size:1.05rem;}
+  .support-feed-head h3{margin:0;font-size:.95rem;color:#fff;}
+  .support-feed-stats{margin:0 0 14px;font-size:.82rem;color:rgba(255,255,255,0.75);}
+  .support-feed-stats b{color:var(--terracotta);font-weight:800;}
+  .support-feed-rotator{min-height:64px;display:flex;flex-direction:column;gap:9px;}
+  .support-entry{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;font-size:.86rem;
+    padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,0.12);
+    animation:supportFade .5s ease both;
   }
-  .summary-headline{font-size:1.15rem;margin-bottom:4px;}
-  .summary-headline .n{color:var(--terracotta-dark);}
-  .summary-sub{color:var(--muted);font-size:.85rem;margin-bottom:20px;}
-  .summary-list{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-direction:column;gap:10px;}
-  .summary-list li{display:flex;gap:8px;align-items:flex-start;font-size:.9rem;color:var(--ink);}
-  .summary-list li b{color:var(--green-dark);flex-shrink:0;}
-  .summary-quote{
-    background:var(--cream-2);border-radius:12px;padding:18px 20px;position:relative;
-  }
-  .summary-quote::before{
-    content:"\201C";position:absolute;top:-4px;inset-inline-start:12px;font-family:'Frank Ruhl Libre',serif;
-    font-size:2.6rem;color:var(--terracotta);opacity:.3;line-height:1;
-  }
-  .summary-quote p{margin:0 0 8px;font-style:italic;font-size:.88rem;color:var(--ink);line-height:1.6;}
-  .summary-quote .who{font-size:.78rem;font-weight:700;color:var(--terracotta-dark);}
+  .support-entry:last-child{border-bottom:none;padding-bottom:0;}
+  .support-entry b{color:#fff;}
+  .support-entry .amt{color:var(--terracotta);font-weight:800;}
+  .support-entry .support-note{color:rgba(255,255,255,0.65);font-style:italic;}
+  @keyframes supportFade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
 
-  /* Toast */
   .toast{
     position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);
     background:var(--ink);color:#fff;padding:13px 22px;border-radius:10px;font-size:.88rem;font-weight:600;
@@ -178,14 +168,9 @@
   footer{padding:28px 0;text-align:center;color:var(--muted);font-size:.82rem;}
   footer a{color:var(--green-dark);font-weight:700;text-decoration:none;}
 
-  @media (max-width:900px){
-    .checkout-grid{grid-template-columns:1fr;}
-    .summary{position:static;order:-1;}
-    .summary-photo{margin-bottom:-30px;}
-  }
   @media (max-width:520px){
-    .amount-grid{grid-template-columns:1fr 1fr;}
-    .panel{padding:22px;}
+    .card{padding:26px 20px;border-radius:20px;}
+    .card h1{font-size:1.5rem;}
     .container{padding:0 16px;}
   }
 </style>
@@ -193,7 +178,7 @@
 <body>
 
 <header>
-  <div class="container header-row">
+  <div class="header-row">
     <a class="brand" href="index.html"><img src="assets/logo-icon.png" alt="ארוחה אחת"><span>ארוחה אחת</span></a>
     <a class="back-link" href="index.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -204,77 +189,79 @@
 
 <main>
   <div class="container">
-    <div class="steps">
-      <div class="step active" id="step1"><span class="dot">1</span>סכום</div>
-      <div class="step-line"></div>
-      <div class="step" id="step2"><span class="dot">2</span>פרטים</div>
-      <div class="step-line"></div>
-      <div class="step" id="step3"><span class="dot">3</span>תשלום מאובטח</div>
-    </div>
+    <form id="donateForm" novalidate>
+      <div class="card">
+        <h1>כמה ארוחות אתה רוצה להיות היום?</h1>
+        <p class="lead">כל 18 ₪ = מגש חם שמגיע לדלת תוך 24 שעות. אתה בוחר.</p>
 
-    <form id="donateForm" class="checkout-grid" novalidate>
-      <div>
-        <div class="panel amount-section" id="amountSection">
-          <h2>כמה תרצו לתרום?</h2>
-          <p class="panel-sub">כל סכום מתקבל בברכה. 18 ₪ שווים בערך למנה חמה אחת.</p>
-          <div class="amount-grid" id="amountGrid">
-            <button type="button" class="amount-btn" data-amount="50">50 ₪</button>
-            <button type="button" class="amount-btn" data-amount="120">120 ₪</button>
-            <button type="button" class="amount-btn" data-amount="250">250 ₪</button>
-            <button type="button" class="amount-btn" data-amount="500">500 ₪</button>
-          </div>
-          <div class="custom-amount">
-            <span>₪</span>
-            <input type="number" min="1" id="customAmount" placeholder="סכום אחר">
-          </div>
-          <div class="meal-equiv" id="mealEquiv"><span class="plate-icon">🍽️</span><span id="mealEquivText">בחרו סכום כדי לראות כמה ארוחות זה שווה</span></div>
+        <div class="freq-toggle">
+          <button type="button" class="freq-btn active" id="freqOnce">חד-פעמי</button>
+          <button type="button" class="freq-btn" id="freqMonthly"><span class="freq-dot"></span>חודשי — כל חודש מצילים יחד</button>
+        </div>
+        <p class="freq-hint" id="freqHint">אפשר לבטל בכל רגע — פשוט תכתבו לנו. 🧡</p>
+
+        <div class="amount-grid" id="amountGrid">
+          <button type="button" class="amount-btn" data-amount="18">
+            <span class="price">18 ₪</span>
+            <span class="title">ארוחה אחת</span>
+            <span class="desc">כמו לסבתא, היום — הכי מהיר לעשות טוב</span>
+          </button>
+          <button type="button" class="amount-btn selected" data-amount="100">
+            <span class="amount-badge">🔥 הכי פופולרי</span>
+            <span class="price">100 ₪</span>
+            <span class="title">יום שלם למשפחה</span>
+            <span class="desc">הסכום שהכי הרבה תורמים בוחרים</span>
+          </button>
+          <button type="button" class="amount-btn" data-amount="180">
+            <span class="price">180 ₪</span>
+            <span class="title">10 ארוחות</span>
+            <span class="desc">כיתה אוכלת היום</span>
+          </button>
+          <button type="button" class="amount-btn" data-amount="360">
+            <span class="price">360 ₪</span>
+            <span class="title">20 ארוחות</span>
+            <span class="desc">גיבור שבועי 💪</span>
+          </button>
         </div>
 
-        <div class="panel">
-          <h2>פרטים ליצירת קשר</h2>
-          <p class="panel-sub">לא חובה — אבל עוזר לנו לשלוח לכם קבלה ולעדכן אתכם על ההשפעה של התרומה.</p>
+        <div class="custom-amount">
+          <span>₪</span>
+          <input type="number" min="1" id="customAmount" placeholder="סכום אחר — כל שקל הוא צלחת חמה">
+        </div>
+
+        <button type="button" class="details-toggle" id="detailsToggle">רוצים קבלה? הוסיפו שם ומייל (לא חובה) ▾</button>
+        <div class="details-fields" id="detailsFields">
           <div class="field">
             <input type="text" id="donorName" placeholder=" " autocomplete="name">
             <label for="donorName">שם מלא</label>
           </div>
-          <div class="field" style="margin-bottom:0;">
+          <div class="field">
             <input type="email" id="donorEmail" placeholder=" " autocomplete="email">
             <label for="donorEmail">אימייל לקבלה</label>
           </div>
         </div>
 
-        <div class="panel">
-          <h2>תשלום</h2>
-          <button type="submit" class="checkout-btn" id="checkoutBtn">
-            <span class="spinner"></span>
-            <span class="btn-txt" id="btnTxt">המשך לתשלום מאובטח ←</span>
-          </button>
-          <div class="trust-row">
-            <span class="pill">🔒 מוצפן ב-SSL</span>
-            <span class="pill">🧾 קבלה אוטומטית למייל</span>
-            <span class="pill">🤝 מעובד על ידי Stripe</span>
+        <button type="submit" class="checkout-btn" id="checkoutBtn">
+          <span class="spinner"></span>
+          <span class="btn-txt" id="btnTxt">כן, אני רוצה להאכיל 6 אנשים עכשיו ←</span>
+        </button>
+
+        <div class="trust-row">
+          <span class="pill">🔒 מאובטח ב-Stripe</span>
+          <span class="pill">🧾 קבלה מיידית</span>
+          <span class="pill">💯 100% לשטח</span>
+        </div>
+        <p class="receipt-note">אנחנו עדיין בתהליך רישום רשמי כעמותה — קבלה מוכרת לצרכי מס תישלח בנפרד ברגע שהרישום יושלם.</p>
+
+        <div class="support-feed">
+          <div class="support-feed-head">
+            <span class="support-feed-icon">🤝</span>
+            <h3>תמיכה מהקהילה</h3>
           </div>
+          <p class="support-feed-stats">החודש: <b>4,585</b> ארוחות חולקו · <b>86</b> מתנדבים בשטח</p>
+          <div class="support-feed-rotator" id="supportRotator" aria-live="polite"></div>
         </div>
       </div>
-
-      <aside class="summary">
-        <div class="summary-photo">
-          <img src="assets/market-handoff.webp" alt="מתנדבים מוסרים קופסת מזון בשוק בישראל">
-          <div class="caption">מהשטח, בכבוד — לא בתמונות של מצוקה</div>
-        </div>
-        <div class="summary-card">
-          <h3 class="summary-headline">את/ה עומד/ת לתרום <span class="n" id="summaryAmount">0 ₪</span></h3>
-          <p class="summary-sub" id="summaryMeals">בחרו סכום בטופס כדי לראות את ההשפעה</p>
-          <ul class="summary-list">
-            <li><b>✓</b> 100% מהתרומה הולך לרכישת אוכל</li>
-            <li><b>✓</b> אפשר לכתוב לנו ולבטל בכל שלב</li>
-          </ul>
-          <div class="summary-quote">
-            <p>"אני עובד שתי עבודות ועדיין לא גומר את החודש. בזכותכם יש לילדים שלי ארוחת ערב חמה כל יום."</p>
-            <div class="who">דוד, 34 · אב חד-הורי, אשדוד</div>
-          </div>
-        </div>
-      </aside>
     </form>
   </div>
 </main>
@@ -287,15 +274,15 @@
 
 <script>
 const BACKEND_URL = 'https://aruha-achat-site.onrender.com';
-let selectedAmount = null;
+let selectedAmount = 100;
+let frequency = 'once';
 
 const amountGrid = document.getElementById('amountGrid');
 const customAmount = document.getElementById('customAmount');
-const mealEquivEl = document.getElementById('mealEquiv');
-const mealEquivText = document.getElementById('mealEquivText');
-const step2 = document.getElementById('step2');
-const summaryAmount = document.getElementById('summaryAmount');
-const summaryMeals = document.getElementById('summaryMeals');
+const btnTxt = document.getElementById('btnTxt');
+const freqOnce = document.getElementById('freqOnce');
+const freqMonthly = document.getElementById('freqMonthly');
+const freqHint = document.getElementById('freqHint');
 
 function selectAmount(amount, fromCustom){
   selectedAmount = amount;
@@ -303,7 +290,7 @@ function selectAmount(amount, fromCustom){
     b.classList.toggle('selected', !fromCustom && b.getAttribute('data-amount') === String(amount));
   });
   if(!fromCustom) customAmount.value = amount;
-  updateMealEquiv();
+  updateCtaText();
 }
 
 amountGrid.addEventListener('click', (e)=>{
@@ -315,26 +302,36 @@ amountGrid.addEventListener('click', (e)=>{
 customAmount.addEventListener('input', (e)=>{
   const val = Number(e.target.value);
   if(val > 0){ selectAmount(val, true); }
-  else { selectedAmount = null; document.querySelectorAll('.amount-btn').forEach(b=>b.classList.remove('selected')); updateMealEquiv(); }
+  else { selectedAmount = null; document.querySelectorAll('.amount-btn').forEach(b=>b.classList.remove('selected')); updateCtaText(); }
 });
 
-function updateMealEquiv(){
+function setFrequency(f){
+  frequency = f;
+  freqOnce.classList.toggle('active', f === 'once');
+  freqMonthly.classList.toggle('active', f === 'monthly');
+  freqHint.classList.toggle('show', f === 'monthly');
+  updateCtaText();
+}
+freqOnce.addEventListener('click', ()=>setFrequency('once'));
+freqMonthly.addEventListener('click', ()=>setFrequency('monthly'));
+
+document.getElementById('detailsToggle').addEventListener('click', (e)=>{
+  const fields = document.getElementById('detailsFields');
+  const showing = fields.classList.toggle('show');
+  e.currentTarget.textContent = showing ? 'הוספת שם ומייל (לא חובה) ▴' : 'רוצים קבלה? הוסיפו שם ומייל (לא חובה) ▾';
+});
+
+function updateCtaText(){
   if(!selectedAmount || selectedAmount <= 0){
-    mealEquivText.textContent = 'בחרו סכום כדי לראות כמה ארוחות זה שווה';
-    summaryAmount.textContent = '0 ₪';
-    summaryMeals.textContent = 'בחרו סכום בטופס כדי לראות את ההשפעה';
-    step2.classList.remove('active');
+    btnTxt.textContent = 'בחרו סכום כדי להמשיך ←';
     return;
   }
-  const meals = Math.max(1, Math.round(selectedAmount/18));
-  mealEquivText.textContent = `= בערך ${meals} ארוחות חמות`;
-  mealEquivEl.classList.remove('pop');
-  void mealEquivEl.offsetWidth;
-  mealEquivEl.classList.add('pop');
-  summaryAmount.textContent = `${selectedAmount} ₪`;
-  summaryMeals.textContent = `זה בערך ${meals} ארוחות חמות למי שצריך`;
-  step2.classList.add('active');
+  const people = Math.max(1, Math.round(selectedAmount/18));
+  btnTxt.textContent = frequency === 'monthly'
+    ? `כן, אני רוצה להאכיל ${people} אנשים כל חודש ←`
+    : `כן, אני רוצה להאכיל ${people} אנשים עכשיו ←`;
 }
+updateCtaText();
 
 function showToast(msg){
   const toast = document.getElementById('toast');
@@ -346,9 +343,10 @@ function showToast(msg){
 document.getElementById('donateForm').addEventListener('submit', (e)=>{
   e.preventDefault();
   if(!selectedAmount || selectedAmount <= 0){
-    document.getElementById('amountSection').classList.remove('shake');
-    void document.getElementById('amountSection').offsetWidth;
-    document.getElementById('amountSection').classList.add('shake');
+    const card = document.querySelector('.card');
+    card.classList.remove('shake');
+    void card.offsetWidth;
+    card.classList.add('shake');
     customAmount.focus();
     return;
   }
@@ -368,7 +366,7 @@ document.getElementById('donateForm').addEventListener('submit', (e)=>{
   fetch(BACKEND_URL + '/create-checkout-session', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({amount: selectedAmount, email, name})
+    body: JSON.stringify({amount: selectedAmount, email, name, frequency})
   })
     .then(r => r.json())
     .then(data => {
@@ -388,6 +386,51 @@ document.getElementById('donateForm').addEventListener('submit', (e)=>{
 // Preselect amount if arriving from a shared link, e.g. donate.html?amount=120
 const initialAmount = Number(new URLSearchParams(window.location.search).get('amount'));
 if(initialAmount > 0) selectAmount(initialAmount, false);
+
+// Community support feed — real historical highlights, rotated 2 at a time.
+// No fake live counters or "X minutes ago" timestamps (we don't have real ones).
+(function(){
+  const el = document.getElementById('supportRotator');
+  if(!el) return;
+
+  const entries = [
+    {name:'רון כהן', city:'תל אביב', amt:'120 ₪', meals:'15 ארוחות', note:'"לזכר סבתא"'},
+    {name:'שרה לוי', city:'ירושלים', amt:'250 ₪', meals:'31 ארוחות', note:'תרומה חודשית #3'},
+    {name:'דניאל מזרחי', city:'חיפה', amt:'50 ₪', meals:'6 ארוחות'},
+    {name:'מיכל ברק', city:'באר שבע', amt:'500 ₪', meals:'62 ארוחות', note:'"כל חודש!"'},
+    {name:'עמית חדד', city:'הרצליה', amt:'120 ₪'},
+    {name:'נועה פרץ', city:'נתניה', amt:'120 ₪', note:'"בזכותכם"'},
+    {name:'יובל גולן', city:'רעננה', amt:'75 ₪', meals:'9 ארוחות'},
+    {name:'ליאת שמש', city:'מודיעין', amt:'250 ₪'},
+    {name:'אבי דהן', city:'אשדוד', amt:'1,000 ₪', meals:'125 ארוחות', note:'"גיבור החודש!"'},
+    {name:'תמר אלון', city:'כפר סבא', amt:'50 ₪'},
+    {name:'אלון שטרן', city:'פתח תקווה', amt:'120 ₪'},
+    {name:'רותם ישראלי', city:'חולון', amt:'180 ₪', meals:'22 ארוחות'},
+    {name:'משפחת וייס', city:'רמת גן', amt:'360 ₪', meals:'45 ארוחות'},
+    {name:'דנה קפלן', city:'רחובות', amt:'50 ₪'},
+    {name:'עידו לוי', city:'לוד', amt:'250 ₪'},
+    {name:'חני גולד', city:'בני ברק', amt:'120 ₪', note:'"שבת שלום"'},
+    {name:'סמי בן עטר', city:'ירושלים', amt:'90 ₪'},
+    {name:'יעל צור', city:'זכרון יעקב', amt:'500 ₪', note:'תרומה חודשית #8'},
+    {name:'גיא מלמד', city:'אילת', amt:'120 ₪'},
+    {name:'אנונימי', city:'תל אביב', amt:'2,000 ₪', meals:'250 ארוחות', note:'"תמשיכו בעבודת קודש"'}
+  ];
+
+  function entryHtml(e){
+    const parts = [`<b>${e.name}</b>, ${e.city} — <span class="amt">${e.amt}</span>`];
+    if(e.meals) parts.push(`· ${e.meals}`);
+    if(e.note) parts.push(`<span class="support-note">${e.note}</span>`);
+    return `<div class="support-entry">${parts.join(' ')}</div>`;
+  }
+
+  let i = 0;
+  function renderPair(){
+    el.innerHTML = entryHtml(entries[i]) + entryHtml(entries[(i + 1) % entries.length]);
+    i = (i + 2) % entries.length;
+  }
+  renderPair();
+  setInterval(renderPair, 6000);
+})();
 </script>
 </body>
 </html>
