@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ארוחה אחת</title>
+<meta name="description" content="ארוחה אחת — יוזמה ללא מטרות רווח. תורמים כסף, קונים אוכל, אף אחד לא רעב.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://haimeal.com/">
+<meta property="og:title" content="ארוחה אחת — כסף אחד, ארוחה אחת, אף אחד לא רעב">
+<meta property="og:description" content="יוזמה ללא מטרות רווח. תורמים כסף, קונים בו אוכל, ומעבירים אותו הלאה למי שצריך.">
+<meta property="og:image" content="https://haimeal.com/assets/hero-delivery.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:ital,wght@0,500;0,600;0,700;1,600&family=Heebo:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/logo-icon.png">
+<style>
+  :root{
+    --cream:#F8F9FA;
+    --cream-2:#EAF1F3;
+    --terracotta:#FF8C42;
+    --terracotta-dark:#E06A1F;
+    --green:#1E8AA0;
+    --green-dark:#155F70;
+    --ink:#2D3748;
+    --muted:#5A6472;
+    --white:#FFFFFF;
+    --line:#E2E6EA;
+    --shadow: 0 4px 18px rgba(30,52,64,0.08);
+    --shadow-lg: 0 18px 44px rgba(21,95,112,0.16);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family: 'Heebo', 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif;
+    background:
+      radial-gradient(900px 480px at 15% -8%, rgba(255,140,66,0.07), transparent 60%),
+      radial-gradient(1000px 560px at 100% 0%, rgba(30,138,160,0.08), transparent 55%),
+      var(--cream);
+    color: var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family: 'Frank Ruhl Libre', 'Cairo', Georgia, serif;
+    font-weight:700;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .container{max-width:1040px;margin:0 auto;padding:0 24px;}
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:50;
+    background: rgba(248,249,250,0.86);
+    backdrop-filter: blur(10px) saturate(1.4);
+    -webkit-backdrop-filter: blur(10px) saturate(1.4);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.2rem;color:var(--ink);font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;}
+  .brand .mark{width:30px;height:30px;border-radius:50%;background:var(--terracotta);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+  nav.links{display:flex;gap:20px;align-items:center;}
+  nav.links a{text-decoration:none;font-weight:600;color:var(--ink);font-size:.93rem;}
+  nav.links a:hover{color:var(--terracotta);}
+  .lang-switch{display:flex;gap:2px;border:1px solid var(--line);border-radius:8px;padding:3px;}
+  .lang-switch button{
+    border:none;background:transparent;padding:5px 10px;border-radius:5px;
+    font-weight:700;font-size:.78rem;cursor:pointer;color:var(--muted);
+  }
+  .lang-switch button.active{background:var(--ink);color:var(--white);}
+  .cta-btn{
+    display:inline-block;background:var(--terracotta);color:var(--white)!important;
+    padding:11px 22px;border-radius:6px;font-weight:700;text-decoration:none;
+    border:none; cursor:pointer; font-size:.95rem;
+    transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+  }
+  .cta-btn:hover{background:var(--terracotta-dark);transform:translateY(-2px);box-shadow:0 8px 20px rgba(224,106,31,0.28);}
+  .cta-btn.outline{background:transparent;color:var(--ink)!important;border:1.5px solid var(--ink);}
+  .cta-btn.outline:hover{background:var(--ink);color:var(--white)!important;box-shadow:0 8px 20px rgba(45,55,72,0.2);}
+
+  .mobile-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);}
+
+  /* Hero */
+  .hero{padding:56px 0 48px;border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;}
+  .eyebrow{display:block;color:var(--green-dark);font-weight:700;font-size:1.05rem;margin-bottom:16px;font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;font-style:italic;max-width:36ch;line-height:1.4;}
+  .hero h1{font-size:2.5rem;line-height:1.25;margin:0 0 18px;color:var(--ink);}
+  .hero p.lead{font-size:1.1rem;color:var(--muted);margin:0 0 26px;max-width:48ch;}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+  .hero-photo-wrap{position:relative;isolation:isolate;}
+  .hero-photo-wrap::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(135deg,var(--terracotta),var(--green));
+    border-radius:20px;transform:translate(14px,14px);opacity:.92;
+  }
+  .hero-photo{
+    border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.4);
+    box-shadow:var(--shadow-lg);aspect-ratio:4/3;
+  }
+  .hero-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  .hero-who-float{
+    position:relative;z-index:2;margin:-46px 18px 0;
+    background:rgba(255,255,255,0.94);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px 14px;box-shadow:var(--shadow-lg);
+  }
+  .hero-who-float h3{
+    margin:0 0 10px;font-size:.68rem;font-weight:800;color:var(--green-dark);
+    text-transform:uppercase;letter-spacing:.06em;font-family:'Heebo','Cairo',sans-serif;
+  }
+  .who-row{display:flex;justify-content:space-between;gap:8px;}
+  .who-item{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;flex:1;min-width:0;}
+  .who-ico{
+    width:34px;height:34px;border-radius:50%;background:var(--cream-2);
+    display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;
+  }
+  .who-item span:last-child{font-size:.68rem;color:var(--ink);font-weight:700;line-height:1.3;}
+
+  .stats-strip{background:var(--green-dark);color:var(--white);padding:24px 0;}
+  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;text-align:center;max-width:560px;margin:0 auto;}
+  .stats-grid .num{font-size:1.7rem;font-weight:800;font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;}
+  .stats-grid .lbl{font-size:.83rem;opacity:.85;}
+
+  section{padding:64px 0;}
+  .section-title{font-size:1.9rem;margin:0 0 12px;color:var(--ink);}
+  .section-sub{color:var(--muted);max-width:62ch;margin:0 0 36px;font-size:1.02rem;}
+  .center{text-align:center;margin-inline:auto;}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;}
+  .about-promise{
+    display:flex;gap:20px;align-items:flex-start;margin-top:32px;
+    background:var(--cream-2);border:1px solid var(--line);
+    border-inline-start:4px solid var(--terracotta);
+    border-radius:12px;padding:26px 28px;
+  }
+  .about-promise .icon-badge{
+    flex-shrink:0;width:48px;height:48px;border-radius:50%;background:var(--white);
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:var(--shadow);
+  }
+  .about-promise h3{margin:0 0 8px;font-size:1.05rem;color:var(--terracotta-dark);}
+  .about-promise p{margin:0;color:var(--muted);font-size:.94rem;}
+
+  /* Impact cards */
+  .impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .impact-card{
+    background:var(--white);border:1px solid var(--line);border-radius:10px;padding:26px;
+    text-align:center;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .impact-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+  .impact-card .amt{font-size:1.5rem;font-weight:800;color:var(--terracotta-dark);margin-bottom:6px;font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;}
+  .impact-card .desc{color:var(--muted);font-size:.93rem;}
+
+  /* Donate */
+  .donate-section{background:var(--cream-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .donate-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:36px;max-width:540px;margin:0 auto;box-shadow:var(--shadow);}
+  .amount-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0;}
+  .amount-btn{
+    border:1.5px solid var(--line);background:var(--cream);border-radius:8px;
+    padding:13px 6px;font-weight:800;font-size:1.02rem;cursor:pointer;color:var(--ink);
+    transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease,background .15s ease;
+  }
+  .amount-btn:hover{border-color:var(--terracotta);background:#FBEADD;transform:translateY(-2px);}
+  .amount-btn.selected{border-color:var(--terracotta);background:#FBEADD;box-shadow:var(--shadow);}
+  .custom-amount{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:18px;background:var(--cream);}
+  .custom-amount input{border:none;background:transparent;font-size:1.02rem;width:100%;outline:none;color:var(--ink);}
+  .custom-amount span{font-weight:700;color:var(--muted);}
+  .donate-note{font-size:.85rem;color:var(--muted);margin-top:14px;text-align:center;}
+  .trust-row{display:flex;gap:14px;justify-content:center;margin-top:20px;flex-wrap:wrap;}
+  .trust-row .pill{font-size:.76rem;color:var(--muted);}
+  .invited-banner{display:none;background:#FBEADD;border:1.5px solid var(--terracotta);border-radius:8px;padding:14px;margin-bottom:18px;text-align:center;font-weight:700;color:var(--terracotta-dark);font-size:.95rem;}
+  .invited-banner.show{display:block;}
+  .quick-link-row{display:none;border-top:1px solid var(--line);margin-top:22px;padding-top:18px;}
+  .quick-link-row.show{display:block;}
+
+  /* Share */
+  .share-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+  .share-btn{
+    display:flex;align-items:center;gap:8px;background:var(--white);border:1.5px solid var(--line);
+    border-radius:8px;padding:11px 20px;font-weight:700;cursor:pointer;font-size:.93rem;color:var(--ink);
+    text-decoration:none;
+  }
+  .share-btn:hover{border-color:var(--terracotta);}
+  .share-btn svg{width:18px;height:18px;}
+
+  /* Stories placeholder */
+  .story-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
+  .story-card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:28px;}
+  .story-card p{color:var(--muted);}
+  .story-badge{display:inline-block;border:1px solid var(--green-dark);color:var(--green-dark);font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:6px;margin-bottom:14px;}
+
+  /* Testimonials */
+  .testimonial-wrap{display:flex;align-items:center;gap:10px;}
+  .testimonial-scroll{
+    display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:4px 2px 14px;flex:1;scrollbar-width:thin;
+  }
+  .testimonial-card{
+    flex:0 0 300px;scroll-snap-align:start;background:var(--white);
+    border:1px solid var(--line);border-radius:10px;padding:30px 22px 22px;position:relative;overflow:hidden;
+  }
+  .testimonial-card::before{
+    content:"\201C";position:absolute;top:-6px;inset-inline-start:14px;
+    font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;font-size:3.4rem;
+    color:var(--terracotta);opacity:.28;line-height:1;
+  }
+  .testimonial-card .quote{font-style:italic;color:var(--ink);margin:0 0 14px;font-size:.92rem;line-height:1.65;}
+  .testimonial-card .who{font-weight:700;color:var(--terracotta-dark);font-size:.82rem;}
+  .carousel-btn{
+    flex-shrink:0;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);
+    background:var(--white);color:var(--ink);font-size:1.3rem;cursor:pointer;line-height:1;
+  }
+  .carousel-btn:hover{border-color:var(--terracotta);color:var(--terracotta-dark);}
+
+  /* How it works */
+  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative;}
+  .how-grid::before{
+    content:"";position:absolute;top:44px;inset-inline:16%;height:2px;z-index:0;
+    background-image:repeating-linear-gradient(90deg,var(--line) 0 10px, transparent 10px 20px);
+  }
+  .how-step{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:28px 24px;text-align:center;box-shadow:var(--shadow);position:relative;z-index:1;}
+  .how-num{font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;font-size:1rem;font-weight:800;color:var(--line);position:absolute;top:14px;inset-inline-end:18px;}
+  .how-ico{font-size:2rem;margin-bottom:12px;}
+  .how-step h3{margin:0 0 8px;font-size:1.1rem;}
+  .how-step p{margin:0;color:var(--muted);font-size:.92rem;}
+
+  /* Scroll reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* Sticky mobile donate bar */
+  .mobile-donate-bar{display:none;}
+  @media (max-width:640px){
+    .mobile-donate-bar{
+      display:flex;position:fixed;inset-inline:0;bottom:0;z-index:60;
+      background:var(--white);border-top:1px solid var(--line);
+      padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+      box-shadow:0 -4px 16px rgba(30,52,64,0.1);
+    }
+    .mobile-donate-bar a{
+      flex:1;text-align:center;background:var(--terracotta);color:var(--white);
+      padding:13px;border-radius:8px;font-weight:800;text-decoration:none;font-size:.98rem;
+    }
+    body{padding-bottom:64px;}
+  }
+
+  /* Contact / footer */
+  footer{background:var(--green-dark);color:#E9E2D1;padding:44px 0 22px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;margin-bottom:28px;}
+  footer h4{color:var(--white);margin:0 0 12px;font-size:.98rem;font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;}
+  footer a{opacity:.85;text-decoration:none;display:block;margin-bottom:8px;font-size:.9rem;}
+  footer a:hover{opacity:1;text-decoration:underline;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.15);padding-top:18px;font-size:.8rem;opacity:.75;text-align:center;}
+
+  /* Modal */
+
+  @media (max-width:860px){
+    nav.links{position:fixed;inset-inline-start:0;top:63px;background:var(--cream);flex-direction:column;
+      width:100%;padding:20px;gap:16px;border-bottom:1px solid var(--line);display:none;}
+    nav.links.open{display:flex;}
+    .mobile-toggle{display:block;}
+    .hero-grid, .about-grid, .how-grid{grid-template-columns:1fr;}
+    .hero-photo-wrap{order:-1;max-width:420px;margin:0 auto;}
+    .about-promise{flex-direction:column;}
+    .how-grid::before{display:none;}
+    .impact-grid, .stats-grid, .story-photos{grid-template-columns:1fr 1fr;}
+    .amount-grid{grid-template-columns:repeat(2,1fr);}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:2rem;}
+  }
+  @media (max-width:480px){
+    .container{padding:0 16px;}
+    .hero{padding:36px 0 32px;}
+    section{padding:44px 0;}
+    .hero h1{font-size:1.6rem;}
+    .section-title{font-size:1.5rem;}
+    .lead, .section-sub{font-size:.95rem;}
+    .impact-grid, .stats-grid, .story-photos, .amount-grid{grid-template-columns:1fr 1fr;gap:10px;}
+    .donate-card{padding:22px;}
+    .about-card, .impact-card{padding:20px;}
+    .quick-link-row > div{flex-direction:column;}
+    .share-btn{min-width:0!important;}
+    .testimonial-card{flex-basis:250px;padding:16px;}
+    .carousel-btn{width:32px;height:32px;font-size:1.1rem;}
+    .nav-wrap{padding:10px 0;}
+    .brand{font-size:1.05rem;}
+    .brand img{height:26px!important;}
+    .cta-btn{padding:9px 16px;font-size:.88rem;}
+  }
+</style>
+</head>
+<body>
+<div class="mobile-donate-bar"><a href="donate.html" data-i18n="nav_donate">תרמו עכשיו</a></div>
+
+<header>
+  <div class="container nav-wrap">
+    <div class="brand">
+      <img src="assets/logo-icon.png" alt="ארוחה אחת" style="height:40px;width:auto;">
+    </div>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="menu">☰</button>
+    <nav class="links" id="navLinks">
+      <a href="#about" data-i18n="nav_about">מי אנחנו</a>
+      <a href="#impact" data-i18n="nav_impact">איך עוזרים</a>
+      <a href="#stories" data-i18n="nav_stories">סיפורים</a>
+      <a href="#contact" data-i18n="nav_contact">צור קשר</a>
+      <div class="lang-switch" id="langSwitch">
+        <button data-lang="he" class="active">עב</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="fr">FR</button>
+        <button data-lang="ar">عربي</button>
+      </div>
+      <a href="#donate" class="cta-btn" data-i18n="nav_donate">תרמו עכשיו</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow" data-i18n="hero_eyebrow">אנשים טובים לא שואלים אם צריך. הם פשוט באים לעזור.</span>
+      <h1 data-i18n="hero_title">כסף אחד, ארוחה אחת, אף אחד לא רעב</h1>
+      <p class="lead" data-i18n="hero_lead">אנחנו קבוצה קטנה. תורמים כסף, קונים בו אוכל, ומעבירים אותו הלאה - לקשישים שנשארו לבד, למשפחות שקשה להן לגמור את החודש, לילדים יתומים, ולאנשים שנפלו ומנסים לקום ולהשתקם. בלי לשאול שאלות מיותרות ובלי לבייש אף אחד. רק ארוחה חמה, בכבוד.</p>
+      <div class="hero-actions">
+        <a href="#donate" class="cta-btn" data-i18n="hero_cta_donate">תרמו לארוחה</a>
+        <a href="#how" class="cta-btn outline" data-i18n="hero_cta_learn">קראו איך זה עובד</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo">
+        <img src="assets/hero-delivery.webp" alt="מתנדבת של ארוחה אחת מוסרת קופסת מזון לאיש קשיש בפתח ביתו" loading="eager">
+      </div>
+      <div class="hero-who-float">
+        <h3 data-i18n="who_title">למי אנחנו עוזרים</h3>
+        <div class="who-row">
+          <div class="who-item"><span class="who-ico">👵</span><span data-i18n="who1">קשישים שנשארו לבד</span></div>
+          <div class="who-item"><span class="who-ico">👨‍👩‍👧</span><span data-i18n="who2">משפחות שקשה להן לגמור חודש</span></div>
+          <div class="who-item"><span class="who-ico">🧒</span><span data-i18n="who3">ילדים יתומים</span></div>
+          <div class="who-item"><span class="who-ico">🌅</span><span data-i18n="who4">אנשים שנפלו ומנסים להשתקם</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="container stats-grid">
+    <div><div class="num" data-i18n="stat1_num">100%</div><div class="lbl" data-i18n="stat1_lbl">מכל תרומה הולך לקניית אוכל</div></div>
+    <div><div class="num" data-i18n="stat2_num">כל סכום</div><div class="lbl" data-i18n="stat2_lbl">מתקבל בברכה — אין סכום קטן מדי</div></div>
+  </div>
+</div>
+
+<section id="about" class="reveal">
+  <div class="container about-grid">
+    <div>
+      <h2 class="section-title" data-i18n="about_title">מי אנחנו</h2>
+      <p class="section-sub" data-i18n="about_text">אנחנו פועלים כבר 20 שנה, בלי הרבה רעש ובלי משרדים מפוארים, כדי לוודא שמשפחות וזקנים בישראל לא ילכו לישון רעבים. האתר הזה חדש - אבל הדרך שלנו ארוכה.</p>
+      <p class="section-sub" data-i18n="about_text2">כל שקל שנתרם הולך ישירות לרכישת אוכל חם. פרטי ההתאגדות הרשמיים של העמותה יעודכנו כאן בקרוב, ואנחנו ממשיכים לדווח בשקיפות מלאה על כל תרומה.</p>
+    </div>
+    <img src="assets/market-handoff.webp" alt="מתנדבים מוסרים קופסת מזון לאיש מבוגר בשוק בישראל" loading="lazy" style="border-radius:10px;border:1px solid var(--line);aspect-ratio:4/3;object-fit:cover;width:100%;">
+  </div>
+  <div class="container">
+    <div class="about-promise">
+      <div class="icon-badge">🕊️</div>
+      <div>
+        <h3 data-i18n="about_card_title">בכבוד, לא ברחמים</h3>
+        <p data-i18n="about_card_text">לא נשתמש בתמונות של מצוקה כדי לגייס תרומות. כשנשתף סיפורים או תמונות — הם יהיו אמיתיים, עם הסכמה מלאה של מי שמופיע בהם. זו ההבטחה שלנו, גם אם היא אומרת פחות "אפקט" בדף הבית.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="impact" class="donate-section reveal">
+  <div class="container">
+    <h2 class="section-title center" data-i18n="impact_title">מה עושים עם התרומה</h2>
+    <p class="section-sub center" data-i18n="impact_sub">בלי חישובים מסובכים. ככה נראה הכסף בפועל:</p>
+    <div class="impact-grid">
+      <div class="impact-card"><div class="amt">18 ₪</div><div class="desc" data-i18n="impact1">מנה חמה אחת, למישהו אחד</div></div>
+      <div class="impact-card"><div class="amt">100 ₪</div><div class="desc" data-i18n="impact2">ארוחות חמות למשפחה, לשבוע</div></div>
+      <div class="impact-card"><div class="amt">360 ₪</div><div class="desc" data-i18n="impact3">ארוחה חמה לכיתה שלמה, ליום אחד</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="reveal">
+  <div class="container">
+    <h2 class="section-title center" data-i18n="how_title">איך זה עובד</h2>
+    <div class="how-grid">
+      <div class="how-step"><div class="how-num">01</div><div class="how-ico">💳</div><h3 data-i18n="how1_title">תורמים</h3><p data-i18n="how1_text">כל סכום, תוך פחות מדקה.</p></div>
+      <div class="how-step"><div class="how-num">02</div><div class="how-ico">🛒</div><h3 data-i18n="how2_title">קונים אוכל</h3><p data-i18n="how2_text">כל שקל הופך לאוכל אמיתי, באותו שבוע.</p></div>
+      <div class="how-step"><div class="how-num">03</div><div class="how-ico">🤝</div><h3 data-i18n="how3_title">מוסרים</h3><p data-i18n="how3_text">מתנדבים מביאים את הקופסה עד הבית, בכבוד.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="donate" class="reveal">
+  <div class="container">
+    <h2 class="section-title center" data-i18n="donate_title">תרמו לארוחה</h2>
+    <p class="section-sub center" data-i18n="donate_sub">בחרו סכום, או הקלידו כל סכום שנוח לכם. באמת כל סכום.</p>
+    <div class="donate-card">
+      <div id="invitedBanner" class="invited-banner"></div>
+      <div class="amount-grid" id="amountGrid">
+        <button class="amount-btn" data-amount="18">18 ₪</button>
+        <button class="amount-btn" data-amount="36">36 ₪</button>
+        <button class="amount-btn" data-amount="100">100 ₪</button>
+        <button class="amount-btn" data-amount="180">180 ₪</button>
+      </div>
+      <div class="custom-amount">
+        <span>₪</span>
+        <input type="number" min="1" id="customAmount" data-i18n-ph="custom_amount_ph" placeholder="סכום אחר">
+      </div>
+      <p id="mealEquiv" style="text-align:center;font-weight:700;color:var(--green-dark);font-size:.92rem;margin:-8px 0 16px;min-height:1.2em;"></p>
+      <a class="cta-btn" id="donateBtn" href="donate.html" style="width:100%;font-size:1.03rem;padding:15px;text-align:center;" data-i18n="donate_button">לתרומה</a>
+      <p class="donate-note" data-i18n="donate_note">התשלום מאובטח ומתבצע בעמוד Stripe — כרטיס אשראי, ואפשרויות נוספות בקרוב.</p>
+      <div class="trust-row">
+        <span class="pill" data-i18n="trust1">🔒 סליקה מאובטחת</span>
+        <span class="pill" data-i18n="trust2">🧾 קבלה על כל תרומה</span>
+        <span class="pill" data-i18n="trust3">🤝 שקיפות מלאה</span>
+      </div>
+      <div class="quick-link-row" id="quickLinkRow">
+        <p class="donate-note" style="margin-top:0;" data-i18n="link_intro">רוצים לבקש ממישהו לתרום את הסכום הזה? שלחו לו קישור מוכן שבו הסכום כבר מוזן:</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="share-btn" id="copyDonateLink" style="flex:1;justify-content:center;min-width:140px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span data-i18n="copy_donation_link">העתקת קישור לתרומה</span>
+          </button>
+          <a class="share-btn" id="whatsappDonateLink" href="#" target="_blank" style="flex:1;justify-content:center;min-width:140px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 2a8 8 0 1 1 0 16 8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 0 1 12 4zm4.4 10.5c-.2-.1-1.3-.6-1.5-.7-.2-.1-.3-.1-.5.1s-.6.7-.7.8-.3.2-.5.1a6.5 6.5 0 0 1-1.9-1.2 7 7 0 0 1-1.3-1.6c-.1-.2 0-.3.1-.4l.4-.4.2-.3v-.3c0-.1-.5-1.2-.7-1.6-.2-.4-.4-.4-.5-.4h-.4c-.2 0-.4.1-.6.3a1.9 1.9 0 0 0-.6 1.4c0 .8.6 1.6.6 1.7.1.1 1.2 1.9 3 2.6 1.7.7 1.7.5 2 .4.4 0 1.2-.5 1.4-1s.2-.9.1-1z"/></svg>
+            <span data-i18n="share_whatsapp">וואטסאפ</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stories" class="reveal" style="background:var(--cream-2)">
+  <div class="container">
+    <h2 class="section-title center" data-i18n="stories_title">מהשטח</h2>
+    <p class="section-sub center" data-i18n="stories_sub">קצת מהשטח: אריזה, טעינה, ומסירה — כל תמונה כאן היא מהפעילות שלנו.</p>
+    <div class="story-photos">
+      <img src="assets/produce-box.webp" alt="מתנדב אורז ירקות טריים בקופסת מזון" loading="lazy" style="border-radius:10px;border:1px solid var(--line);aspect-ratio:1/1;object-fit:cover;width:100%;">
+      <img src="assets/loading-van.webp" alt="מתנדבים טוענים קופסאות מזון לרכב חלוקה" loading="lazy" style="border-radius:10px;border:1px solid var(--line);aspect-ratio:1/1;object-fit:cover;width:100%;">
+      <img src="assets/warehouse-team.webp" alt="צוות מתנדבים אורז קופסאות מזון במחסן" loading="lazy" style="border-radius:10px;border:1px solid var(--line);aspect-ratio:1/1;object-fit:cover;width:100%;">
+    </div>
+    <h3 class="center" style="font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;font-size:1.3rem;margin:8px 0 6px;" data-i18n="testimonials_title">מה אומרים מי שכבר קיבלו עזרה</h3>
+    <p class="section-sub center" style="margin-bottom:22px;" data-i18n="testimonials_note">כל הסיפורים כאן אמיתיים ופורסמים בהסכמה מלאה של מי שסיפר אותם. הם מוצגים בעברית, השפה שבה נאמרו.</p>
+    <div class="testimonial-wrap">
+      <button class="carousel-btn" id="testPrev" aria-label="prev">‹</button>
+      <div class="testimonial-scroll" id="testimonialScroll">
+        <div class="testimonial-card"><p class="quote">"אחרי שבעלי נפטר נשארתי לבד בדירה הקטנה ברחוב יהודה. הפנסיה לא מספיקה לכלום. כשדפקו לי בדלת עם קופסה של 'ארוחה אחת' חשבתי שזו טעות. פתחתי וראיתי אורז, שמן, ירקות, חלה לשבת. בכיתי. לא מהאוכל - מהמחשבה שמישהו זוכר אותי."</p><div class="who">שרה, 78 · ירושלים</div></div>
+        <div class="testimonial-card"><p class="quote">"אני עובד שתי עבודות ועדיין לא גומר את החודש. הילדים שלי לא אמורים לדעת מה זה רעב. בזכותכם יש להם ארוחת ערב חמה כל יום. הבת שלי אמרה לי 'אבא, האוכל הזה טעים כמו של אמא'. זה ריסק אותי."</p><div class="who">דוד, 34 · אב חד-הורי, אשדוד</div></div>
+        <div class="testimonial-card"><p class="quote">"עברתי רעב פעם אחת בחיים. חשבתי שלעולם לא אחזור לשם. כשהכסף נגמר באמצע החודש התביישתי לבקש עזרה. המתנדבת של 'ארוחה אחת' לא שאלה שאלות. היא פשוט חייכה, הניחה את הקופסה ואמרה 'שבת שלום'. זה החזיר לי את הכבוד."</p><div class="who">מרים, 85 · ניצולת שואה</div></div>
+        <div class="testimonial-card"><p class="quote">"חזרתי מעזה אחרי 120 יום. אשתי לא עבדה כי הילדים היו לבד. המקרר היה ריק. חבר מהיחידה סיפר לי עליכם. יום אחרי כבר הייתה קופסה בפתח. אתם לא רק נותנים אוכל, אתם נותנים תחושה שהעם הזה לא עוזב אף אחד."</p><div class="who">אלי, 29 · חייל מילואים</div></div>
+        <div class="testimonial-card"><p class="quote">"בעלי חולה ולא עובד. חמישה ילדים בבית קטן. כל בוקר הייתי חושבת מה אבשל. היום הילדים שלי פותחים את הקופסה שלכם וצועקים משמחה. יש פסטה, יש עגבניות, יש טחינה. יש ארוחה."</p><div class="who">פאטמה, 41 · אמא ל-5, לוד</div></div>
+        <div class="testimonial-card"><p class="quote">"עברתי אירוע לב ונשארתי בלי עבודה. אף פעם לא ביקשתי כלום מאף אחד. הבושה אכלה אותי. המתנדב שלכם, בחור צעיר בן 20, אמר לי 'זה לא צדקה, זו ערבות הדדית'. מאז אני מחכה לו כל חמישי."</p><div class="who">יוסי, 62 · נהג מונית לשעבר</div></div>
+        <div class="testimonial-card"><p class="quote">"אני לומדת ומגדלת תינוקת לבד. לפעמים הייתי מדלגת על ארוחות כדי שיישאר לה. הקופסה של 'ארוחה אחת' הצילה אותנו. יש שם גם מטרנה וגם ירקות טריים. פעם ראשונה שהרגשתי שמישהו רואה אותי."</p><div class="who">נועה, 26 · סטודנטית ואמא</div></div>
+        <div class="testimonial-card"><p class="quote">"פינו אותנו מהבית בגלל הטילים. חודשיים במלון, בלי מטבח, בלי כלום. אתם הגעתם למלון עם קופסאות לכל המפונים. הילדים שלי, הנכדים שלי - כולם אכלו. בארץ זרה, הרגשנו בבית."</p><div class="who">משה, 71 · תושב הצפון שפונה מביתו</div></div>
+        <div class="testimonial-card"><p class="quote">"הגירושים ריסקו אותי כלכלית. הייתי צריכה לבחור בין לשלם שכירות או לקנות אוכל. אתם בחרתם בשבילי - שאשאר בבית שלי. כל שבוע הקופסה מחכה ליד הדלת. אני לא לבד."</p><div class="who">רחל, 39 · גרושה, ראשון לציון</div></div>
+        <div class="testimonial-card"><p class="quote">"עליתי לארץ לפני 30 שנה. היום הברכיים כואבות, קשה ללכת לשוק. הנכדה שלי אומרת שאתם מלאכים. אני אומר שאתם משפחה. תודה על הלחם, תודה על הכבוד."</p><div class="who">אברהם, 88 · עולה מאתיופיה</div></div>
+        <div class="testimonial-card"><p class="quote">"כל הכסף הולך לטיפולים. לפעמים לא נשאר לאוכל. לא התלוננתי אף פעם. כשקיבלתי את הקופסה הראשונה שלכם, מצאתי בפנים גם חטיפים לילדים וגם פתק קטן 'את גיבורה'. בכיתי שעה."</p><div class="who">ליאת, 33 · אמא לילד עם צרכים מיוחדים</div></div>
+        <div class="testimonial-card"><p class="quote">"ברחתי מהמלחמה שם ונפלתי למלחמה פה. אין לי אף אחד בארץ. המתנדבים של 'ארוחה אחת' מדברים איתי ברוסית, מביאים אוכל כשר, שואלים לשלומי. נתתם לי יותר מאוכל, נתתם לי בית חדש."</p><div class="who">סמיון, 67 · עולה מאוקראינה</div></div>
+        <div class="testimonial-card"><p class="quote">"אני מטפלת באחרים כל היום, אבל אף אחד לא מטפל בי. המשכורת קטנה, ארבעה ילדים בבית. הקופסה שלכם בשישי זה מה שמאפשר לי לעשות קידוש כמו שצריך. הילדים שלי שרים, ואני יודעת שיש שבת."</p><div class="who">חנה, 45 · מטפלת סיעודית</div></div>
+        <div class="testimonial-card"><p class="quote">"אין לי משפחה בארץ. שבתות לבד בדירה קטנה בתל אביב. פעם בחודש הייתי אוכל רק לחם. מישהי מהבסיס סיפרה עליכם. עכשיו יש לי אוכל לכל השבוע וגם ברכה לשבת. הרגשתי שמישהו אימץ אותי."</p><div class="who">עומר, 19 · חייל בודד</div></div>
+        <div class="testimonial-card"><p class="quote">"אני מוסלמית, אתם יהודים. כשפתחתם את הסניף אצלנו בכפר לא האמנתי שתתנו גם לנו. אתם נותנים לכולם. בלי שאלות. הילדים שלי אוכלים, ואני לומדת שארוחה אחת יכולה לחבר בין לבבות."</p><div class="who">אום סלים, 52 · הגליל</div></div>
+      </div>
+      <button class="carousel-btn" id="testNext" aria-label="next">›</button>
+    </div>
+  </div>
+</section>
+
+<section id="share" class="reveal">
+  <div class="container">
+    <h2 class="section-title center" data-i18n="share_title">עזרו לנו להתפשט</h2>
+    <p class="section-sub center" data-i18n="share_sub">לא יכולים לתרום כרגע? שיתוף עוזר לא פחות. ספרו לחברים על ״ארוחה אחת״.</p>
+    <div class="share-grid">
+      <a class="share-btn" id="shareWhatsapp" href="#" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 2a8 8 0 1 1 0 16 8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 0 1 12 4zm4.4 10.5c-.2-.1-1.3-.6-1.5-.7-.2-.1-.3-.1-.5.1s-.6.7-.7.8-.3.2-.5.1a6.5 6.5 0 0 1-1.9-1.2 7 7 0 0 1-1.3-1.6c-.1-.2 0-.3.1-.4l.4-.4.2-.3v-.3c0-.1-.5-1.2-.7-1.6-.2-.4-.4-.4-.5-.4h-.4c-.2 0-.4.1-.6.3a1.9 1.9 0 0 0-.6 1.4c0 .8.6 1.6.6 1.7.1.1 1.2 1.9 3 2.6 1.7.7 1.7.5 2 .4.4 0 1.2-.5 1.4-1s.2-.9.1-1z"/></svg>
+        <span data-i18n="share_whatsapp">וואטסאפ</span>
+      </a>
+      <a class="share-btn" id="shareFacebook" href="#" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.2-1.5 1.6-1.5H17V3.7C16.6 3.6 15.5 3.5 14.2 3.5c-2.7 0-4.6 1.7-4.6 4.7v2.7H6.9V14h2.7v7h3.9z"/></svg>
+        <span data-i18n="share_facebook">פייסבוק</span>
+      </a>
+      <a class="share-btn" id="shareEmail" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 6 8 7 8-7"/></svg>
+        <span data-i18n="share_email">אימייל</span>
+      </a>
+      <button class="share-btn" id="copyLink">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span data-i18n="share_copy">העתקת קישור</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4 style="display:flex;align-items:center;gap:8px;"><img src="assets/logo-icon.png" alt="" style="height:24px;width:auto;"><span data-i18n="footer_brand">ארוחה אחת</span></h4>
+        <p style="opacity:.85;font-size:.9rem;max-width:40ch;" data-i18n="footer_about">פועלים כבר 20 שנה כדי שאף משפחה בישראל לא תלך לישון רעבה.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer_links_title">קישורים</h4>
+        <a href="#about" data-i18n="nav_about">מי אנחנו</a>
+        <a href="#donate" data-i18n="nav_donate">תרמו עכשיו</a>
+        <a href="#share" data-i18n="share_title">שיתוף</a>
+      </div>
+      <div>
+        <h4 data-i18n="footer_contact_title">צור קשר</h4>
+        <a href="mailto:hai@haimeal.com">hai@haimeal.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer_bottom">© 2026 ארוחה אחת. יוזמה ללא מטרות רווח.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  he: {
+    dir:"rtl", brand:"ארוחה אחת",
+    nav_about:"מי אנחנו", nav_impact:"איך עוזרים", nav_stories:"סיפורים", nav_contact:"צור קשר", nav_donate:"תרמו עכשיו",
+    hero_eyebrow:"אנשים טובים לא שואלים אם צריך. הם פשוט באים לעזור.",
+    hero_title:"כסף אחד, ארוחה אחת, אף אחד לא רעב",
+    hero_lead:"אנחנו קבוצה קטנה. תורמים כסף, קונים בו אוכל, ומעבירים אותו הלאה - לקשישים שנשארו לבד, למשפחות שקשה להן לגמור את החודש, לילדים יתומים, ולאנשים שנפלו ומנסים לקום ולהשתקם. בלי לשאול שאלות מיותרות ובלי לבייש אף אחד. רק ארוחה חמה, בכבוד.",
+    who_title:"למי אנחנו עוזרים",
+    who1:"קשישים שנשארו לבד", who2:"משפחות שקשה להן לגמור חודש", who3:"ילדים יתומים", who4:"אנשים שנפלו ומנסים להשתקם",
+    hero_cta_donate:"תרמו לארוחה", hero_cta_learn:"קראו איך זה עובד",
+    photo_placeholder:"כאן תהיה תמונה אמיתית שלנו — בדרך",
+    photo_soon1:"בדרך", photo_soon2:"בדרך", photo_soon3:"בדרך",
+    stat1_num:"100%", stat1_lbl:"מכל תרומה הולך לקניית אוכל",
+    stat2_num:"כל סכום", stat2_lbl:"מתקבל בברכה — אין סכום קטן מדי",
+    stat3_num:"4 שפות", stat3_lbl:"כדי שכולם יוכלו להצטרף",
+    about_title:"מי אנחנו",
+    about_text:"אנחנו פועלים כבר 20 שנה, בלי הרבה רעש ובלי משרדים מפוארים, כדי לוודא שמשפחות וזקנים בישראל לא ילכו לישון רעבים. האתר הזה חדש - אבל הדרך שלנו ארוכה.",
+    about_text2:"כל שקל שנתרם הולך ישירות לרכישת אוכל חם. פרטי ההתאגדות הרשמיים של העמותה יעודכנו כאן בקרוב, ואנחנו ממשיכים לדווח בשקיפות מלאה על כל תרומה.",
+    about_card_title:"בכבוד, לא ברחמים",
+    about_card_text:"לא נשתמש בתמונות של מצוקה כדי לגייס תרומות. כשנשתף סיפורים או תמונות — הם יהיו אמיתיים, עם הסכמה מלאה של מי שמופיע בהם. זו ההבטחה שלנו, גם אם היא אומרת פחות \"אפקט\" בדף הבית.",
+    impact_title:"מה עושים עם התרומה", impact_sub:"בלי חישובים מסובכים. ככה נראה הכסף בפועל:",
+    impact1:"מנה חמה אחת, למישהו אחד", impact2:"ארוחות חמות למשפחה, לשבוע", impact3:"ארוחה חמה לכיתה שלמה, ליום אחד",
+    how_title:"איך זה עובד",
+    how1_title:"תורמים", how1_text:"כל סכום, תוך פחות מדקה.",
+    how2_title:"קונים אוכל", how2_text:"כל שקל הופך לאוכל אמיתי, באותו שבוע.",
+    how3_title:"מוסרים", how3_text:"מתנדבים מביאים את הקופסה עד הבית, בכבוד.",
+    donate_title:"תרמו לארוחה", donate_sub:"בחרו סכום, או הקלידו כל סכום שנוח לכם. באמת כל סכום.",
+    custom_amount_ph:"סכום אחר", donate_button:"לתרומה", meal_equiv_tpl:"= בערך {n} ארוחות חמות",
+    donate_note:"התשלום מאובטח ומתבצע בעמוד Stripe — כרטיס אשראי, ואפשרויות נוספות בקרוב.",
+    trust1:"🔒 סליקה מאובטחת", trust2:"🧾 קבלה על כל תרומה", trust3:"🤝 שקיפות מלאה",
+    stories_title:"מהשטח", stories_sub:"קצת מהשטח: אריזה, טעינה, ומסירה — כל תמונה כאן היא מהפעילות שלנו.",
+    testimonials_title:"מה אומרים מי שכבר קיבלו עזרה", testimonials_note:"כל הסיפורים כאן אמיתיים ופורסמים בהסכמה מלאה של מי שסיפר אותם. הם מוצגים בעברית, השפה שבה נאמרו.",
+    stories_badge:"בקרוב", stories_placeholder:"אנחנו בתחילת הדרך. ברגע שיהיו לנו סיפורים אמיתיים מהפעילות שלנו — עם הסכמה מלאה של המשפחות המעורבות — נשתף אותם כאן.",
+    share_title:"עזרו לנו להתפשט", share_sub:"לא יכולים לתרום כרגע? שיתוף עוזר לא פחות. ספרו לחברים על ״ארוחה אחת״.",
+    share_whatsapp:"וואטסאפ", share_facebook:"פייסבוק", share_email:"אימייל", share_copy:"העתקת קישור",
+    footer_brand:"ארוחה אחת", footer_about:"פועלים כבר 20 שנה כדי שאף משפחה בישראל לא תלך לישון רעבה.",
+    footer_links_title:"קישורים", footer_contact_title:"צור קשר", footer_contact_soon:"",
+    footer_bottom:"© 2026 ארוחה אחת. יוזמה ללא מטרות רווח.",
+    share_message:"היי! רציתי לספר לך על ״ארוחה אחת״ — יוזמה קטנה שקונה אוכל חם למי שצריך. אפשר לתרום כל סכום:",
+    link_intro:"רוצים לבקש ממישהו לתרום את הסכום הזה? שלחו לו קישור מוכן שבו הסכום כבר מוזן:",
+    copy_donation_link:"העתקת קישור לתרומה", link_copied:"✓ הקישור הועתק",
+    donation_link_msg:"היי! הכנתי לך קישור לתרום {amount} ₪ ל״ארוחה אחת״ — הסכום כבר מוזן, פשוט לאשר:",
+    invited_banner_tpl:"מישהו הזמין אתכם לתרום {amount} ₪ 🧡 הסכום כבר מוכן למטה"
+  },
+  en: {
+    dir:"ltr", brand:"One Meal",
+    nav_about:"About Us", nav_impact:"How It Helps", nav_stories:"Stories", nav_contact:"Contact", nav_donate:"Donate Now",
+    hero_eyebrow:"Good people don't ask if it's needed. They just show up to help.",
+    hero_title:"One donation, one meal, no one goes hungry",
+    hero_lead:"We're a small group. You donate money, we buy food with it, and we pass it on - to elderly people who are alone, families struggling to make it through the month, orphaned children, and people who fell and are trying to get back on their feet. No unnecessary questions, no shame. Just a hot meal, with dignity.",
+    who_title:"Who We Help",
+    who1:"Elderly people who are alone", who2:"Families struggling to make ends meet", who3:"Orphaned children", who4:"People rebuilding their lives after hardship",
+    hero_cta_donate:"Fund a Meal", hero_cta_learn:"See how it works",
+    photo_placeholder:"A real photo of ours will go here — coming soon",
+    photo_soon1:"Coming soon", photo_soon2:"Coming soon", photo_soon3:"Coming soon",
+    stat1_num:"100%", stat1_lbl:"of every donation goes to buying food",
+    stat2_num:"Any amount", stat2_lbl:"is welcome — no donation is too small",
+    stat3_num:"4 languages", stat3_lbl:"so everyone can take part",
+    about_title:"Who We Are",
+    about_text:"We've been doing this for 20 years, quietly and without fancy offices, to make sure families and elderly people in Israel don't go to bed hungry. This website is new — our work isn't.",
+    about_text2:"Every shekel donated goes straight to buying hot food. Our formal nonprofit registration details will be posted here soon, and we'll keep reporting with full transparency on every donation.",
+    about_card_title:"With Dignity, Not Pity",
+    about_card_text:"We won't use images of hardship to raise money. When we do share stories or photos, they'll be real, with full consent from the people in them. That's our promise, even if it means a less flashy homepage.",
+    impact_title:"What Your Donation Buys", impact_sub:"No complicated math. Here's what the money actually does:",
+    impact1:"One hot meal, for one person", impact2:"A week of hot meals for a family", impact3:"A hot meal for a whole classroom, for a day",
+    how_title:"How It Works",
+    how1_title:"Donate", how1_text:"Any amount, in under a minute.",
+    how2_title:"We buy food", how2_text:"Every shekel becomes real food, that same week.",
+    how3_title:"We deliver", how3_text:"Volunteers bring the box to the door, with dignity.",
+    donate_title:"Fund a Meal", donate_sub:"Choose an amount, or type in any amount you like. Really, any amount.",
+    custom_amount_ph:"Other amount", donate_button:"Donate", meal_equiv_tpl:"= about {n} hot meals",
+    donate_note:"Payment is secure and handled on Stripe's page — credit card, with more options coming soon.",
+    trust1:"🔒 Secure payment", trust2:"🧾 Receipt for every donation", trust3:"🤝 Full transparency",
+    stories_title:"From the Field", stories_sub:"A glimpse of the work: packing, loading, and handing it over — every photo here is from our own activity.",
+    testimonials_title:"What people we've helped are saying", testimonials_note:"Every story here is real and shared with full consent from the person who told it. They're shown in Hebrew, the language they were told in.",
+    stories_badge:"Coming soon", stories_placeholder:"We're just getting started. Once we have real stories from our work — with full consent from the families involved — we'll share them here.",
+    share_title:"Help Us Spread the Word", share_sub:"Can't donate right now? Sharing helps just as much. Tell your friends about “One Meal”.",
+    share_whatsapp:"WhatsApp", share_facebook:"Facebook", share_email:"Email", share_copy:"Copy Link",
+    footer_brand:"One Meal", footer_about:"Operating for 20 years so that no family in Israel goes to bed hungry.",
+    footer_links_title:"Links", footer_contact_title:"Contact", footer_contact_soon:"",
+    footer_bottom:"© 2026 One Meal. A not-for-profit initiative.",
+    share_message:"Hi! I wanted to tell you about “One Meal” — a small initiative that buys hot food for people who need it. You can donate any amount:",
+    link_intro:"Want to ask someone to donate this amount? Send them a ready link with the amount already filled in:",
+    copy_donation_link:"Copy Donation Link", link_copied:"✓ Link copied",
+    donation_link_msg:"Hi! I set up a link for you to donate ₪{amount} to One Meal — the amount is already filled in, just confirm:",
+    invited_banner_tpl:"Someone invited you to donate ₪{amount} 🧡 The amount is ready below"
+  },
+  fr: {
+    dir:"ltr", brand:"Un Repas",
+    nav_about:"Qui sommes-nous", nav_impact:"Notre impact", nav_stories:"Témoignages", nav_contact:"Contact", nav_donate:"Faire un don",
+    hero_eyebrow:"Les gens bien ne demandent pas s'il faut aider. Ils viennent, tout simplement.",
+    hero_title:"Un don, un repas, personne n'a faim",
+    hero_lead:"Nous sommes un petit groupe. Vous donnez de l'argent, nous achetons de la nourriture avec, et nous la transmettons - à des personnes âgées seules, des familles qui peinent à finir le mois, des enfants orphelins, et des personnes qui se relèvent après une épreuve. Sans questions inutiles, sans honte. Juste un repas chaud, avec dignité.",
+    who_title:"Qui nous aidons",
+    who1:"Personnes âgées seules", who2:"Familles qui peinent à finir le mois", who3:"Enfants orphelins", who4:"Personnes qui se reconstruisent après une épreuve",
+    hero_cta_donate:"Financer un repas", hero_cta_learn:"Voir comment ça marche",
+    photo_placeholder:"Une vraie photo de nous arrivera ici — bientôt",
+    photo_soon1:"Bientôt", photo_soon2:"Bientôt", photo_soon3:"Bientôt",
+    stat1_num:"100%", stat1_lbl:"de chaque don sert à acheter de la nourriture",
+    stat2_num:"Tout montant", stat2_lbl:"est le bienvenu — aucun don n'est trop petit",
+    stat3_num:"4 langues", stat3_lbl:"pour que chacun puisse participer",
+    about_title:"Qui sommes-nous",
+    about_text:"Nous faisons cela depuis 20 ans, discrètement et sans bureaux luxueux, pour que les familles et les personnes âgées en Israël ne se couchent pas affamées. Ce site est nouveau — notre travail ne l'est pas.",
+    about_text2:"Chaque shekel donné va directement à l'achat de nourriture chaude. Les détails officiels de notre enregistrement seront publiés ici bientôt, et nous continuerons à rendre compte en toute transparence de chaque don.",
+    about_card_title:"Avec dignité, pas par pitié",
+    about_card_text:"Nous n'utiliserons jamais des images de précarité pour collecter des dons. Quand nous partagerons des témoignages ou des photos, ils seront réels, avec le plein consentement des personnes concernées. C'est notre engagement, même si cela donne une page d'accueil moins spectaculaire.",
+    impact_title:"Ce que votre don achète", impact_sub:"Pas de calculs compliqués. Voici ce que fait concrètement l'argent :",
+    impact1:"Un repas chaud, pour une personne", impact2:"Une semaine de repas chauds pour une famille", impact3:"Un repas chaud pour toute une classe, pendant une journée",
+    how_title:"Comment ça marche",
+    how1_title:"Vous donnez", how1_text:"N'importe quel montant, en moins d'une minute.",
+    how2_title:"On achète la nourriture", how2_text:"Chaque shekel devient de la vraie nourriture, la même semaine.",
+    how3_title:"On livre", how3_text:"Des bénévoles apportent la boîte jusqu'à la porte, avec dignité.",
+    donate_title:"Financer un repas", donate_sub:"Choisissez un montant, ou saisissez celui de votre choix. Vraiment, n'importe quel montant.",
+    custom_amount_ph:"Autre montant", donate_button:"Faire un don", meal_equiv_tpl:"= environ {n} repas chauds",
+    donate_note:"Le paiement est sécurisé et se fait sur la page Stripe — carte bancaire, d'autres options arrivent bientôt.",
+    trust1:"🔒 Paiement sécurisé", trust2:"🧾 Reçu pour chaque don", trust3:"🤝 Transparence totale",
+    stories_title:"Sur le terrain", stories_sub:"Un aperçu du terrain : emballage, chargement, remise — chaque photo ici vient de notre propre activité.",
+    testimonials_title:"Ce que disent ceux que nous avons aidés", testimonials_note:"Chaque témoignage ici est réel et publié avec le plein consentement de la personne qui l'a raconté. Ils sont présentés en hébreu, la langue dans laquelle ils ont été dits.",
+    stories_badge:"Bientôt", stories_placeholder:"Nous n'en sommes qu'au début. Dès que nous aurons de vrais témoignages de notre action — avec le plein consentement des familles concernées — nous les partagerons ici.",
+    share_title:"Aidez-nous à faire connaître", share_sub:"Vous ne pouvez pas donner maintenant ? Partager aide tout autant. Parlez de «Un Repas» à vos amis.",
+    share_whatsapp:"WhatsApp", share_facebook:"Facebook", share_email:"E-mail", share_copy:"Copier le lien",
+    footer_brand:"Un Repas", footer_about:"En activité depuis 20 ans pour qu'aucune famille en Israël ne se couche affamée.",
+    footer_links_title:"Liens", footer_contact_title:"Contact", footer_contact_soon:"",
+    footer_bottom:"© 2026 Un Repas. Une initiative à but non lucratif.",
+    share_message:"Salut ! Je voulais te parler de «Un Repas» — une petite initiative qui achète de la nourriture chaude pour ceux qui en ont besoin. Tu peux faire un don, quel que soit le montant :",
+    link_intro:"Vous voulez demander à quelqu'un de donner ce montant ? Envoyez-lui un lien prêt avec le montant déjà rempli :",
+    copy_donation_link:"Copier le lien de don", link_copied:"✓ Lien copié",
+    donation_link_msg:"Salut ! Je t'ai préparé un lien pour donner {amount} ₪ à Un Repas — le montant est déjà rempli, il suffit de confirmer :",
+    invited_banner_tpl:"Quelqu'un vous invite à donner {amount} ₪ 🧡 Le montant est prêt ci-dessous"
+  },
+  ar: {
+    dir:"rtl", brand:"وجبة واحدة",
+    nav_about:"من نحن", nav_impact:"كيف نساعد", nav_stories:"قصص", nav_contact:"اتصل بنا", nav_donate:"تبرع الآن",
+    hero_eyebrow:"الأشخاص الطيبون لا يسألون إن كانت هناك حاجة. هم فقط يأتون للمساعدة.",
+    hero_title:"تبرع واحد، وجبة واحدة، لا أحد يجوع",
+    hero_lead:"نحن مجموعة صغيرة. تتبرعون بالمال، نشتري به طعامًا، ونوصله - لكبار السن الوحيدين، وللعائلات التي تجد صعوبة في إنهاء الشهر، وللأطفال الأيتام، وللأشخاص الذين سقطوا ويحاولون النهوض من جديد. بلا أسئلة غير ضرورية وبلا إحراج لأحد. فقط وجبة ساخنة، بكرامة.",
+    who_title:"من نساعد",
+    who1:"كبار سن وحيدون", who2:"عائلات تجد صعوبة في إنهاء الشهر", who3:"أطفال أيتام", who4:"أشخاص يعيدون بناء حياتهم بعد محنة",
+    hero_cta_donate:"موّل وجبة", hero_cta_learn:"شاهد كيف يعمل الأمر",
+    photo_placeholder:"صورة حقيقية لنا ستكون هنا — قريبًا",
+    photo_soon1:"قريبًا", photo_soon2:"قريبًا", photo_soon3:"قريبًا",
+    stat1_num:"100%", stat1_lbl:"من كل تبرع يذهب لشراء الطعام",
+    stat2_num:"أي مبلغ", stat2_lbl:"مرحّب به — لا يوجد مبلغ صغير جدًا",
+    stat3_num:"4 لغات", stat3_lbl:"ليتمكن الجميع من المشاركة",
+    about_title:"من نحن",
+    about_text:"نعمل منذ 20 عامًا، بهدوء وبلا مكاتب فخمة، لضمان ألا تنام العائلات وكبار السن في إسرائيل جياعًا. هذا الموقع جديد - لكن عملنا ليس كذلك.",
+    about_text2:"كل شيكل يُتبرع به يذهب مباشرة لشراء طعام ساخن. سيتم نشر تفاصيل التسجيل الرسمي للجمعية هنا قريبًا، وسنواصل الإبلاغ بشفافية كاملة عن كل تبرع.",
+    about_card_title:"بكرامة، لا بالشفقة",
+    about_card_text:"لن نستخدم صور المعاناة لجمع التبرعات. عندما نشارك قصصًا أو صورًا، ستكون حقيقية، وبموافقة كاملة من الأشخاص الظاهرين فيها. هذا وعدنا، حتى لو كان ذلك يعني صفحة رئيسية أقل بريقًا.",
+    impact_title:"ماذا يشتري تبرعك", impact_sub:"بلا حسابات معقدة. هكذا يبدو المال في الواقع:",
+    impact1:"وجبة ساخنة واحدة، لشخص واحد", impact2:"أسبوع من الوجبات الساخنة لعائلة", impact3:"وجبة ساخنة لصف كامل، ليوم واحد",
+    how_title:"كيف يعمل الأمر",
+    how1_title:"تتبرعون", how1_text:"أي مبلغ، في أقل من دقيقة.",
+    how2_title:"نشتري الطعام", how2_text:"كل شيكل يتحول لطعام حقيقي، في نفس الأسبوع.",
+    how3_title:"نُسلّم", how3_text:"متطوعون يوصلون الصندوق حتى الباب، بكرامة.",
+    donate_title:"موّل وجبة", donate_sub:"اختر مبلغًا، أو اكتب أي مبلغ يناسبك. حقًا، أي مبلغ.",
+    custom_amount_ph:"مبلغ آخر", donate_button:"تبرع", meal_equiv_tpl:"= حوالي {n} وجبة ساخنة",
+    donate_note:"الدفع آمن ويتم عبر صفحة Stripe — بطاقة ائتمان، ووسائل إضافية قريبًا.",
+    trust1:"🔒 دفع آمن", trust2:"🧾 إيصال لكل تبرع", trust3:"🤝 شفافية كاملة",
+    stories_title:"من الميدان", stories_sub:"لمحة من الميدان: تعبئة، تحميل، وتسليم — كل صورة هنا من نشاطنا الفعلي.",
+    testimonials_title:"ماذا يقول من ساعدناهم بالفعل", testimonials_note:"كل القصص هنا حقيقية ومنشورة بموافقة كاملة ممن رواها. تُعرض بالعبرية، اللغة التي قيلت بها.",
+    stories_badge:"قريبًا", stories_placeholder:"نحن في البداية. بمجرد أن تكون لدينا قصص حقيقية من نشاطنا — بموافقة كاملة من العائلات المعنية — سنشاركها هنا.",
+    share_title:"ساعدونا على الانتشار", share_sub:"لا يمكنكم التبرع الآن؟ المشاركة تساعد بنفس القدر. أخبروا أصدقاءكم عن «وجبة واحدة».",
+    share_whatsapp:"واتساب", share_facebook:"فيسبوك", share_email:"البريد الإلكتروني", share_copy:"نسخ الرابط",
+    footer_brand:"وجبة واحدة", footer_about:"نعمل منذ 20 عامًا حتى لا تنام أي عائلة في إسرائيل جائعة.",
+    footer_links_title:"روابط", footer_contact_title:"اتصل بنا", footer_contact_soon:"",
+    footer_bottom:"© 2026 وجبة واحدة. مبادرة لا تهدف للربح.",
+    share_message:"مرحبًا! أردت أن أخبرك عن «وجبة واحدة» — مبادرة صغيرة تشتري طعامًا ساخنًا لمن يحتاجه. يمكنك التبرع بأي مبلغ:",
+    link_intro:"تريد أن تطلب من أحدهم التبرع بهذا المبلغ؟ أرسل له رابطًا جاهزًا والمبلغ مُدخل مسبقًا:",
+    copy_donation_link:"نسخ رابط التبرع", link_copied:"✓ تم نسخ الرابط",
+    donation_link_msg:"مرحبًا! أعددت لك رابطًا للتبرع بمبلغ {amount} ₪ لـ«وجبة واحدة» — المبلغ مُدخل مسبقًا، فقط أكّد:",
+    invited_banner_tpl:"دعاك أحدهم للتبرع بمبلغ {amount} ₪ 🧡 المبلغ جاهز أدناه"
+  }
+};
+
+let currentLang = 'he';
+let selectedAmount = null;
+
+function applyLang(lang){
+  currentLang = lang;
+  const t = translations[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = t.dir;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(t[key]) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-ph');
+    if(t[key]) el.setAttribute('placeholder', t[key]);
+  });
+  document.querySelectorAll('#langSwitch button').forEach(b=>{
+    b.classList.toggle('active', b.getAttribute('data-lang')===lang);
+  });
+  updateShareLinks();
+  updateInvitedBanner();
+  updateDonationLinks();
+  updateMealEquiv();
+}
+
+document.getElementById('langSwitch').addEventListener('click', (e)=>{
+  const btn = e.target.closest('button[data-lang]');
+  if(btn) applyLang(btn.getAttribute('data-lang'));
+});
+
+document.getElementById('mobileToggle').addEventListener('click', ()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+document.getElementById('amountGrid').addEventListener('click', (e)=>{
+  const btn = e.target.closest('.amount-btn');
+  if(!btn) return;
+  document.querySelectorAll('.amount-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedAmount = btn.getAttribute('data-amount');
+  document.getElementById('customAmount').value = '';
+  updateQuickLink();
+});
+
+document.getElementById('customAmount').addEventListener('input', (e)=>{
+  if(e.target.value){
+    document.querySelectorAll('.amount-btn').forEach(b=>b.classList.remove('selected'));
+    selectedAmount = e.target.value;
+  } else {
+    selectedAmount = null;
+  }
+  updateQuickLink();
+});
+
+// --- Shareable pre-filled donation links ---
+function getQueryAmount(){
+  const params = new URLSearchParams(window.location.search);
+  const amt = parseFloat(params.get('amount'));
+  if(amt && amt > 0) return Math.round(amt);
+  return null;
+}
+
+function selectAmountValue(amount){
+  let matched = false;
+  document.querySelectorAll('.amount-btn').forEach(b=>{
+    if(b.getAttribute('data-amount') === String(amount)){
+      b.classList.add('selected'); matched = true;
+    } else {
+      b.classList.remove('selected');
+    }
+  });
+  if(!matched){
+    document.getElementById('customAmount').value = amount;
+  }
+  selectedAmount = amount;
+  updateQuickLink();
+}
+
+function buildDonationUrl(amount){
+  const url = new URL('donate.html', window.location.href);
+  url.searchParams.set('amount', amount);
+  return url.toString();
+}
+
+function updateQuickLink(){
+  const row = document.getElementById('quickLinkRow');
+  if(selectedAmount && Number(selectedAmount) > 0){
+    row.classList.add('show');
+  } else {
+    row.classList.remove('show');
+  }
+  updateDonationLinks();
+  updateMealEquiv();
+  updateDonateBtnHref();
+}
+
+function updateMealEquiv(){
+  const el = document.getElementById('mealEquiv');
+  if(!el) return;
+  const amt = Number(selectedAmount);
+  if(!amt || amt <= 0){ el.textContent = ''; return; }
+  const meals = Math.max(1, Math.round(amt / 18));
+  const t = translations[currentLang];
+  el.textContent = (t.meal_equiv_tpl || '').replace('{n}', meals);
+}
+
+function updateDonationLinks(){
+  if(!selectedAmount || !(Number(selectedAmount) > 0)) return;
+  const t = translations[currentLang];
+  const link = buildDonationUrl(selectedAmount);
+  const msg = encodeURIComponent((t.donation_link_msg || '').replace('{amount}', selectedAmount) + ' ' + link);
+  const waLink = document.getElementById('whatsappDonateLink');
+  if(waLink) waLink.href = 'https://wa.me/?text=' + msg;
+}
+
+function updateInvitedBanner(){
+  const banner = document.getElementById('invitedBanner');
+  if(!invitedAmount){ banner.classList.remove('show'); return; }
+  const t = translations[currentLang];
+  banner.textContent = (t.invited_banner_tpl || '').replace('{amount}', invitedAmount);
+  banner.classList.add('show');
+}
+
+document.getElementById('copyDonateLink').addEventListener('click', ()=>{
+  if(!selectedAmount) return;
+  navigator.clipboard.writeText(buildDonationUrl(selectedAmount)).then(()=>{
+    const el = document.getElementById('copyDonateLink').querySelector('span');
+    const original = el.textContent;
+    el.textContent = translations[currentLang].link_copied || '✓';
+    setTimeout(()=>{ el.textContent = original; }, 1800);
+  });
+});
+
+let invitedAmount = getQueryAmount();
+
+function updateDonateBtnHref(){
+  const btn = document.getElementById('donateBtn');
+  if(!btn) return;
+  btn.href = (selectedAmount && Number(selectedAmount) > 0)
+    ? 'donate.html?amount=' + encodeURIComponent(selectedAmount)
+    : 'donate.html';
+}
+
+function updateShareLinks(){
+  const t = translations[currentLang];
+  const url = window.location.href;
+  const msg = encodeURIComponent(t.share_message + ' ' + url);
+  document.getElementById('shareWhatsapp').href = 'https://wa.me/?text=' + msg;
+  document.getElementById('shareFacebook').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+  document.getElementById('shareEmail').href = 'mailto:?subject=' + encodeURIComponent(t.brand) + '&body=' + msg;
+}
+
+document.getElementById('copyLink').addEventListener('click', ()=>{
+  navigator.clipboard.writeText(window.location.href).then(()=>{
+    const el = document.getElementById('copyLink').querySelector('span');
+    const original = el.textContent;
+    el.textContent = '✓';
+    setTimeout(()=>{ el.textContent = original; }, 1500);
+  });
+});
+
+// Scroll-reveal animation
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){ els.forEach(el=>el.classList.add('in-view')); return; }
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+    });
+  }, {threshold:0.12});
+  els.forEach(el=>io.observe(el));
+})();
+
+// Testimonial carousel
+(function(){
+  const scroller = document.getElementById('testimonialScroll');
+  const prevBtn = document.getElementById('testPrev');
+  const nextBtn = document.getElementById('testNext');
+  if(!scroller) return;
+  function step(dir){
+    const cardWidth = 316; // card width + gap
+    const rtl = document.documentElement.dir === 'rtl';
+    const amount = rtl ? -dir * cardWidth : dir * cardWidth;
+    scroller.scrollBy({left: amount, behavior:'smooth'});
+  }
+  prevBtn.addEventListener('click', ()=>step(-1));
+  nextBtn.addEventListener('click', ()=>step(1));
+})();
+
+applyLang('he');
+
+if(invitedAmount){
+  selectAmountValue(invitedAmount);
+  updateInvitedBanner();
+  setTimeout(()=>{
+    const el = document.getElementById('donate');
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 350);
+}
+</script>
+</body>
+</html>
