@@ -42,11 +42,13 @@
   .hero h1{font-size:2.1rem;margin:0 0 10px;}
   .hero p.sub{font-size:1.1rem;color:var(--muted);margin:0 0 8px;}
 
-  .plates{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:520px;margin:28px auto;}
+  .plates{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;max-width:520px;margin:28px auto;}
   .plate{
-    font-size:1.6rem;opacity:0;transform:scale(.5);
+    width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;
+    opacity:0;transform:scale(.5);
     animation:plate-in .4s ease forwards;
   }
+  .plate svg{display:block;}
   @keyframes plate-in{to{opacity:1;transform:scale(1);}}
   .plates-more{font-size:.95rem;color:var(--muted);align-self:center;}
 
@@ -66,12 +68,14 @@
   .cta-btn.outline{background:transparent;color:var(--green-dark)!important;border:1.5px solid var(--green-dark);}
   .cta-btn.teal{background:var(--green);}
   .cta-btn.teal:hover{background:var(--green-dark);}
+  .cta-btn.icon{display:inline-flex;align-items:center;gap:8px;}
+  .cta-btn.icon svg{width:16px;height:16px;flex-shrink:0;}
 
   .cert{
     background:linear-gradient(160deg,var(--cream-2),var(--white));
     border:2px solid var(--green); border-radius:14px; padding:32px; text-align:center;
   }
-  .cert .mark{font-size:2.4rem;margin-bottom:6px;}
+  .cert .mark{width:52px;height:52px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;}
   .cert h2{font-size:1.4rem;margin:0 0 4px;color:var(--green-dark);}
   .cert .amt{font-size:2.6rem;font-weight:800;color:var(--terracotta-dark);font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;margin:10px 0;}
   .cert .date{font-size:.85rem;color:var(--muted);margin-top:10px;}
@@ -119,14 +123,23 @@
   <div class="plates" id="platesRow"></div>
 
   <div class="card cert">
-    <div class="mark">🥣</div>
+    <div class="mark">
+      <svg viewBox="0 0 24 24" width="46" height="46" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="8" r="7" fill="var(--green)" stroke="var(--green-dark)" stroke-width="1.3"/>
+        <path d="M9.2 7.8l1.6 1.6 3.2-3.6" stroke="#fff" stroke-width="1.6" fill="none"/>
+        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" stroke="var(--terracotta)" stroke-width="1.6" fill="none"/>
+      </svg>
+    </div>
     <h2>תעודת הוקרה</h2>
     <p style="margin-bottom:0;">תרמת</p>
     <div class="amt" id="certAmount">₪—</div>
     <p style="margin-bottom:0;" id="certMeals">כ-— ארוחות חמות למי שצריך</p>
     <div class="date" id="certDate"></div>
     <div class="cert-actions">
-      <button class="cta-btn" id="downloadCert">⬇ הורדת תעודה</button>
+      <button class="cta-btn icon" id="downloadCert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+        <span>הורדת תעודה</span>
+      </button>
       <button class="cta-btn outline" id="shareCert">שיתוף בוואטסאפ</button>
     </div>
   </div>
@@ -215,7 +228,7 @@ function render(){
   for(let i=0;i<maxShown;i++){
     const span = document.createElement('span');
     span.className = 'plate';
-    span.textContent = '🍽️';
+    span.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="var(--cream-2)" stroke="var(--green)" stroke-width="1.6"/><circle cx="12" cy="12" r="5.5" fill="none" stroke="var(--green)" stroke-width="1.2" opacity=".55"/></svg>';
     span.style.animationDelay = (i*0.06)+'s';
     platesRow.appendChild(span);
   }
