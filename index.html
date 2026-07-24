@@ -691,7 +691,7 @@ document.getElementById('amountGrid').addEventListener('click', (e)=>{
   document.querySelectorAll('.amount-btn').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
   selectedAmount = btn.getAttribute('data-amount');
-  document.getElementById('customAmount').value = '';
+  document.getElementById('customAmount').value = selectedAmount;
   updateQuickLink();
 });
 

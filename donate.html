@@ -302,7 +302,7 @@ function selectAmount(amount, fromCustom){
   document.querySelectorAll('.amount-btn').forEach(b=>{
     b.classList.toggle('selected', !fromCustom && b.getAttribute('data-amount') === String(amount));
   });
-  if(!fromCustom) customAmount.value = '';
+  if(!fromCustom) customAmount.value = amount;
   updateMealEquiv();
 }
 
