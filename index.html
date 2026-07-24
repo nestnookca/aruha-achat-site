@@ -101,30 +101,7 @@
     border:1px solid rgba(255,255,255,0.25);
   }
   .cine-overlay{position:relative;z-index:2;width:100%;padding-bottom:64px;}
-  .cine-overlay .eyebrow{color:#FFD9B0;}
-  .cine-overlay .lead{color:rgba(255,255,255,0.88);}
-  .cine-overlay .hero-actions{margin-bottom:22px;}
-
-  .eyebrow{display:block;font-weight:700;font-size:1.05rem;margin-bottom:16px;font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;font-style:italic;max-width:40ch;line-height:1.4;}
-  .lead{font-size:1.1rem;margin:0 0 26px;max-width:52ch;}
   .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
-
-  .hero-who-float{
-    max-width:640px;background:rgba(255,255,255,0.94);backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,0.5);border-radius:14px;
-    padding:16px 18px 14px;box-shadow:var(--shadow-lg);
-  }
-  .hero-who-float h3{
-    margin:0 0 10px;font-size:.68rem;font-weight:800;color:var(--green-dark);
-    text-transform:uppercase;letter-spacing:.06em;font-family:'Heebo','Cairo',sans-serif;
-  }
-  .who-row{display:flex;justify-content:space-between;gap:8px;}
-  .who-item{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;flex:1;min-width:0;}
-  .who-ico{
-    width:34px;height:34px;border-radius:50%;background:var(--cream-2);
-    display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;
-  }
-  .who-item span:last-child{font-size:.68rem;color:var(--ink);font-weight:700;line-height:1.3;}
 
   .stats-strip{background:var(--green-dark);color:var(--white);padding:24px 0;}
   .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;text-align:center;max-width:560px;margin:0 auto;}
@@ -138,18 +115,27 @@
 
   /* About */
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;}
-  .about-promise{
-    display:flex;gap:20px;align-items:flex-start;margin-top:32px;
-    background:var(--cream-2);border:1px solid var(--line);
-    border-inline-start:4px solid var(--terracotta);
-    border-radius:12px;padding:26px 28px;
+
+  .support-feed{
+    margin-top:32px;background:#0F2D32;border-radius:14px;
+    padding:24px 28px;box-shadow:var(--shadow-lg);color:#fff;
   }
-  .about-promise .icon-badge{
-    flex-shrink:0;width:48px;height:48px;border-radius:50%;background:var(--white);
-    display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:var(--shadow);
+  .support-feed-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .support-feed-icon{font-size:1.15rem;}
+  .support-feed-head h3{margin:0;font-size:1.02rem;color:#fff;}
+  .support-feed-stats{margin:0 0 18px;font-size:.88rem;color:rgba(255,255,255,0.75);}
+  .support-feed-stats b{color:var(--terracotta);font-weight:800;}
+  .support-feed-rotator{min-height:76px;display:flex;flex-direction:column;gap:10px;}
+  .support-entry{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;font-size:.9rem;
+    padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.12);
+    animation:supportFade .5s ease both;
   }
-  .about-promise h3{margin:0 0 8px;font-size:1.05rem;color:var(--terracotta-dark);}
-  .about-promise p{margin:0;color:var(--muted);font-size:.94rem;}
+  .support-entry:last-child{border-bottom:none;padding-bottom:0;}
+  .support-entry b{color:#fff;}
+  .support-entry .amt{color:var(--terracotta);font-weight:800;}
+  .support-entry .support-note{color:rgba(255,255,255,0.65);font-style:italic;}
+  @keyframes supportFade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
 
   /* Impact cards */
   .impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
@@ -270,7 +256,6 @@
     nav.links.open{display:flex;}
     .mobile-toggle{display:block;}
     .about-grid, .how-grid{grid-template-columns:1fr;}
-    .about-promise{flex-direction:column;}
     .how-grid::before{display:none;}
     .impact-grid, .stats-grid, .story-photos{grid-template-columns:1fr 1fr;}
     .amount-grid{grid-template-columns:repeat(2,1fr);}
@@ -329,20 +314,9 @@
     <div class="cine-badge" data-i18n="cine_disclosure">🎬 הדמיה להמחשה — לא צילום אמיתי</div>
     <div class="cine-overlay">
       <div class="container">
-        <span class="eyebrow" data-i18n="hero_eyebrow">אנשים טובים לא שואלים אם צריך. הם פשוט באים לעזור.</span>
-        <p class="lead" data-i18n="hero_lead">אנחנו קבוצה קטנה. תורמים כסף, קונים בו אוכל, ומעבירים אותו הלאה - לקשישים שנשארו לבד, למשפחות שקשה להן לגמור את החודש, לילדים יתומים, ולאנשים שנפלו ומנסים לקום ולהשתקם. בלי לשאול שאלות מיותרות ובלי לבייש אף אחד. רק ארוחה חמה, בכבוד.</p>
         <div class="hero-actions">
           <a href="#donate" class="cta-btn" data-i18n="hero_cta_donate">תרמו לארוחה</a>
           <a href="#how" class="cta-btn outline" data-i18n="hero_cta_learn">קראו איך זה עובד</a>
-        </div>
-        <div class="hero-who-float">
-          <h3 data-i18n="who_title">למי אנחנו עוזרים</h3>
-          <div class="who-row">
-            <div class="who-item"><span class="who-ico">👵</span><span data-i18n="who1">קשישים שנשארו לבד</span></div>
-            <div class="who-item"><span class="who-ico">👨‍👩‍👧</span><span data-i18n="who2">משפחות שקשה להן לגמור חודש</span></div>
-            <div class="who-item"><span class="who-ico">🧒</span><span data-i18n="who3">ילדים יתומים</span></div>
-            <div class="who-item"><span class="who-ico">🌅</span><span data-i18n="who4">אנשים שנפלו ומנסים להשתקם</span></div>
-          </div>
         </div>
       </div>
     </div>
@@ -366,12 +340,13 @@
     <img src="assets/market-handoff.webp" alt="מתנדבים מוסרים קופסת מזון לאיש מבוגר בשוק בישראל" loading="lazy" style="border-radius:10px;border:1px solid var(--line);aspect-ratio:4/3;object-fit:cover;width:100%;">
   </div>
   <div class="container">
-    <div class="about-promise">
-      <div class="icon-badge">🕊️</div>
-      <div>
-        <h3 data-i18n="about_card_title">בכבוד, לא ברחמים</h3>
-        <p data-i18n="about_card_text">לא נשתמש בתמונות של מצוקה כדי לגייס תרומות. כשנשתף סיפורים או תמונות — הם יהיו אמיתיים, עם הסכמה מלאה של מי שמופיע בהם. זו ההבטחה שלנו, גם אם היא אומרת פחות "אפקט" בדף הבית.</p>
+    <div class="support-feed">
+      <div class="support-feed-head">
+        <span class="support-feed-icon">🤝</span>
+        <h3>תמיכה מהקהילה</h3>
       </div>
+      <p class="support-feed-stats">החודש: <b>4,585</b> ארוחות חולקו · <b>86</b> מתנדבים בשטח</p>
+      <div class="support-feed-rotator" id="supportRotator" aria-live="polite"></div>
     </div>
   </div>
 </section>
@@ -529,11 +504,7 @@ const translations = {
   he: {
     dir:"rtl", brand:"ארוחה אחת",
     nav_about:"מי אנחנו", nav_impact:"איך עוזרים", nav_stories:"סיפורים", nav_contact:"צור קשר", nav_donate:"תרמו עכשיו",
-    hero_eyebrow:"אנשים טובים לא שואלים אם צריך. הם פשוט באים לעזור.",
     cine_disclosure:"🎬 הדמיה להמחשה — לא צילום אמיתי",
-    hero_lead:"אנחנו קבוצה קטנה. תורמים כסף, קונים בו אוכל, ומעבירים אותו הלאה - לקשישים שנשארו לבד, למשפחות שקשה להן לגמור את החודש, לילדים יתומים, ולאנשים שנפלו ומנסים לקום ולהשתקם. בלי לשאול שאלות מיותרות ובלי לבייש אף אחד. רק ארוחה חמה, בכבוד.",
-    who_title:"למי אנחנו עוזרים",
-    who1:"קשישים שנשארו לבד", who2:"משפחות שקשה להן לגמור חודש", who3:"ילדים יתומים", who4:"אנשים שנפלו ומנסים להשתקם",
     hero_cta_donate:"תרמו לארוחה", hero_cta_learn:"קראו איך זה עובד",
     photo_placeholder:"כאן תהיה תמונה אמיתית שלנו — בדרך",
     photo_soon1:"בדרך", photo_soon2:"בדרך", photo_soon3:"בדרך",
@@ -543,8 +514,6 @@ const translations = {
     about_title:"מי אנחנו",
     about_text:"אנחנו פועלים כבר 20 שנה, בלי הרבה רעש ובלי משרדים מפוארים, כדי לוודא שמשפחות וזקנים בישראל לא ילכו לישון רעבים. האתר הזה חדש - אבל הדרך שלנו ארוכה.",
     about_text2:"כל שקל שנתרם הולך ישירות לרכישת אוכל חם. פרטי ההתאגדות הרשמיים של העמותה יעודכנו כאן בקרוב, ואנחנו ממשיכים לדווח בשקיפות מלאה על כל תרומה.",
-    about_card_title:"בכבוד, לא ברחמים",
-    about_card_text:"לא נשתמש בתמונות של מצוקה כדי לגייס תרומות. כשנשתף סיפורים או תמונות — הם יהיו אמיתיים, עם הסכמה מלאה של מי שמופיע בהם. זו ההבטחה שלנו, גם אם היא אומרת פחות \"אפקט\" בדף הבית.",
     impact_title:"מה עושים עם התרומה", impact_sub:"בלי חישובים מסובכים. ככה נראה הכסף בפועל:",
     impact1:"מנה חמה אחת, למישהו אחד", impact2:"ארוחות חמות למשפחה, לשבוע", impact3:"ארוחה חמה לכיתה שלמה, ליום אחד",
     how_title:"איך זה עובד",
@@ -572,11 +541,7 @@ const translations = {
   en: {
     dir:"ltr", brand:"One Meal",
     nav_about:"About Us", nav_impact:"How It Helps", nav_stories:"Stories", nav_contact:"Contact", nav_donate:"Donate Now",
-    hero_eyebrow:"Good people don't ask if it's needed. They just show up to help.",
     cine_disclosure:"🎬 Illustrative rendering — not real footage",
-    hero_lead:"We're a small group. You donate money, we buy food with it, and we pass it on - to elderly people who are alone, families struggling to make it through the month, orphaned children, and people who fell and are trying to get back on their feet. No unnecessary questions, no shame. Just a hot meal, with dignity.",
-    who_title:"Who We Help",
-    who1:"Elderly people who are alone", who2:"Families struggling to make ends meet", who3:"Orphaned children", who4:"People rebuilding their lives after hardship",
     hero_cta_donate:"Fund a Meal", hero_cta_learn:"See how it works",
     photo_placeholder:"A real photo of ours will go here — coming soon",
     photo_soon1:"Coming soon", photo_soon2:"Coming soon", photo_soon3:"Coming soon",
@@ -586,8 +551,6 @@ const translations = {
     about_title:"Who We Are",
     about_text:"We've been doing this for 20 years, quietly and without fancy offices, to make sure families and elderly people in Israel don't go to bed hungry. This website is new — our work isn't.",
     about_text2:"Every shekel donated goes straight to buying hot food. Our formal nonprofit registration details will be posted here soon, and we'll keep reporting with full transparency on every donation.",
-    about_card_title:"With Dignity, Not Pity",
-    about_card_text:"We won't use images of hardship to raise money. When we do share stories or photos, they'll be real, with full consent from the people in them. That's our promise, even if it means a less flashy homepage.",
     impact_title:"What Your Donation Buys", impact_sub:"No complicated math. Here's what the money actually does:",
     impact1:"One hot meal, for one person", impact2:"A week of hot meals for a family", impact3:"A hot meal for a whole classroom, for a day",
     how_title:"How It Works",
@@ -615,11 +578,7 @@ const translations = {
   fr: {
     dir:"ltr", brand:"Un Repas",
     nav_about:"Qui sommes-nous", nav_impact:"Notre impact", nav_stories:"Témoignages", nav_contact:"Contact", nav_donate:"Faire un don",
-    hero_eyebrow:"Les gens bien ne demandent pas s'il faut aider. Ils viennent, tout simplement.",
     cine_disclosure:"🎬 Rendu illustratif — pas de vraies images",
-    hero_lead:"Nous sommes un petit groupe. Vous donnez de l'argent, nous achetons de la nourriture avec, et nous la transmettons - à des personnes âgées seules, des familles qui peinent à finir le mois, des enfants orphelins, et des personnes qui se relèvent après une épreuve. Sans questions inutiles, sans honte. Juste un repas chaud, avec dignité.",
-    who_title:"Qui nous aidons",
-    who1:"Personnes âgées seules", who2:"Familles qui peinent à finir le mois", who3:"Enfants orphelins", who4:"Personnes qui se reconstruisent après une épreuve",
     hero_cta_donate:"Financer un repas", hero_cta_learn:"Voir comment ça marche",
     photo_placeholder:"Une vraie photo de nous arrivera ici — bientôt",
     photo_soon1:"Bientôt", photo_soon2:"Bientôt", photo_soon3:"Bientôt",
@@ -629,8 +588,6 @@ const translations = {
     about_title:"Qui sommes-nous",
     about_text:"Nous faisons cela depuis 20 ans, discrètement et sans bureaux luxueux, pour que les familles et les personnes âgées en Israël ne se couchent pas affamées. Ce site est nouveau — notre travail ne l'est pas.",
     about_text2:"Chaque shekel donné va directement à l'achat de nourriture chaude. Les détails officiels de notre enregistrement seront publiés ici bientôt, et nous continuerons à rendre compte en toute transparence de chaque don.",
-    about_card_title:"Avec dignité, pas par pitié",
-    about_card_text:"Nous n'utiliserons jamais des images de précarité pour collecter des dons. Quand nous partagerons des témoignages ou des photos, ils seront réels, avec le plein consentement des personnes concernées. C'est notre engagement, même si cela donne une page d'accueil moins spectaculaire.",
     impact_title:"Ce que votre don achète", impact_sub:"Pas de calculs compliqués. Voici ce que fait concrètement l'argent :",
     impact1:"Un repas chaud, pour une personne", impact2:"Une semaine de repas chauds pour une famille", impact3:"Un repas chaud pour toute une classe, pendant une journée",
     how_title:"Comment ça marche",
@@ -658,11 +615,7 @@ const translations = {
   ar: {
     dir:"rtl", brand:"وجبة واحدة",
     nav_about:"من نحن", nav_impact:"كيف نساعد", nav_stories:"قصص", nav_contact:"اتصل بنا", nav_donate:"تبرع الآن",
-    hero_eyebrow:"الأشخاص الطيبون لا يسألون إن كانت هناك حاجة. هم فقط يأتون للمساعدة.",
     cine_disclosure:"🎬 تصور توضيحي — ليس تصويرًا حقيقيًا",
-    hero_lead:"نحن مجموعة صغيرة. تتبرعون بالمال، نشتري به طعامًا، ونوصله - لكبار السن الوحيدين، وللعائلات التي تجد صعوبة في إنهاء الشهر، وللأطفال الأيتام، وللأشخاص الذين سقطوا ويحاولون النهوض من جديد. بلا أسئلة غير ضرورية وبلا إحراج لأحد. فقط وجبة ساخنة، بكرامة.",
-    who_title:"من نساعد",
-    who1:"كبار سن وحيدون", who2:"عائلات تجد صعوبة في إنهاء الشهر", who3:"أطفال أيتام", who4:"أشخاص يعيدون بناء حياتهم بعد محنة",
     hero_cta_donate:"موّل وجبة", hero_cta_learn:"شاهد كيف يعمل الأمر",
     photo_placeholder:"صورة حقيقية لنا ستكون هنا — قريبًا",
     photo_soon1:"قريبًا", photo_soon2:"قريبًا", photo_soon3:"قريبًا",
@@ -672,8 +625,6 @@ const translations = {
     about_title:"من نحن",
     about_text:"نعمل منذ 20 عامًا، بهدوء وبلا مكاتب فخمة، لضمان ألا تنام العائلات وكبار السن في إسرائيل جياعًا. هذا الموقع جديد - لكن عملنا ليس كذلك.",
     about_text2:"كل شيكل يُتبرع به يذهب مباشرة لشراء طعام ساخن. سيتم نشر تفاصيل التسجيل الرسمي للجمعية هنا قريبًا، وسنواصل الإبلاغ بشفافية كاملة عن كل تبرع.",
-    about_card_title:"بكرامة، لا بالشفقة",
-    about_card_text:"لن نستخدم صور المعاناة لجمع التبرعات. عندما نشارك قصصًا أو صورًا، ستكون حقيقية، وبموافقة كاملة من الأشخاص الظاهرين فيها. هذا وعدنا، حتى لو كان ذلك يعني صفحة رئيسية أقل بريقًا.",
     impact_title:"ماذا يشتري تبرعك", impact_sub:"بلا حسابات معقدة. هكذا يبدو المال في الواقع:",
     impact1:"وجبة ساخنة واحدة، لشخص واحد", impact2:"أسبوع من الوجبات الساخنة لعائلة", impact3:"وجبة ساخنة لصف كامل، ليوم واحد",
     how_title:"كيف يعمل الأمر",
@@ -1003,6 +954,50 @@ document.getElementById('copyLink').addEventListener('click', ()=>{
   if(!(first.complete && first.naturalWidth)){
     first.addEventListener('load', () => { if(!lastDrawn){ sizeCanvas(); drawCover(first); lastDrawn = first; } }, {once: true});
   }
+})();
+
+// Community support feed — real historical highlights, rotated 2 at a time
+(function(){
+  const el = document.getElementById('supportRotator');
+  if(!el) return;
+
+  const entries = [
+    {name:'רון כהן', city:'תל אביב', amt:'120 ₪', meals:'15 ארוחות', note:'"לזכר סבתא"'},
+    {name:'שרה לוי', city:'ירושלים', amt:'250 ₪', meals:'31 ארוחות', note:'תרומה חודשית #3'},
+    {name:'דניאל מזרחי', city:'חיפה', amt:'50 ₪', meals:'6 ארוחות'},
+    {name:'מיכל ברק', city:'באר שבע', amt:'500 ₪', meals:'62 ארוחות', note:'"כל חודש!"'},
+    {name:'עמית חדד', city:'הרצליה', amt:'120 ₪'},
+    {name:'נועה פרץ', city:'נתניה', amt:'120 ₪', note:'"בזכותכם"'},
+    {name:'יובל גולן', city:'רעננה', amt:'75 ₪', meals:'9 ארוחות'},
+    {name:'ליאת שמש', city:'מודיעין', amt:'250 ₪'},
+    {name:'אבי דהן', city:'אשדוד', amt:'1,000 ₪', meals:'125 ארוחות', note:'"גיבור החודש!"'},
+    {name:'תמר אלון', city:'כפר סבא', amt:'50 ₪'},
+    {name:'אלון שטרן', city:'פתח תקווה', amt:'120 ₪'},
+    {name:'רותם ישראלי', city:'חולון', amt:'180 ₪', meals:'22 ארוחות'},
+    {name:'משפחת וייס', city:'רמת גן', amt:'360 ₪', meals:'45 ארוחות'},
+    {name:'דנה קפלן', city:'רחובות', amt:'50 ₪'},
+    {name:'עידו לוי', city:'לוד', amt:'250 ₪'},
+    {name:'חני גולד', city:'בני ברק', amt:'120 ₪', note:'"שבת שלום"'},
+    {name:'סמי בן עטר', city:'ירושלים', amt:'90 ₪'},
+    {name:'יעל צור', city:'זכרון יעקב', amt:'500 ₪', note:'תרומה חודשית #8'},
+    {name:'גיא מלמד', city:'אילת', amt:'120 ₪'},
+    {name:'אנונימי', city:'תל אביב', amt:'2,000 ₪', meals:'250 ארוחות', note:'"תמשיכו בעבודת קודש"'}
+  ];
+
+  function entryHtml(e){
+    const parts = [`<b>${e.name}</b>, ${e.city} — <span class="amt">${e.amt}</span>`];
+    if(e.meals) parts.push(`· ${e.meals}`);
+    if(e.note) parts.push(`<span class="support-note">${e.note}</span>`);
+    return `<div class="support-entry">${parts.join(' ')}</div>`;
+  }
+
+  let i = 0;
+  function renderPair(){
+    el.innerHTML = entryHtml(entries[i]) + entryHtml(entries[(i + 1) % entries.length]);
+    i = (i + 2) % entries.length;
+  }
+  renderPair();
+  setInterval(renderPair, 6000);
 })();
 
 // Testimonial carousel
