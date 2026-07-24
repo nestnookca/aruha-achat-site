@@ -227,7 +227,7 @@
 
         <div class="custom-amount">
           <span>₪</span>
-          <input type="number" min="1" id="customAmount" placeholder="סכום אחר — כל שקל הוא צלחת חמה">
+          <input type="number" min="2" id="customAmount" placeholder="סכום אחר — כל שקל הוא צלחת חמה">
         </div>
 
         <button type="button" class="details-toggle" id="detailsToggle">רוצים קבלה? הוסיפו שם ומייל (לא חובה) ▾</button>
@@ -354,6 +354,15 @@ document.getElementById('donateForm').addEventListener('submit', (e)=>{
     void card.offsetWidth;
     card.classList.add('shake');
     customAmount.focus();
+    return;
+  }
+  if(selectedAmount < 2){
+    const card = document.querySelector('.card');
+    card.classList.remove('shake');
+    void card.offsetWidth;
+    card.classList.add('shake');
+    customAmount.focus();
+    showToast('הסכום המינימלי לתרומה הוא 2 ₪');
     return;
   }
   const meals = Math.max(1, Math.round(selectedAmount/18));

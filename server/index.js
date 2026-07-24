@@ -36,8 +36,8 @@ app.get('/', (req, res) => {
 app.post('/create-checkout-session', async (req, res) => {
   try {
     const amount = Math.round(Number(req.body.amount));
-    if (!amount || amount <= 0 || amount > 1000000) {
-      return res.status(400).json({ error: 'סכום לא תקין' });
+    if (!amount || amount < 2 || amount > 1000000) {
+      return res.status(400).json({ error: 'הסכום המינימלי לתרומה הוא 2 ₪' });
     }
     const frequency = req.body.frequency === 'monthly' ? 'monthly' : 'once';
     const email = typeof req.body.email === 'string' ? req.body.email.trim().slice(0, 200) : '';
