@@ -86,7 +86,7 @@
   .cine-hero{height:400vh;position:relative;background:#0b1f26;}
   .cine-sticky{
     position:sticky;top:0;height:100vh;overflow:hidden;
-    display:flex;align-items:flex-end;
+    display:flex;align-items:center;
   }
   .cine-sticky.static{position:relative;height:78vh;min-height:520px;}
   #cineCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;}
@@ -100,7 +100,7 @@
     padding:7px 13px;border-radius:20px;backdrop-filter:blur(6px);
     border:1px solid rgba(255,255,255,0.25);
   }
-  .cine-overlay{position:relative;z-index:2;width:100%;padding-bottom:64px;}
+  .cine-overlay{position:relative;z-index:2;width:100%;}
   .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
 
   .stats-strip{background:var(--green-dark);color:var(--white);padding:24px 0;}
@@ -316,7 +316,6 @@
       <div class="container">
         <div class="hero-actions">
           <a href="#donate" class="cta-btn" data-i18n="hero_cta_donate">תרמו לארוחה</a>
-          <a href="#how" class="cta-btn outline" data-i18n="hero_cta_learn">קראו איך זה עובד</a>
         </div>
       </div>
     </div>
@@ -505,7 +504,7 @@ const translations = {
     dir:"rtl", brand:"ארוחה אחת",
     nav_about:"מי אנחנו", nav_impact:"איך עוזרים", nav_stories:"סיפורים", nav_contact:"צור קשר", nav_donate:"תרמו עכשיו",
     cine_disclosure:"🎬 הדמיה להמחשה — לא צילום אמיתי",
-    hero_cta_donate:"תרמו לארוחה", hero_cta_learn:"קראו איך זה עובד",
+    hero_cta_donate:"תרמו לארוחה",
     photo_placeholder:"כאן תהיה תמונה אמיתית שלנו — בדרך",
     photo_soon1:"בדרך", photo_soon2:"בדרך", photo_soon3:"בדרך",
     stat1_num:"100%", stat1_lbl:"מכל תרומה הולך לקניית אוכל",
@@ -542,7 +541,7 @@ const translations = {
     dir:"ltr", brand:"One Meal",
     nav_about:"About Us", nav_impact:"How It Helps", nav_stories:"Stories", nav_contact:"Contact", nav_donate:"Donate Now",
     cine_disclosure:"🎬 Illustrative rendering — not real footage",
-    hero_cta_donate:"Fund a Meal", hero_cta_learn:"See how it works",
+    hero_cta_donate:"Fund a Meal",
     photo_placeholder:"A real photo of ours will go here — coming soon",
     photo_soon1:"Coming soon", photo_soon2:"Coming soon", photo_soon3:"Coming soon",
     stat1_num:"100%", stat1_lbl:"of every donation goes to buying food",
@@ -579,7 +578,7 @@ const translations = {
     dir:"ltr", brand:"Un Repas",
     nav_about:"Qui sommes-nous", nav_impact:"Notre impact", nav_stories:"Témoignages", nav_contact:"Contact", nav_donate:"Faire un don",
     cine_disclosure:"🎬 Rendu illustratif — pas de vraies images",
-    hero_cta_donate:"Financer un repas", hero_cta_learn:"Voir comment ça marche",
+    hero_cta_donate:"Financer un repas",
     photo_placeholder:"Une vraie photo de nous arrivera ici — bientôt",
     photo_soon1:"Bientôt", photo_soon2:"Bientôt", photo_soon3:"Bientôt",
     stat1_num:"100%", stat1_lbl:"de chaque don sert à acheter de la nourriture",
@@ -616,7 +615,7 @@ const translations = {
     dir:"rtl", brand:"وجبة واحدة",
     nav_about:"من نحن", nav_impact:"كيف نساعد", nav_stories:"قصص", nav_contact:"اتصل بنا", nav_donate:"تبرع الآن",
     cine_disclosure:"🎬 تصور توضيحي — ليس تصويرًا حقيقيًا",
-    hero_cta_donate:"موّل وجبة", hero_cta_learn:"شاهد كيف يعمل الأمر",
+    hero_cta_donate:"موّل وجبة",
     photo_placeholder:"صورة حقيقية لنا ستكون هنا — قريبًا",
     photo_soon1:"قريبًا", photo_soon2:"قريبًا", photo_soon3:"قريبًا",
     stat1_num:"100%", stat1_lbl:"من كل تبرع يذهب لشراء الطعام",
