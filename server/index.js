@@ -30,27 +30,33 @@ app.get('/', (req, res) => {
 
 // Creates a Stripe Checkout Session for the exact amount the donor chose,
 // so there's no manual copy/paste of the amount on Stripe's page.
+// frequency 'monthly' creates a real recurring subscription (not a one-off
+// charge dressed up as one) — Stripe supports inline recurring price_data,
+// no pre-created Price object needed.
 app.post('/create-checkout-session', async (req, res) => {
   try {
     const amount = Math.round(Number(req.body.amount));
     if (!amount || amount <= 0 || amount > 1000000) {
       return res.status(400).json({ error: 'סכום לא תקין' });
     }
+    const frequency = req.body.frequency === 'monthly' ? 'monthly' : 'once';
     const email = typeof req.body.email === 'string' ? req.body.email.trim().slice(0, 200) : '';
     const name = typeof req.body.name === 'string' ? req.body.name.trim().slice(0, 200) : '';
 
+    const priceData = {
+      currency: 'ils',
+      product_data: { name: frequency === 'monthly' ? 'תרומה חודשית לארוחה אחת' : 'תרומה לארוחה אחת' },
+      unit_amount: amount * 100
+    };
+    if (frequency === 'monthly') {
+      priceData.recurring = { interval: 'month' };
+    }
+
     const session = await stripe.checkout.sessions.create({
-      mode: 'payment',
-      line_items: [{
-        price_data: {
-          currency: 'ils',
-          product_data: { name: 'תרומה לארוחה אחת' },
-          unit_amount: amount * 100
-        },
-        quantity: 1
-      }],
+      mode: frequency === 'monthly' ? 'subscription' : 'payment',
+      line_items: [{ price_data: priceData, quantity: 1 }],
       customer_email: email || undefined,
-      metadata: { donor_name: name },
+      metadata: { donor_name: name, frequency },
       success_url: `${SITE_URL}/thank-you.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${SITE_URL}/donate.html`
     });
@@ -69,7 +75,8 @@ app.get('/session/:id', async (req, res) => {
     res.json({
       status: session.payment_status,
       amount: session.amount_total != null ? session.amount_total / 100 : null,
-      email: session.customer_details ? session.customer_details.email : null
+      email: session.customer_details ? session.customer_details.email : null,
+      frequency: session.mode === 'subscription' ? 'monthly' : 'once'
     });
   } catch (err) {
     console.error('session lookup error:', err.message);
