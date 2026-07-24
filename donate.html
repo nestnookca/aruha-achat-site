@@ -129,7 +129,7 @@
   .checkout-btn:disabled{opacity:.75;cursor:default;transform:none;}
   .spinner{width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(255,255,255,0.4);border-top-color:#fff;animation:spin .7s linear infinite;display:none;}
   .checkout-btn.loading .spinner{display:inline-block;}
-  .checkout-btn.loading .btn-txt::after{content:" בהעתקה…";}
+  .checkout-btn.loading .btn-txt::after{content:" מתחבר לסטרייפ…";}
   @keyframes spin{to{transform:rotate(360deg);}}
 
   .trust-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
@@ -286,7 +286,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const STRIPE_LINK = 'https://buy.stripe.com/6oU7sE0fl2yqfdj4I2bbG00';
+const BACKEND_URL = 'https://aruha-achat-site.onrender.com';
 let selectedAmount = null;
 
 const amountGrid = document.getElementById('amountGrid');
@@ -363,21 +363,26 @@ document.getElementById('donateForm').addEventListener('submit', (e)=>{
   btn.disabled = true;
 
   const email = document.getElementById('donorEmail').value.trim();
-  const params = new URLSearchParams();
-  if(email) params.set('prefilled_email', email);
-  params.set('client_reference_id', 'site-' + selectedAmount + '-' + Date.now());
-  const url = STRIPE_LINK + '?' + params.toString();
+  const name = document.getElementById('donorName').value.trim();
 
-  function goToStripe(){ window.location.href = url; }
-
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(String(selectedAmount)).then(()=>{
-      showToast(`הסכום ${selectedAmount} ₪ הועתק — הדביקו אותו בעמוד סטרייפ`);
-      setTimeout(goToStripe, 1500);
-    }).catch(goToStripe);
-  } else {
-    setTimeout(goToStripe, 500);
-  }
+  fetch(BACKEND_URL + '/create-checkout-session', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({amount: selectedAmount, email, name})
+  })
+    .then(r => r.json())
+    .then(data => {
+      if(data.url){
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.error || 'שגיאה');
+      }
+    })
+    .catch(() => {
+      showToast('לא הצלחנו להתחבר לתשלום כרגע. נסו שוב בעוד רגע.');
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    });
 });
 
 // Preselect amount if arriving from a shared link, e.g. donate.html?amount=120

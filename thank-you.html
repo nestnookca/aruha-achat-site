@@ -173,12 +173,15 @@
 </footer>
 
 <script>
+const BACKEND_URL = 'https://aruha-achat-site.onrender.com';
 const params = new URLSearchParams(window.location.search);
+const sessionId = params.get('session_id');
+
 let amount = Math.max(0, Math.round(parseFloat(params.get('amount')) || 0));
 let mealsParam = parseInt(params.get('meals'));
 
-// Stripe's hosted checkout redirects back here without query params,
-// so fall back to what donate.html stored right before handing off to Stripe.
+// Fallback for direct/old links: what donate.html stored right before
+// handing off to Stripe. Overwritten below once the real session is verified.
 if(amount <= 0){
   try{
     const storedAmount = Math.round(parseFloat(localStorage.getItem('lastDonationAmount')) || 0);
@@ -187,36 +190,65 @@ if(amount <= 0){
       amount = storedAmount;
       mealsParam = storedMeals > 0 ? storedMeals : NaN;
     }
-    localStorage.removeItem('lastDonationAmount');
-    localStorage.removeItem('lastDonationMeals');
   }catch(err){}
 }
+try{
+  localStorage.removeItem('lastDonationAmount');
+  localStorage.removeItem('lastDonationMeals');
+}catch(err){}
 
-const meals = mealsParam > 0 ? mealsParam : (amount > 0 ? Math.max(1, Math.round(amount/18)) : 5);
+let meals = mealsParam > 0 ? mealsParam : (amount > 0 ? Math.max(1, Math.round(amount/18)) : 5);
+const siteUrl = window.location.origin + window.location.pathname.replace(/thank-you\.html$/, 'index.html');
 
-document.getElementById('thanksTitle').textContent = amount > 0
-  ? `וואו! תודה רבה! תרמת ${meals} ארוחות חמות!`
-  : 'וואו, תודה רבה!';
-document.getElementById('thanksSub').textContent = 'משפחה שלמה תאכל בזכותך השבוע.';
-document.getElementById('certAmount').textContent = amount > 0 ? `₪${amount}` : '🧡';
-document.getElementById('certMeals').textContent = `כ-${meals} ארוחות חמות למי שצריך`;
-document.getElementById('certDate').textContent = new Date().toLocaleDateString('he-IL', {year:'numeric', month:'long', day:'numeric'});
+function render(){
+  document.getElementById('thanksTitle').textContent = amount > 0
+    ? `וואו! תודה רבה! תרמת ${meals} ארוחות חמות!`
+    : 'וואו, תודה רבה!';
+  document.getElementById('thanksSub').textContent = 'משפחה שלמה תאכל בזכותך השבוע.';
+  document.getElementById('certAmount').textContent = amount > 0 ? `₪${amount}` : '🧡';
+  document.getElementById('certMeals').textContent = `כ-${meals} ארוחות חמות למי שצריך`;
+  document.getElementById('certDate').textContent = new Date().toLocaleDateString('he-IL', {year:'numeric', month:'long', day:'numeric'});
 
-// Plates animation
-const platesRow = document.getElementById('platesRow');
-const maxShown = Math.min(meals, 24);
-for(let i=0;i<maxShown;i++){
-  const span = document.createElement('span');
-  span.className = 'plate';
-  span.textContent = '🍽️';
-  span.style.animationDelay = (i*0.06)+'s';
-  platesRow.appendChild(span);
+  const platesRow = document.getElementById('platesRow');
+  platesRow.innerHTML = '';
+  const maxShown = Math.min(meals, 24);
+  for(let i=0;i<maxShown;i++){
+    const span = document.createElement('span');
+    span.className = 'plate';
+    span.textContent = '🍽️';
+    span.style.animationDelay = (i*0.06)+'s';
+    platesRow.appendChild(span);
+  }
+  if(meals > maxShown){
+    const more = document.createElement('span');
+    more.className = 'plates-more';
+    more.textContent = `+${meals-maxShown} עוד`;
+    platesRow.appendChild(more);
+  }
+
+  const shareMsg = amount > 0
+    ? `הרגע תרמתי ${meals} ארוחות למי שצריך בישראל דרך ״ארוחה אחת״. גם אתם יכולים לתרום כל סכום:`
+    : `תרמתי הרגע ל״ארוחה אחת״ - יוזמה שמביאה ארוחות חמות למי שצריך. גם אתם יכולים לתרום כל סכום:`;
+  const shareUrl = 'https://wa.me/?text=' + encodeURIComponent(shareMsg + ' ' + siteUrl);
+  document.getElementById('shareWhatsapp').href = shareUrl;
+  window.currentShareUrl = shareUrl;
 }
-if(meals > maxShown){
-  const more = document.createElement('span');
-  more.className = 'plates-more';
-  more.textContent = `+${meals-maxShown} עוד`;
-  platesRow.appendChild(more);
+
+render();
+
+// If we arrived from a real Stripe redirect, verify the actual paid amount
+// with our backend instead of trusting the localStorage guess.
+if(sessionId){
+  fetch(BACKEND_URL + '/session/' + encodeURIComponent(sessionId))
+    .then(r => r.json())
+    .then(data => {
+      if(data.status === 'paid' && data.amount > 0){
+        amount = Math.round(data.amount);
+        meals = Math.max(1, Math.round(amount/18));
+        render();
+      }
+    })
+    .catch(() => {});
 }
 
 // Confetti burst
@@ -265,14 +297,8 @@ document.getElementById('downloadCert').addEventListener('click', ()=>{
   });
 });
 
-const shareMsg = amount > 0
-  ? `הרגע תרמתי ${meals} ארוחות למי שצריך בישראל דרך ״ארוחה אחת״. גם אתם יכולים לתרום כל סכום:`
-  : `תרמתי הרגע ל״ארוחה אחת״ - יוזמה שמביאה ארוחות חמות למי שצריך. גם אתם יכולים לתרום כל סכום:`;
-const siteUrl = window.location.origin + window.location.pathname.replace(/thank-you\.html$/, 'index.html');
-
-document.getElementById('shareWhatsapp').href = 'https://wa.me/?text=' + encodeURIComponent(shareMsg + ' ' + siteUrl);
 document.getElementById('shareCert').addEventListener('click', ()=>{
-  window.open('https://wa.me/?text=' + encodeURIComponent(shareMsg + ' ' + siteUrl), '_blank');
+  window.open(window.currentShareUrl, '_blank');
 });
 document.getElementById('copyShare').addEventListener('click', ()=>{
   navigator.clipboard.writeText(siteUrl).then(()=>{
