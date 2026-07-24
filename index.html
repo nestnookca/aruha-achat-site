@@ -875,7 +875,7 @@ function showToast(msg){
 
 function goToCheckout(amount, btn){
   const original = btn.textContent;
-  btn.textContent = 'מתחבר לסטרייפ…';
+  btn.textContent = 'רגע, טוענים…';
   btn.style.pointerEvents = 'none';
 
   fetch(BACKEND_URL + '/create-checkout-session', {
