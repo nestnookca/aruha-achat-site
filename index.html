@@ -7,7 +7,7 @@
 <meta name="description" content="ארוחה אחת — יוזמה ללא מטרות רווח. תורמים כסף, קונים אוכל, אף אחד לא רעב.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://haimeal.com/">
-<meta property="og:title" content="ארוחה אחת — כסף אחד, ארוחה אחת, אף אחד לא רעב">
+<meta property="og:title" content="ארוחה אחת — יוזמה ללא מטרות רווח">
 <meta property="og:description" content="יוזמה ללא מטרות רווח. תורמים כסף, קונים בו אוכל, ומעבירים אותו הלאה למי שצריך.">
 <meta property="og:image" content="https://haimeal.com/assets/hero-delivery.webp">
 <meta name="twitter:card" content="summary_large_image">
@@ -82,30 +82,36 @@
 
   .mobile-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);}
 
-  /* Hero */
-  .hero{padding:56px 0 48px;border-bottom:1px solid var(--line);}
-  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;}
-  .eyebrow{display:block;color:var(--green-dark);font-weight:700;font-size:1.05rem;margin-bottom:16px;font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;font-style:italic;max-width:36ch;line-height:1.4;}
-  .hero h1{font-size:2.5rem;line-height:1.25;margin:0 0 18px;color:var(--ink);}
-  .hero p.lead{font-size:1.1rem;color:var(--muted);margin:0 0 26px;max-width:48ch;}
+  /* Cinematic hero (scroll-scrubbed image sequence) */
+  .cine-hero{height:400vh;position:relative;background:#0b1f26;}
+  .cine-sticky{
+    position:sticky;top:0;height:100vh;overflow:hidden;
+    display:flex;align-items:flex-end;
+  }
+  .cine-sticky.static{position:relative;height:78vh;min-height:520px;}
+  #cineCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;}
+  .cine-scrim{
+    position:absolute;inset:0;z-index:1;
+    background:linear-gradient(to top, rgba(10,22,28,0.82) 0%, rgba(10,22,28,0.25) 42%, rgba(10,22,28,0.5) 100%);
+  }
+  .cine-badge{
+    position:absolute;top:18px;inset-inline-end:18px;z-index:3;
+    background:rgba(10,22,28,0.72);color:#fff;font-size:.74rem;font-weight:700;
+    padding:7px 13px;border-radius:20px;backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.25);
+  }
+  .cine-overlay{position:relative;z-index:2;width:100%;padding-bottom:64px;}
+  .cine-overlay .eyebrow{color:#FFD9B0;}
+  .cine-overlay .lead{color:rgba(255,255,255,0.88);}
+  .cine-overlay .hero-actions{margin-bottom:22px;}
+
+  .eyebrow{display:block;font-weight:700;font-size:1.05rem;margin-bottom:16px;font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;font-style:italic;max-width:40ch;line-height:1.4;}
+  .lead{font-size:1.1rem;margin:0 0 26px;max-width:52ch;}
   .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
 
-  .hero-photo-wrap{position:relative;isolation:isolate;}
-  .hero-photo-wrap::before{
-    content:"";position:absolute;inset:0;z-index:-1;
-    background:linear-gradient(135deg,var(--terracotta),var(--green));
-    border-radius:20px;transform:translate(14px,14px);opacity:.92;
-  }
-  .hero-photo{
-    border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.4);
-    box-shadow:var(--shadow-lg);aspect-ratio:4/3;
-  }
-  .hero-photo img{width:100%;height:100%;object-fit:cover;display:block;}
-
   .hero-who-float{
-    position:relative;z-index:2;margin:-46px 18px 0;
-    background:rgba(255,255,255,0.94);backdrop-filter:blur(10px);
-    border:1px solid var(--line);border-radius:14px;
+    max-width:640px;background:rgba(255,255,255,0.94);backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.5);border-radius:14px;
     padding:16px 18px 14px;box-shadow:var(--shadow-lg);
   }
   .hero-who-float h3{
@@ -263,20 +269,18 @@
       width:100%;padding:20px;gap:16px;border-bottom:1px solid var(--line);display:none;}
     nav.links.open{display:flex;}
     .mobile-toggle{display:block;}
-    .hero-grid, .about-grid, .how-grid{grid-template-columns:1fr;}
-    .hero-photo-wrap{order:-1;max-width:420px;margin:0 auto;}
+    .about-grid, .how-grid{grid-template-columns:1fr;}
     .about-promise{flex-direction:column;}
     .how-grid::before{display:none;}
     .impact-grid, .stats-grid, .story-photos{grid-template-columns:1fr 1fr;}
     .amount-grid{grid-template-columns:repeat(2,1fr);}
     .footer-grid{grid-template-columns:1fr;}
-    .hero h1{font-size:2rem;}
+    .cine-hero{height:340vh;}
+    .cine-sticky.static{height:auto;min-height:0;}
   }
   @media (max-width:480px){
     .container{padding:0 16px;}
-    .hero{padding:36px 0 32px;}
     section{padding:44px 0;}
-    .hero h1{font-size:1.6rem;}
     .section-title{font-size:1.5rem;}
     .lead, .section-sub{font-size:.95rem;}
     .impact-grid, .stats-grid, .story-photos, .amount-grid{grid-template-columns:1fr 1fr;gap:10px;}
@@ -318,28 +322,27 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <span class="eyebrow" data-i18n="hero_eyebrow">אנשים טובים לא שואלים אם צריך. הם פשוט באים לעזור.</span>
-      <h1 data-i18n="hero_title">כסף אחד, ארוחה אחת, אף אחד לא רעב</h1>
-      <p class="lead" data-i18n="hero_lead">אנחנו קבוצה קטנה. תורמים כסף, קונים בו אוכל, ומעבירים אותו הלאה - לקשישים שנשארו לבד, למשפחות שקשה להן לגמור את החודש, לילדים יתומים, ולאנשים שנפלו ומנסים לקום ולהשתקם. בלי לשאול שאלות מיותרות ובלי לבייש אף אחד. רק ארוחה חמה, בכבוד.</p>
-      <div class="hero-actions">
-        <a href="#donate" class="cta-btn" data-i18n="hero_cta_donate">תרמו לארוחה</a>
-        <a href="#how" class="cta-btn outline" data-i18n="hero_cta_learn">קראו איך זה עובד</a>
-      </div>
-    </div>
-    <div class="hero-photo-wrap">
-      <div class="hero-photo">
-        <img src="assets/hero-delivery.webp" alt="מתנדבת של ארוחה אחת מוסרת קופסת מזון לאיש קשיש בפתח ביתו" loading="eager">
-      </div>
-      <div class="hero-who-float">
-        <h3 data-i18n="who_title">למי אנחנו עוזרים</h3>
-        <div class="who-row">
-          <div class="who-item"><span class="who-ico">👵</span><span data-i18n="who1">קשישים שנשארו לבד</span></div>
-          <div class="who-item"><span class="who-ico">👨‍👩‍👧</span><span data-i18n="who2">משפחות שקשה להן לגמור חודש</span></div>
-          <div class="who-item"><span class="who-ico">🧒</span><span data-i18n="who3">ילדים יתומים</span></div>
-          <div class="who-item"><span class="who-ico">🌅</span><span data-i18n="who4">אנשים שנפלו ומנסים להשתקם</span></div>
+<section class="cine-hero" id="cineHero">
+  <div class="cine-sticky" id="cineSticky">
+    <canvas id="cineCanvas" aria-hidden="true"></canvas>
+    <div class="cine-scrim"></div>
+    <div class="cine-badge" data-i18n="cine_disclosure">🎬 הדמיה להמחשה — לא צילום אמיתי</div>
+    <div class="cine-overlay">
+      <div class="container">
+        <span class="eyebrow" data-i18n="hero_eyebrow">אנשים טובים לא שואלים אם צריך. הם פשוט באים לעזור.</span>
+        <p class="lead" data-i18n="hero_lead">אנחנו קבוצה קטנה. תורמים כסף, קונים בו אוכל, ומעבירים אותו הלאה - לקשישים שנשארו לבד, למשפחות שקשה להן לגמור את החודש, לילדים יתומים, ולאנשים שנפלו ומנסים לקום ולהשתקם. בלי לשאול שאלות מיותרות ובלי לבייש אף אחד. רק ארוחה חמה, בכבוד.</p>
+        <div class="hero-actions">
+          <a href="#donate" class="cta-btn" data-i18n="hero_cta_donate">תרמו לארוחה</a>
+          <a href="#how" class="cta-btn outline" data-i18n="hero_cta_learn">קראו איך זה עובד</a>
+        </div>
+        <div class="hero-who-float">
+          <h3 data-i18n="who_title">למי אנחנו עוזרים</h3>
+          <div class="who-row">
+            <div class="who-item"><span class="who-ico">👵</span><span data-i18n="who1">קשישים שנשארו לבד</span></div>
+            <div class="who-item"><span class="who-ico">👨‍👩‍👧</span><span data-i18n="who2">משפחות שקשה להן לגמור חודש</span></div>
+            <div class="who-item"><span class="who-ico">🧒</span><span data-i18n="who3">ילדים יתומים</span></div>
+            <div class="who-item"><span class="who-ico">🌅</span><span data-i18n="who4">אנשים שנפלו ומנסים להשתקם</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -527,7 +530,7 @@ const translations = {
     dir:"rtl", brand:"ארוחה אחת",
     nav_about:"מי אנחנו", nav_impact:"איך עוזרים", nav_stories:"סיפורים", nav_contact:"צור קשר", nav_donate:"תרמו עכשיו",
     hero_eyebrow:"אנשים טובים לא שואלים אם צריך. הם פשוט באים לעזור.",
-    hero_title:"כסף אחד, ארוחה אחת, אף אחד לא רעב",
+    cine_disclosure:"🎬 הדמיה להמחשה — לא צילום אמיתי",
     hero_lead:"אנחנו קבוצה קטנה. תורמים כסף, קונים בו אוכל, ומעבירים אותו הלאה - לקשישים שנשארו לבד, למשפחות שקשה להן לגמור את החודש, לילדים יתומים, ולאנשים שנפלו ומנסים לקום ולהשתקם. בלי לשאול שאלות מיותרות ובלי לבייש אף אחד. רק ארוחה חמה, בכבוד.",
     who_title:"למי אנחנו עוזרים",
     who1:"קשישים שנשארו לבד", who2:"משפחות שקשה להן לגמור חודש", who3:"ילדים יתומים", who4:"אנשים שנפלו ומנסים להשתקם",
@@ -570,7 +573,7 @@ const translations = {
     dir:"ltr", brand:"One Meal",
     nav_about:"About Us", nav_impact:"How It Helps", nav_stories:"Stories", nav_contact:"Contact", nav_donate:"Donate Now",
     hero_eyebrow:"Good people don't ask if it's needed. They just show up to help.",
-    hero_title:"One donation, one meal, no one goes hungry",
+    cine_disclosure:"🎬 Illustrative rendering — not real footage",
     hero_lead:"We're a small group. You donate money, we buy food with it, and we pass it on - to elderly people who are alone, families struggling to make it through the month, orphaned children, and people who fell and are trying to get back on their feet. No unnecessary questions, no shame. Just a hot meal, with dignity.",
     who_title:"Who We Help",
     who1:"Elderly people who are alone", who2:"Families struggling to make ends meet", who3:"Orphaned children", who4:"People rebuilding their lives after hardship",
@@ -613,7 +616,7 @@ const translations = {
     dir:"ltr", brand:"Un Repas",
     nav_about:"Qui sommes-nous", nav_impact:"Notre impact", nav_stories:"Témoignages", nav_contact:"Contact", nav_donate:"Faire un don",
     hero_eyebrow:"Les gens bien ne demandent pas s'il faut aider. Ils viennent, tout simplement.",
-    hero_title:"Un don, un repas, personne n'a faim",
+    cine_disclosure:"🎬 Rendu illustratif — pas de vraies images",
     hero_lead:"Nous sommes un petit groupe. Vous donnez de l'argent, nous achetons de la nourriture avec, et nous la transmettons - à des personnes âgées seules, des familles qui peinent à finir le mois, des enfants orphelins, et des personnes qui se relèvent après une épreuve. Sans questions inutiles, sans honte. Juste un repas chaud, avec dignité.",
     who_title:"Qui nous aidons",
     who1:"Personnes âgées seules", who2:"Familles qui peinent à finir le mois", who3:"Enfants orphelins", who4:"Personnes qui se reconstruisent après une épreuve",
@@ -656,7 +659,7 @@ const translations = {
     dir:"rtl", brand:"وجبة واحدة",
     nav_about:"من نحن", nav_impact:"كيف نساعد", nav_stories:"قصص", nav_contact:"اتصل بنا", nav_donate:"تبرع الآن",
     hero_eyebrow:"الأشخاص الطيبون لا يسألون إن كانت هناك حاجة. هم فقط يأتون للمساعدة.",
-    hero_title:"تبرع واحد، وجبة واحدة، لا أحد يجوع",
+    cine_disclosure:"🎬 تصور توضيحي — ليس تصويرًا حقيقيًا",
     hero_lead:"نحن مجموعة صغيرة. تتبرعون بالمال، نشتري به طعامًا، ونوصله - لكبار السن الوحيدين، وللعائلات التي تجد صعوبة في إنهاء الشهر، وللأطفال الأيتام، وللأشخاص الذين سقطوا ويحاولون النهوض من جديد. بلا أسئلة غير ضرورية وبلا إحراج لأحد. فقط وجبة ساخنة، بكرامة.",
     who_title:"من نساعد",
     who1:"كبار سن وحيدون", who2:"عائلات تجد صعوبة في إنهاء الشهر", who3:"أطفال أيتام", who4:"أشخاص يعيدون بناء حياتهم بعد محنة",
@@ -868,6 +871,138 @@ document.getElementById('copyLink').addEventListener('click', ()=>{
     });
   }, {threshold:0.12});
   els.forEach(el=>io.observe(el));
+})();
+
+// Cinematic hero — scroll-scrubbed image sequence
+(function(){
+  const heroSection = document.getElementById('cineHero');
+  const sticky = document.getElementById('cineSticky');
+  const canvas = document.getElementById('cineCanvas');
+  if(!heroSection || !sticky || !canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const CLIPS = [1, 2, 3];
+  const FRAMES_PER_CLIP = 101;
+  const TOTAL_FRAMES = CLIPS.length * FRAMES_PER_CLIP;
+
+  function framePath(clip, index){
+    const n = String(index + 1).padStart(3, '0');
+    return `assets/hero-sequence/${clip}/${n}.webp`;
+  }
+
+  const images = CLIPS.map(() => new Array(FRAMES_PER_CLIP).fill(null));
+  let lastDrawn = null;
+
+  // requestAnimationFrame doesn't fire in tabs that never get composited
+  // (e.g. backgrounded/prerendered). A setTimeout backup guarantees this
+  // still runs so the hero never gets stuck unsized/unpainted.
+  function raf(cb){
+    let done = false;
+    const fire = (t) => { if(done) return; done = true; cb(t); };
+    requestAnimationFrame(fire);
+    setTimeout(fire, 50);
+  }
+
+  function loadFrame(clipIdx, frameIdx){
+    const existing = images[clipIdx][frameIdx];
+    if(existing) return existing;
+    const img = new Image();
+    img.src = framePath(CLIPS[clipIdx], frameIdx);
+    images[clipIdx][frameIdx] = img;
+    return img;
+  }
+
+  function sizeCanvas(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = sticky.getBoundingClientRect();
+    canvas.width = Math.max(1, Math.round(rect.width * dpr));
+    canvas.height = Math.max(1, Math.round(rect.height * dpr));
+  }
+
+  function drawCover(img){
+    if(!img || !img.naturalWidth) return;
+    const cw = canvas.width, ch = canvas.height;
+    const iw = img.naturalWidth, ih = img.naturalHeight;
+    const scale = Math.max(cw / iw, ch / ih);
+    const dw = iw * scale, dh = ih * scale;
+    const dx = (cw - dw) / 2, dy = (ch - dh) / 2;
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(img, dx, dy, dw, dh);
+  }
+
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(reduceMotion){
+    heroSection.style.height = 'auto';
+    sticky.classList.add('static');
+    const img = loadFrame(0, 0);
+    const draw = () => { sizeCanvas(); drawCover(img); lastDrawn = img; };
+    setTimeout(() => { if(img.complete && img.naturalWidth) draw(); }, 0);
+    if(!(img.complete && img.naturalWidth)) img.addEventListener('load', draw, {once: true});
+    window.addEventListener('resize', () => { sizeCanvas(); if(lastDrawn) drawCover(lastDrawn); });
+    return;
+  }
+
+  function preloadClip(clipIdx, onDone){
+    const CONCURRENCY = 6;
+    let started = 0, remaining = FRAMES_PER_CLIP;
+    function loadNext(){
+      if(started >= FRAMES_PER_CLIP) return;
+      const i = started++;
+      const img = loadFrame(clipIdx, i);
+      const settle = () => { remaining--; if(remaining <= 0){ if(onDone) onDone(); } else loadNext(); };
+      if(img.complete && img.naturalWidth) settle();
+      else {
+        img.addEventListener('load', settle, {once: true});
+        img.addEventListener('error', settle, {once: true});
+      }
+    }
+    for(let c = 0; c < CONCURRENCY; c++) loadNext();
+  }
+
+  preloadClip(0, () => preloadClip(1, () => preloadClip(2, null)));
+
+  function currentGlobalIndex(){
+    const rect = heroSection.getBoundingClientRect();
+    const total = heroSection.offsetHeight - window.innerHeight;
+    if(total <= 0) return 0;
+    const progress = Math.min(1, Math.max(0, -rect.top / total));
+    return Math.min(TOTAL_FRAMES - 1, Math.floor(progress * TOTAL_FRAMES));
+  }
+
+  function nearestLoaded(clipIdx, frameIdx){
+    for(let d = 0; d < FRAMES_PER_CLIP; d++){
+      const a = frameIdx - d, b = frameIdx + d;
+      if(a >= 0){ const img = images[clipIdx][a]; if(img && img.complete && img.naturalWidth) return img; }
+      if(b < FRAMES_PER_CLIP){ const img = images[clipIdx][b]; if(img && img.complete && img.naturalWidth) return img; }
+    }
+    return null;
+  }
+
+  let ticking = false;
+  function render(){
+    ticking = false;
+    const globalIdx = currentGlobalIndex();
+    const clipIdx = Math.min(CLIPS.length - 1, Math.floor(globalIdx / FRAMES_PER_CLIP));
+    const localIdx = globalIdx - clipIdx * FRAMES_PER_CLIP;
+    loadFrame(clipIdx, localIdx);
+    const img = nearestLoaded(clipIdx, localIdx);
+    if(img && img !== lastDrawn){ drawCover(img); lastDrawn = img; }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; raf(render); } }
+
+  window.addEventListener('scroll', onScroll, {passive: true});
+  window.addEventListener('resize', () => { sizeCanvas(); render(); });
+
+  const first = loadFrame(0, 0);
+  raf(() => {
+    sizeCanvas();
+    if(first.complete && first.naturalWidth){ drawCover(first); lastDrawn = first; }
+    render();
+  });
+  if(!(first.complete && first.naturalWidth)){
+    first.addEventListener('load', () => { if(!lastDrawn){ sizeCanvas(); drawCover(first); lastDrawn = first; } }, {once: true});
+  }
 })();
 
 // Testimonial carousel
