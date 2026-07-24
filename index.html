@@ -812,6 +812,11 @@ let currentLang = 'he';
 let selectedAmount = 100;
 let frequency = 'once';
 
+// The payments backend runs on Render's free tier, which spins down after
+// ~15 minutes idle and can take 30-60s to wake up. Ping it as soon as the
+// page loads so it's already warm by the time someone clicks donate.
+fetch(BACKEND_URL + '/', {mode: 'no-cors'}).catch(() => {});
+
 function applyLang(lang){
   currentLang = lang;
   const t = translations[lang];
@@ -996,29 +1001,42 @@ function goToCheckout(amount, btn, opts){
   btn.textContent = 'רגע, טוענים…';
   btn.style.pointerEvents = 'none';
 
-  fetch(BACKEND_URL + '/create-checkout-session', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      amount: amount,
-      frequency: opts.frequency || 'once',
-      email: opts.email || '',
-      name: opts.name || ''
+  const body = JSON.stringify({
+    amount: amount,
+    frequency: opts.frequency || 'once',
+    email: opts.email || '',
+    name: opts.name || ''
+  });
+
+  // The backend can be mid-wake-up (Render free tier) on the first try —
+  // give it one more chance before showing an error to a real donor.
+  function attempt(isRetry){
+    fetch(BACKEND_URL + '/create-checkout-session', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: body
     })
-  })
-    .then(r => r.json())
-    .then(data => {
-      if(data.url){
-        window.location.href = data.url;
-      } else {
-        throw new Error(data.error || 'שגיאה');
-      }
-    })
-    .catch(() => {
-      showToast('לא הצלחנו להתחבר לתשלום כרגע. נסו שוב בעוד רגע.');
-      btn.textContent = original;
-      btn.style.pointerEvents = '';
-    });
+      .then(r => r.json())
+      .then(data => {
+        if(data.url){
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error || 'שגיאה');
+        }
+      })
+      .catch(() => {
+        if(!isRetry){
+          btn.textContent = 'עוד רגע, מתחברים…';
+          setTimeout(() => attempt(true), 4000);
+          return;
+        }
+        showToast('לא הצלחנו להתחבר לתשלום כרגע. נסו שוב בעוד רגע.');
+        btn.textContent = original;
+        btn.style.pointerEvents = '';
+      });
+  }
+
+  attempt(false);
 }
 
 document.getElementById('donateBtn').addEventListener('click', (e)=>{
