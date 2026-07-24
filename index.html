@@ -138,14 +138,33 @@
   @keyframes supportFade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
 
   /* Impact cards */
-  .impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   .impact-card{
-    background:var(--white);border:1px solid var(--line);border-radius:10px;padding:26px;
-    text-align:center;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease;
+    background:var(--white);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);
+    display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease;
   }
-  .impact-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
-  .impact-card .amt{font-size:1.5rem;font-weight:800;color:var(--terracotta-dark);margin-bottom:6px;font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;}
-  .impact-card .desc{color:var(--muted);font-size:.93rem;}
+  .impact-card:hover{transform:scale(1.03);box-shadow:0 24px 50px rgba(30,52,64,0.18);}
+  .impact-img{position:relative;aspect-ratio:4/3;overflow:hidden;}
+  .impact-img img{width:100%;height:100%;object-fit:cover;display:block;}
+  .impact-img::after{content:"";position:absolute;inset:0;background:rgba(10,22,28,0.4);}
+  .impact-price{
+    position:absolute;top:14px;inset-inline-start:14px;z-index:2;
+    background:var(--terracotta);color:#fff;font-weight:800;font-size:1.05rem;
+    padding:7px 15px;border-radius:999px;box-shadow:var(--shadow);
+    font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;
+  }
+  .impact-hot{
+    position:absolute;top:14px;inset-inline-end:14px;z-index:2;
+    background:#fff;color:var(--terracotta-dark);font-weight:800;font-size:.76rem;
+    padding:6px 12px;border-radius:999px;box-shadow:var(--shadow);
+  }
+  .impact-body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .impact-body h3{margin:0;font-size:1.15rem;}
+  .impact-body p{margin:0 0 4px;color:var(--muted);font-size:.92rem;line-height:1.6;flex:1;}
+  .impact-cta{width:100%;text-align:center;border:none;cursor:pointer;font-family:inherit;}
+  .impact-note{text-align:center;color:var(--muted);margin-top:28px;font-size:.95rem;}
+  .impact-note a{color:var(--green-dark);font-weight:700;text-decoration:none;}
+  .impact-note a:hover{text-decoration:underline;}
 
   /* Donate */
   .donate-section{background:var(--cream-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
@@ -217,16 +236,29 @@
   .carousel-btn:hover{border-color:var(--terracotta);color:var(--terracotta-dark);}
 
   /* How it works */
-  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative;}
+  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative;margin-top:28px;}
   .how-grid::before{
-    content:"";position:absolute;top:44px;inset-inline:16%;height:2px;z-index:0;
-    background-image:repeating-linear-gradient(90deg,var(--line) 0 10px, transparent 10px 20px);
+    content:"";position:absolute;top:-8px;inset-inline:16%;height:2px;z-index:0;
+    background-image:repeating-linear-gradient(90deg,var(--terracotta) 0 8px, transparent 8px 16px);
+    opacity:.55;
   }
-  .how-step{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:28px 24px;text-align:center;box-shadow:var(--shadow);position:relative;z-index:1;}
+  .how-step{
+    background:var(--white);border:1px solid var(--line);border-radius:12px;padding:28px 24px;
+    text-align:center;box-shadow:var(--shadow);position:relative;z-index:1;margin-top:20px;
+  }
+  .how-dot{
+    position:absolute;top:-20px;inset-inline-start:50%;transform:translateX(-50%);
+    width:14px;height:14px;border-radius:50%;background:var(--terracotta);
+    border:3px solid var(--cream);z-index:2;
+  }
   .how-num{font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;font-size:1rem;font-weight:800;color:var(--line);position:absolute;top:14px;inset-inline-end:18px;}
   .how-ico{font-size:2rem;margin-bottom:12px;}
   .how-step h3{margin:0 0 8px;font-size:1.1rem;}
   .how-step p{margin:0;color:var(--muted);font-size:.92rem;}
+  .how-banner{
+    text-align:center;margin:30px auto 0;max-width:60ch;color:var(--muted);font-size:.9rem;
+    background:var(--cream-2);border-radius:10px;padding:14px 18px;
+  }
 
   /* Scroll reveal */
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
@@ -360,24 +392,57 @@
 
 <section id="impact" class="donate-section reveal">
   <div class="container">
-    <h2 class="section-title center" data-i18n="impact_title">מה עושים עם התרומה</h2>
-    <p class="section-sub center" data-i18n="impact_sub">בלי חישובים מסובכים. ככה נראה הכסף בפועל:</p>
+    <h2 class="section-title center">כמה עולה לשנות שבוע למישהו?</h2>
+    <p class="section-sub center">לא אחוזים. לא משכורות. קופסאות אוכל אמיתיות שמגיעות לדלת.</p>
     <div class="impact-grid">
-      <div class="impact-card"><div class="amt">18 ₪</div><div class="desc" data-i18n="impact1">מנה חמה אחת, למישהו אחד</div></div>
-      <div class="impact-card"><div class="amt">100 ₪</div><div class="desc" data-i18n="impact2">ארוחות חמות למשפחה, לשבוע</div></div>
-      <div class="impact-card"><div class="amt">360 ₪</div><div class="desc" data-i18n="impact3">ארוחה חמה לכיתה שלמה, ליום אחד</div></div>
+      <div class="impact-card">
+        <div class="impact-img">
+          <img src="assets/hero-delivery.webp" alt="מתנדבת מוסרת קופסת מזון לאיש קשיש" loading="lazy">
+          <span class="impact-price">18 ₪</span>
+        </div>
+        <div class="impact-body">
+          <h3>ארוחה חמה אחת</h3>
+          <p>18 ₪ יכולים לתת ארוחה חמה למישהי כמו קשישה שלא בישלה כבר יומיים — עם לחמניה וחיוך.</p>
+          <button type="button" class="cta-btn impact-cta" data-amount="18">לתרום 18 ₪ עכשיו</button>
+        </div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-img">
+          <img src="assets/market-handoff.webp" alt="מתנדבים מוסרים קופסת מזון בשוק" loading="lazy">
+          <span class="impact-price">120 ₪</span>
+          <span class="impact-hot">הכי מבוקש 🔥</span>
+        </div>
+        <div class="impact-body">
+          <h3>שבת שלמה למשפחה</h3>
+          <p>חלה, עוף, אורז, סלטים וקינוח — כך שמשפחה של חמש לא תלך לישון רעבה בשישי.</p>
+          <button type="button" class="cta-btn impact-cta" data-amount="120">לתרום 120 ₪ עכשיו</button>
+        </div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-img">
+          <img src="assets/warehouse-team.webp" alt="צוות מתנדבים אורז קופסאות מזון במחסן" loading="lazy">
+          <span class="impact-price">360 ₪</span>
+        </div>
+        <div class="impact-body">
+          <h3>כיתה שלמה אוכלת</h3>
+          <p>ארוחה חמה כל יום, ליום שלם, לכיתה של 12 ילדים שאין להם אוכל בבית הספר.</p>
+          <button type="button" class="cta-btn outline impact-cta" data-amount="360">לתרום 360 ₪</button>
+        </div>
+      </div>
     </div>
+    <p class="impact-note">רוצה סכום אחר? כל 18 ₪ = ארוחה חמה אחת. <a href="#donate">אתה בוחר כמה.</a></p>
   </div>
 </section>
 
 <section id="how" class="reveal">
   <div class="container">
-    <h2 class="section-title center" data-i18n="how_title">איך זה עובד</h2>
+    <h2 class="section-title center">איך 18 ₪ שלך מגיע לצלחת? תוך פחות מ-24 שעות</h2>
     <div class="how-grid">
-      <div class="how-step"><div class="how-num">01</div><div class="how-ico">💳</div><h3 data-i18n="how1_title">תורמים</h3><p data-i18n="how1_text">כל סכום, תוך פחות מדקה.</p></div>
-      <div class="how-step"><div class="how-num">02</div><div class="how-ico">🛒</div><h3 data-i18n="how2_title">קונים אוכל</h3><p data-i18n="how2_text">כל שקל הופך לאוכל אמיתי, באותו שבוע.</p></div>
-      <div class="how-step"><div class="how-num">03</div><div class="how-ico">🤝</div><h3 data-i18n="how3_title">מוסרים</h3><p data-i18n="how3_text">מתנדבים מביאים את הקופסה עד הבית, בכבוד.</p></div>
+      <div class="how-step"><span class="how-dot"></span><div class="how-ico">💳</div><h3>אתה תורם</h3><p>כל סכום, תוך פחות מדקה. קבלה אוטומטית למייל.</p></div>
+      <div class="how-step"><span class="how-dot"></span><div class="how-ico">🍲</div><h3>אנחנו קונים ומבשלים היום</h3><p>מתנדב קונה בשוק ב-7 בבוקר. הכל טרי. כל שקל מתועד.</p></div>
+      <div class="how-step"><span class="how-dot"></span><div class="how-ico">🚪💙</div><h3>דפיקה בדלת ב-18:00</h3><p>מתנדב מהשכונה דופק, אומר שבת שלום, ומשאיר ארוחה חמה. בכבוד.</p></div>
     </div>
+    <p class="how-banner">📸 כל חלוקה מתועדת (בלי פרצופים) ועולה לסטורי שלנו.</p>
   </div>
 </section>
 
@@ -523,12 +588,6 @@ const translations = {
     about_title:"מי אנחנו",
     about_text:"אנחנו פועלים כבר 20 שנה, בלי הרבה רעש ובלי משרדים מפוארים, כדי לוודא שמשפחות וזקנים בישראל לא ילכו לישון רעבים. האתר הזה חדש - אבל הדרך שלנו ארוכה.",
     about_text2:"כל שקל שנתרם הולך ישירות לרכישת אוכל חם. פרטי ההתאגדות הרשמיים של העמותה יעודכנו כאן בקרוב, ואנחנו ממשיכים לדווח בשקיפות מלאה על כל תרומה.",
-    impact_title:"מה עושים עם התרומה", impact_sub:"בלי חישובים מסובכים. ככה נראה הכסף בפועל:",
-    impact1:"מנה חמה אחת, למישהו אחד", impact2:"ארוחות חמות למשפחה, לשבוע", impact3:"ארוחה חמה לכיתה שלמה, ליום אחד",
-    how_title:"איך זה עובד",
-    how1_title:"תורמים", how1_text:"כל סכום, תוך פחות מדקה.",
-    how2_title:"קונים אוכל", how2_text:"כל שקל הופך לאוכל אמיתי, באותו שבוע.",
-    how3_title:"מוסרים", how3_text:"מתנדבים מביאים את הקופסה עד הבית, בכבוד.",
     donate_title:"תרמו לארוחה", donate_sub:"בחרו סכום, או הקלידו כל סכום שנוח לכם. באמת כל סכום.",
     custom_amount_ph:"סכום אחר", donate_button:"לתרומה", meal_equiv_tpl:"= בערך {n} ארוחות חמות",
     donate_note:"התשלום מאובטח ומתבצע בעמוד Stripe — כרטיס אשראי, ואפשרויות נוספות בקרוב.",
@@ -560,12 +619,6 @@ const translations = {
     about_title:"Who We Are",
     about_text:"We've been doing this for 20 years, quietly and without fancy offices, to make sure families and elderly people in Israel don't go to bed hungry. This website is new — our work isn't.",
     about_text2:"Every shekel donated goes straight to buying hot food. Our formal nonprofit registration details will be posted here soon, and we'll keep reporting with full transparency on every donation.",
-    impact_title:"What Your Donation Buys", impact_sub:"No complicated math. Here's what the money actually does:",
-    impact1:"One hot meal, for one person", impact2:"A week of hot meals for a family", impact3:"A hot meal for a whole classroom, for a day",
-    how_title:"How It Works",
-    how1_title:"Donate", how1_text:"Any amount, in under a minute.",
-    how2_title:"We buy food", how2_text:"Every shekel becomes real food, that same week.",
-    how3_title:"We deliver", how3_text:"Volunteers bring the box to the door, with dignity.",
     donate_title:"Fund a Meal", donate_sub:"Choose an amount, or type in any amount you like. Really, any amount.",
     custom_amount_ph:"Other amount", donate_button:"Donate", meal_equiv_tpl:"= about {n} hot meals",
     donate_note:"Payment is secure and handled on Stripe's page — credit card, with more options coming soon.",
@@ -597,12 +650,6 @@ const translations = {
     about_title:"Qui sommes-nous",
     about_text:"Nous faisons cela depuis 20 ans, discrètement et sans bureaux luxueux, pour que les familles et les personnes âgées en Israël ne se couchent pas affamées. Ce site est nouveau — notre travail ne l'est pas.",
     about_text2:"Chaque shekel donné va directement à l'achat de nourriture chaude. Les détails officiels de notre enregistrement seront publiés ici bientôt, et nous continuerons à rendre compte en toute transparence de chaque don.",
-    impact_title:"Ce que votre don achète", impact_sub:"Pas de calculs compliqués. Voici ce que fait concrètement l'argent :",
-    impact1:"Un repas chaud, pour une personne", impact2:"Une semaine de repas chauds pour une famille", impact3:"Un repas chaud pour toute une classe, pendant une journée",
-    how_title:"Comment ça marche",
-    how1_title:"Vous donnez", how1_text:"N'importe quel montant, en moins d'une minute.",
-    how2_title:"On achète la nourriture", how2_text:"Chaque shekel devient de la vraie nourriture, la même semaine.",
-    how3_title:"On livre", how3_text:"Des bénévoles apportent la boîte jusqu'à la porte, avec dignité.",
     donate_title:"Financer un repas", donate_sub:"Choisissez un montant, ou saisissez celui de votre choix. Vraiment, n'importe quel montant.",
     custom_amount_ph:"Autre montant", donate_button:"Faire un don", meal_equiv_tpl:"= environ {n} repas chauds",
     donate_note:"Le paiement est sécurisé et se fait sur la page Stripe — carte bancaire, d'autres options arrivent bientôt.",
@@ -634,12 +681,6 @@ const translations = {
     about_title:"من نحن",
     about_text:"نعمل منذ 20 عامًا، بهدوء وبلا مكاتب فخمة، لضمان ألا تنام العائلات وكبار السن في إسرائيل جياعًا. هذا الموقع جديد - لكن عملنا ليس كذلك.",
     about_text2:"كل شيكل يُتبرع به يذهب مباشرة لشراء طعام ساخن. سيتم نشر تفاصيل التسجيل الرسمي للجمعية هنا قريبًا، وسنواصل الإبلاغ بشفافية كاملة عن كل تبرع.",
-    impact_title:"ماذا يشتري تبرعك", impact_sub:"بلا حسابات معقدة. هكذا يبدو المال في الواقع:",
-    impact1:"وجبة ساخنة واحدة، لشخص واحد", impact2:"أسبوع من الوجبات الساخنة لعائلة", impact3:"وجبة ساخنة لصف كامل، ليوم واحد",
-    how_title:"كيف يعمل الأمر",
-    how1_title:"تتبرعون", how1_text:"أي مبلغ، في أقل من دقيقة.",
-    how2_title:"نشتري الطعام", how2_text:"كل شيكل يتحول لطعام حقيقي، في نفس الأسبوع.",
-    how3_title:"نُسلّم", how3_text:"متطوعون يوصلون الصندوق حتى الباب، بكرامة.",
     donate_title:"موّل وجبة", donate_sub:"اختر مبلغًا، أو اكتب أي مبلغ يناسبك. حقًا، أي مبلغ.",
     custom_amount_ph:"مبلغ آخر", donate_button:"تبرع", meal_equiv_tpl:"= حوالي {n} وجبة ساخنة",
     donate_note:"الدفع آمن ويتم عبر صفحة Stripe — بطاقة ائتمان، ووسائل إضافية قريبًا.",
@@ -814,15 +855,7 @@ function showToast(msg){
   setTimeout(()=>toast.classList.remove('show'), 3200);
 }
 
-document.getElementById('donateBtn').addEventListener('click', (e)=>{
-  const amt = Number(selectedAmount);
-  if(!amt || amt <= 0){
-    e.preventDefault();
-    document.getElementById('customAmount').focus();
-    return;
-  }
-  e.preventDefault();
-  const btn = e.currentTarget;
+function goToCheckout(amount, btn){
   const original = btn.textContent;
   btn.textContent = 'מתחבר לסטרייפ…';
   btn.style.pointerEvents = 'none';
@@ -830,7 +863,7 @@ document.getElementById('donateBtn').addEventListener('click', (e)=>{
   fetch(BACKEND_URL + '/create-checkout-session', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({amount: amt})
+    body: JSON.stringify({amount: amount})
   })
     .then(r => r.json())
     .then(data => {
@@ -845,6 +878,23 @@ document.getElementById('donateBtn').addEventListener('click', (e)=>{
       btn.textContent = original;
       btn.style.pointerEvents = '';
     });
+}
+
+document.getElementById('donateBtn').addEventListener('click', (e)=>{
+  const amt = Number(selectedAmount);
+  if(!amt || amt <= 0){
+    e.preventDefault();
+    document.getElementById('customAmount').focus();
+    return;
+  }
+  e.preventDefault();
+  goToCheckout(amt, e.currentTarget);
+});
+
+document.querySelectorAll('.impact-cta').forEach(btn => {
+  btn.addEventListener('click', ()=>{
+    goToCheckout(Number(btn.getAttribute('data-amount')), btn);
+  });
 });
 
 function updateShareLinks(){
