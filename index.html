@@ -255,7 +255,6 @@
   .donate-note{font-size:.85rem;color:var(--muted);margin-top:14px;text-align:center;}
   .trust-row{display:flex;gap:14px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
   .trust-row .pill{font-size:.76rem;color:var(--muted);}
-  .receipt-note{font-size:.78rem;color:var(--muted);text-align:center;margin-top:12px;}
   .invited-banner{display:none;background:#FBEADD;border:1.5px solid var(--terracotta);border-radius:8px;padding:14px;margin-bottom:18px;text-align:center;font-weight:700;color:var(--terracotta-dark);font-size:.95rem;}
   .invited-banner.show{display:block;}
   .quick-link-row{display:none;border-top:1px solid var(--line);margin-top:22px;padding-top:18px;}
@@ -326,6 +325,7 @@
       padding:13px;border-radius:8px;font-weight:800;text-decoration:none;font-size:.98rem;
     }
     body{padding-bottom:64px;}
+    .cine-sticky{align-items:flex-start;padding-top:20vh;}
   }
 
   /* Contact / footer */
@@ -556,9 +556,7 @@
         <span class="pill" data-i18n="trust1">🔒 סליקה מאובטחת</span>
         <span class="pill" data-i18n="trust2">🧾 קבלה על כל תרומה</span>
         <span class="pill" data-i18n="trust3">🤝 שקיפות מלאה</span>
-      </div>
-      <p class="receipt-note">אנחנו ארגון רשום כחוק — קבלה מוכרת לצרכי מס נשלחת אוטומטית עם כל תרומה.</p>
-      <div class="quick-link-row" id="quickLinkRow">
+      </div>      <div class="quick-link-row" id="quickLinkRow">
         <p class="donate-note" style="margin-top:0;" data-i18n="link_intro">רוצים לבקש ממישהו לתרום את הסכום הזה? שלחו לו קישור מוכן שבו הסכום כבר מוזן:</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <button class="share-btn" id="copyDonateLink" style="flex:1;justify-content:center;min-width:140px;">
@@ -584,8 +582,7 @@
       <img src="assets/loading-van.webp" alt="מתנדבים טוענים קופסאות מזון לרכב חלוקה" loading="lazy" style="border-radius:10px;border:1px solid var(--line);aspect-ratio:1/1;object-fit:cover;width:100%;">
       <img src="assets/warehouse-team.webp" alt="צוות מתנדבים אורז קופסאות מזון במחסן" loading="lazy" style="border-radius:10px;border:1px solid var(--line);aspect-ratio:1/1;object-fit:cover;width:100%;">
     </div>
-    <h3 class="center" style="font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;font-size:1.3rem;margin:8px 0 6px;" data-i18n="testimonials_title">מה אומרים מי שכבר קיבלו עזרה</h3>
-    <p class="section-sub center" style="margin-bottom:22px;" data-i18n="testimonials_note">הצטרפו עכשיו לקהילת התורמים שלנו ועזרו להאכיל עוד אנשים היום וככה ניצור עוד סיפורים כל יום מחדש.</p>
+    <h3 class="center" style="font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;font-size:1.3rem;margin:8px 0 22px;" data-i18n="testimonials_title">מה אומרים מי שכבר קיבלו עזרה</h3>
     <div class="testimonial-wrap">
       <button class="carousel-btn" id="testPrev" aria-label="prev">‹</button>
       <div class="testimonial-scroll" id="testimonialScroll">
@@ -689,7 +686,7 @@ const translations = {
     custom_amount_ph:"סכום אחר", donate_button:"לתרומה", meal_equiv_tpl:"= בערך {n} ארוחות חמות",
     trust1:"🔒 סליקה מאובטחת", trust2:"🧾 קבלה על כל תרומה", trust3:"🤝 שקיפות מלאה",
     stories_title:"מהשטח", stories_sub:"קצת מהשטח: אריזה, טעינה, ומסירה — כל תמונה כאן היא מהפעילות שלנו.",
-    testimonials_title:"מה אומרים מי שכבר קיבלו עזרה", testimonials_note:"כל הסיפורים כאן אמיתיים ופורסמים בהסכמה מלאה של מי שסיפר אותם. הם מוצגים בעברית, השפה שבה נאמרו.",
+    testimonials_title:"מה אומרים מי שכבר קיבלו עזרה",
     stories_badge:"בקרוב", stories_placeholder:"אנחנו בתחילת הדרך. ברגע שיהיו לנו סיפורים אמיתיים מהפעילות שלנו — עם הסכמה מלאה של המשפחות המעורבות — נשתף אותם כאן.",
     share_title:"עזרו לנו להתפשט", share_sub:"לא יכולים לתרום כרגע? שיתוף עוזר לא פחות. ספרו לחברים על ״ארוחה אחת״.",
     share_whatsapp:"וואטסאפ", share_facebook:"פייסבוק", share_email:"אימייל", share_copy:"העתקת קישור",
@@ -724,7 +721,7 @@ const translations = {
     custom_amount_ph:"Other amount", donate_button:"Donate", meal_equiv_tpl:"= about {n} hot meals",
     trust1:"🔒 Secure payment", trust2:"🧾 Receipt for every donation", trust3:"🤝 Full transparency",
     stories_title:"From the Field", stories_sub:"A glimpse of the work: packing, loading, and handing it over — every photo here is from our own activity.",
-    testimonials_title:"What people we've helped are saying", testimonials_note:"Every story here is real and shared with full consent from the person who told it. They're shown in Hebrew, the language they were told in.",
+    testimonials_title:"What people we've helped are saying",
     stories_badge:"Coming soon", stories_placeholder:"We're just getting started. Once we have real stories from our work — with full consent from the families involved — we'll share them here.",
     share_title:"Help Us Spread the Word", share_sub:"Can't donate right now? Sharing helps just as much. Tell your friends about “One Meal”.",
     share_whatsapp:"WhatsApp", share_facebook:"Facebook", share_email:"Email", share_copy:"Copy Link",
@@ -759,7 +756,7 @@ const translations = {
     custom_amount_ph:"Autre montant", donate_button:"Faire un don", meal_equiv_tpl:"= environ {n} repas chauds",
     trust1:"🔒 Paiement sécurisé", trust2:"🧾 Reçu pour chaque don", trust3:"🤝 Transparence totale",
     stories_title:"Sur le terrain", stories_sub:"Un aperçu du terrain : emballage, chargement, remise — chaque photo ici vient de notre propre activité.",
-    testimonials_title:"Ce que disent ceux que nous avons aidés", testimonials_note:"Chaque témoignage ici est réel et publié avec le plein consentement de la personne qui l'a raconté. Ils sont présentés en hébreu, la langue dans laquelle ils ont été dits.",
+    testimonials_title:"Ce que disent ceux que nous avons aidés",
     stories_badge:"Bientôt", stories_placeholder:"Nous n'en sommes qu'au début. Dès que nous aurons de vrais témoignages de notre action — avec le plein consentement des familles concernées — nous les partagerons ici.",
     share_title:"Aidez-nous à faire connaître", share_sub:"Vous ne pouvez pas donner maintenant ? Partager aide tout autant. Parlez de «Un Repas» à vos amis.",
     share_whatsapp:"WhatsApp", share_facebook:"Facebook", share_email:"E-mail", share_copy:"Copier le lien",
@@ -794,7 +791,7 @@ const translations = {
     custom_amount_ph:"مبلغ آخر", donate_button:"تبرع", meal_equiv_tpl:"= حوالي {n} وجبة ساخنة",
     trust1:"🔒 دفع آمن", trust2:"🧾 إيصال لكل تبرع", trust3:"🤝 شفافية كاملة",
     stories_title:"من الميدان", stories_sub:"لمحة من الميدان: تعبئة، تحميل، وتسليم — كل صورة هنا من نشاطنا الفعلي.",
-    testimonials_title:"ماذا يقول من ساعدناهم بالفعل", testimonials_note:"كل القصص هنا حقيقية ومنشورة بموافقة كاملة ممن رواها. تُعرض بالعبرية، اللغة التي قيلت بها.",
+    testimonials_title:"ماذا يقول من ساعدناهم بالفعل",
     stories_badge:"قريبًا", stories_placeholder:"نحن في البداية. بمجرد أن تكون لدينا قصص حقيقية من نشاطنا — بموافقة كاملة من العائلات المعنية — سنشاركها هنا.",
     share_title:"ساعدونا على الانتشار", share_sub:"لا يمكنكم التبرع الآن؟ المشاركة تساعد بنفس القدر. أخبروا أصدقاءكم عن «وجبة واحدة».",
     share_whatsapp:"واتساب", share_facebook:"فيسبوك", share_email:"البريد الإلكتروني", share_copy:"نسخ الرابط",
@@ -1135,6 +1132,10 @@ document.getElementById('copyLink').addEventListener('click', ()=>{
     if(existing) return existing;
     const img = new Image();
     img.src = framePath(CLIPS[clipIdx], frameIdx);
+    // Paint the hero as soon as ANY frame finishes loading, instead of
+    // waiting specifically for frame 0 (which can be slow or fail) or for
+    // the user to scroll — scrolling was the only other thing that painted.
+    img.addEventListener('load', () => { if(!lastDrawn){ sizeCanvas(); render(); } }, {once: true});
     images[clipIdx][frameIdx] = img;
     return img;
   }
