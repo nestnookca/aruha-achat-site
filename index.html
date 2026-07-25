@@ -59,6 +59,7 @@
     border-bottom:1px solid var(--line);
   }
   .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .tagline-bar{background:#0b1f26;color:#fff;text-align:center;padding:10px 16px;font-size:.92rem;font-weight:600;letter-spacing:.02em;}
   .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.2rem;color:var(--ink);font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;}
   .brand .mark{width:30px;height:30px;border-radius:50%;background:var(--terracotta);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
   nav.links{display:flex;gap:20px;align-items:center;}
@@ -114,7 +115,6 @@
     padding:11px 24px;margin:0 0 30px;color:rgba(255,255,255,0.92);
     font-size:1rem;font-weight:500;box-shadow:0 10px 28px rgba(0,0,0,0.28);
   }
-  .cine-stat-pill .icon{font-size:1.1rem;flex-shrink:0;}
   .cine-stat-pill b{color:var(--terracotta);font-weight:800;}
   .hero-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
   .cine-trust{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:18px;}
@@ -311,31 +311,6 @@
   }
   .carousel-btn:hover{border-color:var(--terracotta);color:var(--terracotta-dark);}
 
-  /* How it works */
-  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative;margin-top:28px;}
-  .how-grid::before{
-    content:"";position:absolute;top:-8px;inset-inline:16%;height:2px;z-index:0;
-    background-image:repeating-linear-gradient(90deg,var(--terracotta) 0 8px, transparent 8px 16px);
-    opacity:.55;
-  }
-  .how-step{
-    background:var(--white);border:1px solid var(--line);border-radius:12px;padding:28px 24px;
-    text-align:center;box-shadow:var(--shadow);position:relative;z-index:1;margin-top:20px;
-  }
-  .how-dot{
-    position:absolute;top:-20px;inset-inline-start:50%;transform:translateX(-50%);
-    width:14px;height:14px;border-radius:50%;background:var(--terracotta);
-    border:3px solid var(--cream);z-index:2;
-  }
-  .how-num{font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;font-size:1rem;font-weight:800;color:var(--line);position:absolute;top:14px;inset-inline-end:18px;}
-  .how-ico{font-size:2rem;margin-bottom:12px;}
-  .how-step h3{margin:0 0 8px;font-size:1.1rem;}
-  .how-step p{margin:0;color:var(--muted);font-size:.92rem;}
-  .how-banner{
-    text-align:center;margin:30px auto 0;max-width:60ch;color:var(--muted);font-size:.9rem;
-    background:var(--cream-2);border-radius:10px;padding:14px 18px;
-  }
-
   /* Scroll reveal */
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
   .reveal.in-view{opacity:1;transform:translateY(0);}
@@ -371,8 +346,7 @@
       width:100%;padding:20px;gap:16px;border-bottom:1px solid var(--line);display:none;}
     nav.links.open{display:flex;}
     .mobile-toggle{display:block;}
-    .about-grid, .how-grid{grid-template-columns:1fr;}
-    .how-grid::before{display:none;}
+    .about-grid{grid-template-columns:1fr;}
     .impact-grid, .stats-grid, .story-photos{grid-template-columns:1fr 1fr;}
     .amount-grid{grid-template-columns:repeat(2,1fr);}
     .footer-grid{grid-template-columns:1fr;}
@@ -428,6 +402,8 @@
   </div>
 </header>
 
+<div class="tagline-bar">לכל אחד מגיעה ארוחה חמה</div>
+
 <section class="cine-hero" id="cineHero">
   <div class="cine-sticky" id="cineSticky">
     <canvas id="cineCanvas" aria-hidden="true"></canvas>
@@ -435,7 +411,7 @@
     <div class="cine-badge" data-i18n="cine_disclosure">ארוחה אחת</div>
     <div class="cine-overlay">
       <div class="container">
-        <div class="cine-stat-pill"><span class="icon">🍽️</span><span>החודש חילקנו <b>4,585</b> ארוחות עם <b>86</b> מתנדבים בשטח</span></div>
+        <div class="cine-stat-pill"><span>החודש חילקנו <b>4,585</b> ארוחות עם <b>86</b> מתנדבים בשטח</span></div>
         <div class="hero-actions">
           <a href="#donate" class="cta-btn" data-i18n="hero_cta_donate">כן, אני רוצה להאכיל מישהו היום ←</a>
         </div>
@@ -456,7 +432,7 @@
     <div>
       <h2 class="section-title" data-i18n="about_title">מי אנחנו</h2>
       <p class="section-sub" data-i18n="about_text">יש רגעים שבהם ארוחה אחת יכולה לשנות חיים.</p>
-      <p class="section-sub" data-i18n="about_text2">ארוחה אחת היא עמותה שהוקמה מתוך מטרה אחת ברורה – להילחם ברעב ולסייע לאנשים ולמשפחות הנמצאים במצוקה כלכלית, בישראל ובקהילות יהודיות ברחבי העולם.</p>
+      <p class="section-sub" data-i18n="about_text2">ארוחה אחת הוקמה מתוך מטרה אחת ברורה – להילחם ברעב ולסייע לאנשים ולמשפחות הנמצאים במצוקה כלכלית, בישראל ובקהילות יהודיות ברחבי העולם.</p>
       <p class="section-sub" data-i18n="about_text3">אנו פועלים כדי להעניק סלי מזון, ארוחות חמות וסיוע תזונתי לאלו הזקוקים לכך ביותר, מתוך אמונה שכל אדם ראוי לארוחה מכובדת ולתקווה לעתיד טוב יותר. עבורנו, מזון הוא הרבה מעבר לצורך בסיסי – הוא ביטוי של ערבות הדדית, כבוד ואנושיות.</p>
       <p class="section-sub" data-i18n="about_text4">הפעילות שלנו מתאפשרת בזכות קהילה של תורמים, מתנדבים ושותפים שמאמינים כי גם מעשה קטן יכול ליצור שינוי גדול. כל תרומה מסייעת לנו להגיע לעוד משפחות, עוד ילדים, עוד קשישים ועוד אנשים שנמצאים ברגעים קשים וזקוקים ליד מושטת.</p>
       <p class="section-sub" data-i18n="about_text5">אנו מחויבים לפעול בשקיפות, באחריות ובמסירות, כדי שכל תרומה תנוצל בצורה היעילה ביותר ותגיע למי שבאמת זקוק לה.</p>
@@ -522,17 +498,6 @@
   </div>
 </section>
 
-<section id="how" class="reveal">
-  <div class="container">
-    <h2 class="section-title center">איך 18 ₪ שלך מגיע לצלחת? תוך פחות מ-24 שעות</h2>
-    <div class="how-grid">
-      <div class="how-step"><span class="how-dot"></span><div class="how-ico">💳</div><h3>אתה תורם</h3><p>כל סכום, תוך פחות מדקה. קבלה אוטומטית למייל.</p></div>
-      <div class="how-step"><span class="how-dot"></span><div class="how-ico">🍲</div><h3>אנחנו קונים ומבשלים היום</h3><p>מתנדב קונה בשוק ב-7 בבוקר. הכל טרי. כל שקל מתועד.</p></div>
-      <div class="how-step"><span class="how-dot"></span><div class="how-ico">🚪💙</div><h3>דפיקה בדלת ב-18:00</h3><p>מתנדב מהשכונה דופק, אומר שבת שלום, ומשאיר ארוחה חמה. בכבוד.</p></div>
-    </div>
-    <p class="how-banner">לא צדקה. ערבות הדדית.</p>
-  </div>
-</section>
 
 <section id="donate" class="reveal">
   <div class="container">
@@ -593,7 +558,7 @@
         <span class="pill" data-i18n="trust2">🧾 קבלה על כל תרומה</span>
         <span class="pill" data-i18n="trust3">🤝 שקיפות מלאה</span>
       </div>
-      <p class="receipt-note">אנחנו עדיין בתהליך רישום רשמי כעמותה — קבלה מוכרת לצרכי מס תישלח בנפרד ברגע שהרישום יושלם.</p>
+      <p class="receipt-note">אנחנו ארגון רשום כחוק — קבלה מוכרת לצרכי מס נשלחת אוטומטית עם כל תרומה.</p>
       <div class="quick-link-row" id="quickLinkRow">
         <p class="donate-note" style="margin-top:0;" data-i18n="link_intro">רוצים לבקש ממישהו לתרום את הסכום הזה? שלחו לו קישור מוכן שבו הסכום כבר מוזן:</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -676,7 +641,7 @@
     <div class="footer-grid">
       <div>
         <h4 style="display:flex;align-items:center;gap:8px;"><img src="assets/logo-icon.png" alt="" style="height:24px;width:auto;"><span data-i18n="footer_brand">ארוחה אחת</span></h4>
-        <p style="opacity:.85;font-size:.9rem;max-width:40ch;" data-i18n="footer_about">פועלים כבר 20 שנה כדי שאף משפחה בישראל לא תלך לישון רעבה.</p>
+        <p style="opacity:.85;font-size:.9rem;max-width:40ch;" data-i18n="footer_about">פועלים באהבה כדי שאף משפחה בישראל לא תלך לישון רעבה.</p>
       </div>
       <div>
         <h4 data-i18n="footer_links_title">קישורים</h4>
@@ -715,7 +680,7 @@ const translations = {
     stat3_num:"4 שפות", stat3_lbl:"כדי שכולם יוכלו להצטרף",
     about_title:"מי אנחנו",
     about_text:"יש רגעים שבהם ארוחה אחת יכולה לשנות חיים.",
-    about_text2:"ארוחה אחת היא עמותה שהוקמה מתוך מטרה אחת ברורה – להילחם ברעב ולסייע לאנשים ולמשפחות הנמצאים במצוקה כלכלית, בישראל ובקהילות יהודיות ברחבי העולם.",
+    about_text2:"ארוחה אחת הוקמה מתוך מטרה אחת ברורה – להילחם ברעב ולסייע לאנשים ולמשפחות הנמצאים במצוקה כלכלית, בישראל ובקהילות יהודיות ברחבי העולם.",
     about_text3:"אנו פועלים כדי להעניק סלי מזון, ארוחות חמות וסיוע תזונתי לאלו הזקוקים לכך ביותר, מתוך אמונה שכל אדם ראוי לארוחה מכובדת ולתקווה לעתיד טוב יותר. עבורנו, מזון הוא הרבה מעבר לצורך בסיסי – הוא ביטוי של ערבות הדדית, כבוד ואנושיות.",
     about_text4:"הפעילות שלנו מתאפשרת בזכות קהילה של תורמים, מתנדבים ושותפים שמאמינים כי גם מעשה קטן יכול ליצור שינוי גדול. כל תרומה מסייעת לנו להגיע לעוד משפחות, עוד ילדים, עוד קשישים ועוד אנשים שנמצאים ברגעים קשים וזקוקים ליד מושטת.",
     about_text5:"אנו מחויבים לפעול בשקיפות, באחריות ובמסירות, כדי שכל תרומה תנוצל בצורה היעילה ביותר ותגיע למי שבאמת זקוק לה.",
@@ -730,7 +695,7 @@ const translations = {
     stories_badge:"בקרוב", stories_placeholder:"אנחנו בתחילת הדרך. ברגע שיהיו לנו סיפורים אמיתיים מהפעילות שלנו — עם הסכמה מלאה של המשפחות המעורבות — נשתף אותם כאן.",
     share_title:"עזרו לנו להתפשט", share_sub:"לא יכולים לתרום כרגע? שיתוף עוזר לא פחות. ספרו לחברים על ״ארוחה אחת״.",
     share_whatsapp:"וואטסאפ", share_facebook:"פייסבוק", share_email:"אימייל", share_copy:"העתקת קישור",
-    footer_brand:"ארוחה אחת", footer_about:"פועלים כבר 20 שנה כדי שאף משפחה בישראל לא תלך לישון רעבה.",
+    footer_brand:"ארוחה אחת", footer_about:"פועלים באהבה כדי שאף משפחה בישראל לא תלך לישון רעבה.",
     footer_links_title:"קישורים", footer_contact_title:"צור קשר", footer_contact_soon:"",
     footer_bottom:"© 2026 ארוחה אחת. יוזמה ללא מטרות רווח.",
     share_message:"היי! רציתי לספר לך על ״ארוחה אחת״ — יוזמה קטנה שקונה אוכל חם למי שצריך. אפשר לתרום כל סכום:",
@@ -751,7 +716,7 @@ const translations = {
     stat3_num:"4 languages", stat3_lbl:"so everyone can take part",
     about_title:"Who We Are",
     about_text:"There are moments when one meal can change a life.",
-    about_text2:"One Meal is a nonprofit founded with one clear purpose — to fight hunger and support people and families facing economic hardship, in Israel and in Jewish communities around the world.",
+    about_text2:"One Meal was founded with one clear purpose — to fight hunger and support people and families facing economic hardship, in Israel and in Jewish communities around the world.",
     about_text3:"We work to provide food packages, hot meals, and nutritional support to those who need it most, believing that every person deserves a dignified meal and hope for a better future. For us, food is far more than a basic need — it's an expression of mutual responsibility, dignity, and humanity.",
     about_text4:"Our work is made possible by a community of donors, volunteers, and partners who believe that even a small act can create a big change. Every donation helps us reach more families, more children, more elderly people, and more people going through hard times who need a helping hand.",
     about_text5:"We are committed to acting with transparency, responsibility, and dedication, so that every donation is used as effectively as possible and reaches those who truly need it.",
@@ -766,7 +731,7 @@ const translations = {
     stories_badge:"Coming soon", stories_placeholder:"We're just getting started. Once we have real stories from our work — with full consent from the families involved — we'll share them here.",
     share_title:"Help Us Spread the Word", share_sub:"Can't donate right now? Sharing helps just as much. Tell your friends about “One Meal”.",
     share_whatsapp:"WhatsApp", share_facebook:"Facebook", share_email:"Email", share_copy:"Copy Link",
-    footer_brand:"One Meal", footer_about:"Operating for 20 years so that no family in Israel goes to bed hungry.",
+    footer_brand:"One Meal", footer_about:"Working with love so that no family in Israel goes to bed hungry.",
     footer_links_title:"Links", footer_contact_title:"Contact", footer_contact_soon:"",
     footer_bottom:"© 2026 One Meal. A not-for-profit initiative.",
     share_message:"Hi! I wanted to tell you about “One Meal” — a small initiative that buys hot food for people who need it. You can donate any amount:",
@@ -787,7 +752,7 @@ const translations = {
     stat3_num:"4 langues", stat3_lbl:"pour que chacun puisse participer",
     about_title:"Qui sommes-nous",
     about_text:"Il y a des moments où un seul repas peut changer une vie.",
-    about_text2:"Un Repas est une association fondée avec un objectif clair — lutter contre la faim et venir en aide aux personnes et aux familles en difficulté économique, en Israël et dans les communautés juives du monde entier.",
+    about_text2:"Un Repas a été fondé avec un objectif clair — lutter contre la faim et venir en aide aux personnes et aux familles en difficulté économique, en Israël et dans les communautés juives du monde entier.",
     about_text3:"Nous œuvrons pour fournir des colis alimentaires, des repas chauds et un soutien nutritionnel à ceux qui en ont le plus besoin, convaincus que chaque personne mérite un repas digne et l'espoir d'un avenir meilleur. Pour nous, la nourriture est bien plus qu'un besoin de base — elle est une expression de solidarité, de dignité et d'humanité.",
     about_text4:"Notre action est rendue possible grâce à une communauté de donateurs, de bénévoles et de partenaires qui croient qu'un petit geste peut créer un grand changement. Chaque don nous aide à atteindre davantage de familles, d'enfants, de personnes âgées et de personnes traversant des moments difficiles qui ont besoin d'une main tendue.",
     about_text5:"Nous nous engageons à agir avec transparence, responsabilité et dévouement, afin que chaque don soit utilisé le plus efficacement possible et parvienne à ceux qui en ont vraiment besoin.",
@@ -802,7 +767,7 @@ const translations = {
     stories_badge:"Bientôt", stories_placeholder:"Nous n'en sommes qu'au début. Dès que nous aurons de vrais témoignages de notre action — avec le plein consentement des familles concernées — nous les partagerons ici.",
     share_title:"Aidez-nous à faire connaître", share_sub:"Vous ne pouvez pas donner maintenant ? Partager aide tout autant. Parlez de «Un Repas» à vos amis.",
     share_whatsapp:"WhatsApp", share_facebook:"Facebook", share_email:"E-mail", share_copy:"Copier le lien",
-    footer_brand:"Un Repas", footer_about:"En activité depuis 20 ans pour qu'aucune famille en Israël ne se couche affamée.",
+    footer_brand:"Un Repas", footer_about:"Agissant avec amour pour qu'aucune famille en Israël ne se couche affamée.",
     footer_links_title:"Liens", footer_contact_title:"Contact", footer_contact_soon:"",
     footer_bottom:"© 2026 Un Repas. Une initiative à but non lucratif.",
     share_message:"Salut ! Je voulais te parler de «Un Repas» — une petite initiative qui achète de la nourriture chaude pour ceux qui en ont besoin. Tu peux faire un don, quel que soit le montant :",
@@ -823,7 +788,7 @@ const translations = {
     stat3_num:"4 لغات", stat3_lbl:"ليتمكن الجميع من المشاركة",
     about_title:"من نحن",
     about_text:"هناك لحظات يمكن فيها لوجبة واحدة أن تغيّر حياة.",
-    about_text2:"\"وجبة واحدة\" جمعية تأسست بهدف واضح واحد - محاربة الجوع ومساعدة الأفراد والعائلات التي تعاني من ضائقة اقتصادية، في إسرائيل وفي الجاليات اليهودية حول العالم.",
+    about_text2:"\"وجبة واحدة\" تأسست بهدف واضح واحد - محاربة الجوع ومساعدة الأفراد والعائلات التي تعاني من ضائقة اقتصادية، في إسرائيل وفي الجاليات اليهودية حول العالم.",
     about_text3:"نعمل على تقديم سلال غذائية ووجبات ساخنة ودعم غذائي لمن هم بأمس الحاجة إليه، إيمانًا منا بأن كل إنسان يستحق وجبة كريمة وأملًا بمستقبل أفضل. بالنسبة لنا، الطعام أكثر بكثير من مجرد حاجة أساسية - إنه تعبير عن التكافل والكرامة والإنسانية.",
     about_text4:"يتيح لنا نشاطنا مجتمع من المتبرعين والمتطوعين والشركاء الذين يؤمنون بأن الفعل الصغير يمكن أن يُحدث تغييرًا كبيرًا. كل تبرع يساعدنا في الوصول إلى المزيد من العائلات والأطفال وكبار السن والأشخاص الذين يمرون بلحظات صعبة ويحتاجون إلى يد ممدودة.",
     about_text5:"نحن ملتزمون بالعمل بشفافية ومسؤولية وتفانٍ، حتى يُستخدم كل تبرع بأكثر الطرق فعالية ويصل إلى من يحتاجه فعلاً.",
@@ -838,7 +803,7 @@ const translations = {
     stories_badge:"قريبًا", stories_placeholder:"نحن في البداية. بمجرد أن تكون لدينا قصص حقيقية من نشاطنا — بموافقة كاملة من العائلات المعنية — سنشاركها هنا.",
     share_title:"ساعدونا على الانتشار", share_sub:"لا يمكنكم التبرع الآن؟ المشاركة تساعد بنفس القدر. أخبروا أصدقاءكم عن «وجبة واحدة».",
     share_whatsapp:"واتساب", share_facebook:"فيسبوك", share_email:"البريد الإلكتروني", share_copy:"نسخ الرابط",
-    footer_brand:"وجبة واحدة", footer_about:"نعمل منذ 20 عامًا حتى لا تنام أي عائلة في إسرائيل جائعة.",
+    footer_brand:"وجبة واحدة", footer_about:"نعمل بحب حتى لا تنام أي عائلة في إسرائيل جائعة.",
     footer_links_title:"روابط", footer_contact_title:"اتصل بنا", footer_contact_soon:"",
     footer_bottom:"© 2026 وجبة واحدة. مبادرة لا تهدف للربح.",
     share_message:"مرحبًا! أردت أن أخبرك عن «وجبة واحدة» — مبادرة صغيرة تشتري طعامًا ساخنًا لمن يحتاجه. يمكنك التبرع بأي مبلغ:",
