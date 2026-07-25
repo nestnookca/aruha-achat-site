@@ -1,0 +1,89 @@
+/* Floating accessibility widget — shared across all pages */
+.a11y-btn{
+  position:fixed;bottom:20px;left:20px;z-index:9999;
+  width:50px;height:50px;border-radius:50%;
+  background:var(--green,#1E8AA0);color:#fff;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;padding:0;
+  box-shadow:0 4px 14px rgba(0,0,0,0.28);
+  transition:transform .18s ease,background .18s ease;
+}
+.a11y-btn:hover{background:var(--green-dark,#155F70);transform:scale(1.06);}
+.a11y-btn svg{width:24px;height:24px;}
+
+.a11y-panel{
+  position:fixed;bottom:78px;left:20px;z-index:9999;
+  width:270px;max-width:calc(100vw - 40px);
+  background:#fff;border:1px solid var(--line,#E2E6EA);border-radius:16px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.22);
+  padding:14px;display:none;flex-direction:column;
+  font-family:'Heebo','Segoe UI',Tahoma,Arial,sans-serif;
+  direction:rtl;
+}
+.a11y-panel.open{display:flex;}
+.a11y-panel h4{
+  margin:0 0 6px;font-size:.92rem;color:var(--ink,#2D3748);font-weight:800;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.a11y-panel .close{
+  background:none;border:none;cursor:pointer;color:var(--muted,#5A6472);
+  font-size:1.05rem;line-height:1;padding:2px 6px;
+}
+.a11y-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:9px 2px;border-top:1px solid var(--line,#E2E6EA);
+}
+.a11y-row:first-of-type{border-top:none;}
+.a11y-row .lbl{font-size:.84rem;color:var(--ink,#2D3748);font-weight:600;}
+.a11y-toggle{
+  position:relative;width:38px;height:21px;border-radius:999px;border:none;
+  background:var(--line,#E2E6EA);cursor:pointer;flex-shrink:0;padding:0;
+  transition:background .18s ease;
+}
+.a11y-toggle::before{
+  content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;
+  border-radius:50%;background:#fff;transition:transform .18s ease;
+  box-shadow:0 1px 3px rgba(0,0,0,.3);
+}
+.a11y-toggle.on{background:var(--green,#1E8AA0);}
+.a11y-toggle.on::before{transform:translateX(17px);}
+.a11y-steps{display:flex;align-items:center;gap:6px;}
+.a11y-steps button{
+  width:26px;height:26px;border-radius:7px;border:1.5px solid var(--line,#E2E6EA);background:#fff;
+  cursor:pointer;font-weight:800;font-size:.8rem;color:var(--ink,#2D3748);
+  display:flex;align-items:center;justify-content:center;padding:0;
+}
+.a11y-steps button:hover{border-color:var(--terracotta,#FF8C42);color:var(--terracotta-dark,#E06A1F);}
+.a11y-steps span{font-size:.78rem;color:var(--muted,#5A6472);min-width:34px;text-align:center;}
+.a11y-reset{
+  margin-top:10px;width:100%;padding:8px;border-radius:9px;border:none;
+  background:var(--cream-2,#EAF1F3);color:var(--green-dark,#155F70);
+  font-weight:700;font-size:.8rem;cursor:pointer;
+}
+.a11y-reset:hover{background:var(--line,#E2E6EA);}
+
+@media (max-width:480px){
+  .a11y-btn{width:44px;height:44px;bottom:14px;left:14px;}
+  .a11y-btn svg{width:21px;height:21px;}
+  .a11y-panel{bottom:66px;left:14px;}
+}
+
+/* Applied states */
+html.a11y-underline a{text-decoration:underline!important;}
+
+html.a11y-readable, html.a11y-readable body, html.a11y-readable p, html.a11y-readable span, html.a11y-readable li{
+  font-family:Arial,Helvetica,sans-serif!important;letter-spacing:.01em!important;line-height:1.85!important;
+}
+
+html.a11y-reduce-motion *, html.a11y-reduce-motion *::before, html.a11y-reduce-motion *::after{
+  animation-duration:.001ms!important;animation-iteration-count:1!important;
+  transition-duration:.001ms!important;scroll-behavior:auto!important;
+}
+
+html.a11y-contrast, html.a11y-contrast *{
+  background-color:#000!important;color:#fff!important;
+  border-color:#666!important;box-shadow:none!important;text-shadow:none!important;
+}
+html.a11y-contrast a, html.a11y-contrast button, html.a11y-contrast .a11y-toggle.on{color:#ffd23f!important;}
+html.a11y-contrast .a11y-toggle::before{background:#000!important;}
+html.a11y-contrast img{filter:grayscale(.15) brightness(.9);}
+html.a11y-contrast .a11y-btn{background:#000!important;border:2px solid #ffd23f!important;}
