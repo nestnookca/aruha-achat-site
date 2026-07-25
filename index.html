@@ -128,6 +128,8 @@
   section{padding:64px 0;}
   .section-title{font-size:1.9rem;margin:0 0 12px;color:var(--ink);}
   .section-sub{color:var(--muted);max-width:62ch;margin:0 0 36px;font-size:1.02rem;}
+  .about-grid .section-sub{margin:0 0 16px;}
+  .about-grid .about-tagline{color:var(--green-dark);font-weight:800;font-size:1.15rem;margin:22px 0 0;font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;}
   .center{text-align:center;margin-inline:auto;}
 
   /* About */
@@ -452,8 +454,14 @@
   <div class="container about-grid">
     <div>
       <h2 class="section-title" data-i18n="about_title">מי אנחנו</h2>
-      <p class="section-sub" data-i18n="about_text">אנחנו פועלים כבר 20 שנה, בלי הרבה רעש ובלי משרדים מפוארים, כדי לוודא שמשפחות וזקנים בישראל לא ילכו לישון רעבים. האתר הזה חדש - אבל הדרך שלנו ארוכה.</p>
-      <p class="section-sub" data-i18n="about_text2">כל שקל שנתרם הולך ישירות לרכישת אוכל חם. פרטי ההתאגדות הרשמיים של העמותה יעודכנו כאן בקרוב, ואנחנו ממשיכים לדווח בשקיפות מלאה על כל תרומה.</p>
+      <p class="section-sub" data-i18n="about_text">יש רגעים שבהם ארוחה אחת יכולה לשנות חיים.</p>
+      <p class="section-sub" data-i18n="about_text2">ארוחה אחת היא עמותה שהוקמה מתוך מטרה אחת ברורה – להילחם ברעב ולסייע לאנשים ולמשפחות הנמצאים במצוקה כלכלית, בישראל ובקהילות יהודיות ברחבי העולם.</p>
+      <p class="section-sub" data-i18n="about_text3">אנו פועלים כדי להעניק סלי מזון, ארוחות חמות וסיוע תזונתי לאלו הזקוקים לכך ביותר, מתוך אמונה שכל אדם ראוי לארוחה מכובדת ולתקווה לעתיד טוב יותר. עבורנו, מזון הוא הרבה מעבר לצורך בסיסי – הוא ביטוי של ערבות הדדית, כבוד ואנושיות.</p>
+      <p class="section-sub" data-i18n="about_text4">הפעילות שלנו מתאפשרת בזכות קהילה של תורמים, מתנדבים ושותפים שמאמינים כי גם מעשה קטן יכול ליצור שינוי גדול. כל תרומה מסייעת לנו להגיע לעוד משפחות, עוד ילדים, עוד קשישים ועוד אנשים שנמצאים ברגעים קשים וזקוקים ליד מושטת.</p>
+      <p class="section-sub" data-i18n="about_text5">אנו מחויבים לפעול בשקיפות, באחריות ובמסירות, כדי שכל תרומה תנוצל בצורה היעילה ביותר ותגיע למי שבאמת זקוק לה.</p>
+      <p class="section-sub" data-i18n="about_text6">החזון שלנו הוא עולם שבו אף אדם לא יצטרך לבחור בין אוכל לבין צרכים בסיסיים אחרים, ושבו אף משפחה לא תישאר רעבה.</p>
+      <p class="section-sub" data-i18n="about_text7">ביחד, אנחנו יכולים להעניק הרבה יותר מארוחה – אנחנו יכולים להעניק תקווה.</p>
+      <p class="about-tagline" data-i18n="about_tagline">ארוחה אחת. תקווה אחת. קהילה אחת.</p>
     </div>
     <img src="assets/market-handoff.webp" alt="מתנדבים מוסרים קופסת מזון לאיש מבוגר בשוק בישראל" loading="lazy" style="border-radius:10px;border:1px solid var(--line);aspect-ratio:4/3;object-fit:cover;width:100%;">
   </div>
@@ -701,8 +709,14 @@ const translations = {
     stat2_num:"כל סכום", stat2_lbl:"מתקבל בברכה — אין סכום קטן מדי",
     stat3_num:"4 שפות", stat3_lbl:"כדי שכולם יוכלו להצטרף",
     about_title:"מי אנחנו",
-    about_text:"אנחנו פועלים כבר 20 שנה, בלי הרבה רעש ובלי משרדים מפוארים, כדי לוודא שמשפחות וזקנים בישראל לא ילכו לישון רעבים. האתר הזה חדש - אבל הדרך שלנו ארוכה.",
-    about_text2:"כל שקל שנתרם הולך ישירות לרכישת אוכל חם. פרטי ההתאגדות הרשמיים של העמותה יעודכנו כאן בקרוב, ואנחנו ממשיכים לדווח בשקיפות מלאה על כל תרומה.",
+    about_text:"יש רגעים שבהם ארוחה אחת יכולה לשנות חיים.",
+    about_text2:"ארוחה אחת היא עמותה שהוקמה מתוך מטרה אחת ברורה – להילחם ברעב ולסייע לאנשים ולמשפחות הנמצאים במצוקה כלכלית, בישראל ובקהילות יהודיות ברחבי העולם.",
+    about_text3:"אנו פועלים כדי להעניק סלי מזון, ארוחות חמות וסיוע תזונתי לאלו הזקוקים לכך ביותר, מתוך אמונה שכל אדם ראוי לארוחה מכובדת ולתקווה לעתיד טוב יותר. עבורנו, מזון הוא הרבה מעבר לצורך בסיסי – הוא ביטוי של ערבות הדדית, כבוד ואנושיות.",
+    about_text4:"הפעילות שלנו מתאפשרת בזכות קהילה של תורמים, מתנדבים ושותפים שמאמינים כי גם מעשה קטן יכול ליצור שינוי גדול. כל תרומה מסייעת לנו להגיע לעוד משפחות, עוד ילדים, עוד קשישים ועוד אנשים שנמצאים ברגעים קשים וזקוקים ליד מושטת.",
+    about_text5:"אנו מחויבים לפעול בשקיפות, באחריות ובמסירות, כדי שכל תרומה תנוצל בצורה היעילה ביותר ותגיע למי שבאמת זקוק לה.",
+    about_text6:"החזון שלנו הוא עולם שבו אף אדם לא יצטרך לבחור בין אוכל לבין צרכים בסיסיים אחרים, ושבו אף משפחה לא תישאר רעבה.",
+    about_text7:"ביחד, אנחנו יכולים להעניק הרבה יותר מארוחה – אנחנו יכולים להעניק תקווה.",
+    about_tagline:"ארוחה אחת. תקווה אחת. קהילה אחת.",
     donate_title:"תרמו לארוחה", donate_sub:"בחרו סכום, או הקלידו כל סכום שנוח לכם. באמת כל סכום.",
     custom_amount_ph:"סכום אחר", donate_button:"לתרומה", meal_equiv_tpl:"= בערך {n} ארוחות חמות",
     trust1:"🔒 סליקה מאובטחת", trust2:"🧾 קבלה על כל תרומה", trust3:"🤝 שקיפות מלאה",
@@ -731,8 +745,14 @@ const translations = {
     stat2_num:"Any amount", stat2_lbl:"is welcome — no donation is too small",
     stat3_num:"4 languages", stat3_lbl:"so everyone can take part",
     about_title:"Who We Are",
-    about_text:"We've been doing this for 20 years, quietly and without fancy offices, to make sure families and elderly people in Israel don't go to bed hungry. This website is new — our work isn't.",
-    about_text2:"Every shekel donated goes straight to buying hot food. Our formal nonprofit registration details will be posted here soon, and we'll keep reporting with full transparency on every donation.",
+    about_text:"There are moments when one meal can change a life.",
+    about_text2:"One Meal is a nonprofit founded with one clear purpose — to fight hunger and support people and families facing economic hardship, in Israel and in Jewish communities around the world.",
+    about_text3:"We work to provide food packages, hot meals, and nutritional support to those who need it most, believing that every person deserves a dignified meal and hope for a better future. For us, food is far more than a basic need — it's an expression of mutual responsibility, dignity, and humanity.",
+    about_text4:"Our work is made possible by a community of donors, volunteers, and partners who believe that even a small act can create a big change. Every donation helps us reach more families, more children, more elderly people, and more people going through hard times who need a helping hand.",
+    about_text5:"We are committed to acting with transparency, responsibility, and dedication, so that every donation is used as effectively as possible and reaches those who truly need it.",
+    about_text6:"Our vision is a world where no one has to choose between food and other basic needs, and where no family goes to bed hungry.",
+    about_text7:"Together, we can give so much more than a meal — we can give hope.",
+    about_tagline:"One meal. One hope. One community.",
     donate_title:"Fund a Meal", donate_sub:"Choose an amount, or type in any amount you like. Really, any amount.",
     custom_amount_ph:"Other amount", donate_button:"Donate", meal_equiv_tpl:"= about {n} hot meals",
     trust1:"🔒 Secure payment", trust2:"🧾 Receipt for every donation", trust3:"🤝 Full transparency",
@@ -761,8 +781,14 @@ const translations = {
     stat2_num:"Tout montant", stat2_lbl:"est le bienvenu — aucun don n'est trop petit",
     stat3_num:"4 langues", stat3_lbl:"pour que chacun puisse participer",
     about_title:"Qui sommes-nous",
-    about_text:"Nous faisons cela depuis 20 ans, discrètement et sans bureaux luxueux, pour que les familles et les personnes âgées en Israël ne se couchent pas affamées. Ce site est nouveau — notre travail ne l'est pas.",
-    about_text2:"Chaque shekel donné va directement à l'achat de nourriture chaude. Les détails officiels de notre enregistrement seront publiés ici bientôt, et nous continuerons à rendre compte en toute transparence de chaque don.",
+    about_text:"Il y a des moments où un seul repas peut changer une vie.",
+    about_text2:"Un Repas est une association fondée avec un objectif clair — lutter contre la faim et venir en aide aux personnes et aux familles en difficulté économique, en Israël et dans les communautés juives du monde entier.",
+    about_text3:"Nous œuvrons pour fournir des colis alimentaires, des repas chauds et un soutien nutritionnel à ceux qui en ont le plus besoin, convaincus que chaque personne mérite un repas digne et l'espoir d'un avenir meilleur. Pour nous, la nourriture est bien plus qu'un besoin de base — elle est une expression de solidarité, de dignité et d'humanité.",
+    about_text4:"Notre action est rendue possible grâce à une communauté de donateurs, de bénévoles et de partenaires qui croient qu'un petit geste peut créer un grand changement. Chaque don nous aide à atteindre davantage de familles, d'enfants, de personnes âgées et de personnes traversant des moments difficiles qui ont besoin d'une main tendue.",
+    about_text5:"Nous nous engageons à agir avec transparence, responsabilité et dévouement, afin que chaque don soit utilisé le plus efficacement possible et parvienne à ceux qui en ont vraiment besoin.",
+    about_text6:"Notre vision est un monde où personne n'a à choisir entre se nourrir et subvenir à d'autres besoins essentiels, et où aucune famille ne se couche affamée.",
+    about_text7:"Ensemble, nous pouvons offrir bien plus qu'un repas — nous pouvons offrir de l'espoir.",
+    about_tagline:"Un repas. Un espoir. Une communauté.",
     donate_title:"Financer un repas", donate_sub:"Choisissez un montant, ou saisissez celui de votre choix. Vraiment, n'importe quel montant.",
     custom_amount_ph:"Autre montant", donate_button:"Faire un don", meal_equiv_tpl:"= environ {n} repas chauds",
     trust1:"🔒 Paiement sécurisé", trust2:"🧾 Reçu pour chaque don", trust3:"🤝 Transparence totale",
@@ -791,8 +817,14 @@ const translations = {
     stat2_num:"أي مبلغ", stat2_lbl:"مرحّب به — لا يوجد مبلغ صغير جدًا",
     stat3_num:"4 لغات", stat3_lbl:"ليتمكن الجميع من المشاركة",
     about_title:"من نحن",
-    about_text:"نعمل منذ 20 عامًا، بهدوء وبلا مكاتب فخمة، لضمان ألا تنام العائلات وكبار السن في إسرائيل جياعًا. هذا الموقع جديد - لكن عملنا ليس كذلك.",
-    about_text2:"كل شيكل يُتبرع به يذهب مباشرة لشراء طعام ساخن. سيتم نشر تفاصيل التسجيل الرسمي للجمعية هنا قريبًا، وسنواصل الإبلاغ بشفافية كاملة عن كل تبرع.",
+    about_text:"هناك لحظات يمكن فيها لوجبة واحدة أن تغيّر حياة.",
+    about_text2:"\"وجبة واحدة\" جمعية تأسست بهدف واضح واحد - محاربة الجوع ومساعدة الأفراد والعائلات التي تعاني من ضائقة اقتصادية، في إسرائيل وفي الجاليات اليهودية حول العالم.",
+    about_text3:"نعمل على تقديم سلال غذائية ووجبات ساخنة ودعم غذائي لمن هم بأمس الحاجة إليه، إيمانًا منا بأن كل إنسان يستحق وجبة كريمة وأملًا بمستقبل أفضل. بالنسبة لنا، الطعام أكثر بكثير من مجرد حاجة أساسية - إنه تعبير عن التكافل والكرامة والإنسانية.",
+    about_text4:"يتيح لنا نشاطنا مجتمع من المتبرعين والمتطوعين والشركاء الذين يؤمنون بأن الفعل الصغير يمكن أن يُحدث تغييرًا كبيرًا. كل تبرع يساعدنا في الوصول إلى المزيد من العائلات والأطفال وكبار السن والأشخاص الذين يمرون بلحظات صعبة ويحتاجون إلى يد ممدودة.",
+    about_text5:"نحن ملتزمون بالعمل بشفافية ومسؤولية وتفانٍ، حتى يُستخدم كل تبرع بأكثر الطرق فعالية ويصل إلى من يحتاجه فعلاً.",
+    about_text6:"رؤيتنا هي عالم لا يضطر فيه أي إنسان للاختيار بين الطعام واحتياجات أساسية أخرى، ولا تبقى فيه أي عائلة جائعة.",
+    about_text7:"معًا، يمكننا أن نمنح أكثر بكثير من وجبة - يمكننا أن نمنح الأمل.",
+    about_tagline:"وجبة واحدة. أمل واحد. مجتمع واحد.",
     donate_title:"موّل وجبة", donate_sub:"اختر مبلغًا، أو اكتب أي مبلغ يناسبك. حقًا، أي مبلغ.",
     custom_amount_ph:"مبلغ آخر", donate_button:"تبرع", meal_equiv_tpl:"= حوالي {n} وجبة ساخنة",
     trust1:"🔒 دفع آمن", trust2:"🧾 إيصال لكل تبرع", trust3:"🤝 شفافية كاملة",
