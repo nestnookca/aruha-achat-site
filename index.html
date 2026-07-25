@@ -58,8 +58,11 @@
     -webkit-backdrop-filter: blur(10px) saturate(1.4);
     border-bottom:1px solid var(--line);
   }
-  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
-  .tagline-bar{background:#0b1f26;color:#fff;text-align:center;padding:10px 16px;font-size:.92rem;font-weight:600;letter-spacing:.02em;}
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 0;position:relative;}
+  .header-tagline{
+    color:var(--green-dark);font-size:.82rem;font-weight:600;
+    margin-inline-start:12px;padding-inline-start:12px;border-inline-start:1px solid var(--line);
+  }
   .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.2rem;color:var(--ink);font-family:'Frank Ruhl Libre','Cairo',Georgia,serif;}
   .brand .mark{width:30px;height:30px;border-radius:50%;background:var(--terracotta);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
   nav.links{display:flex;gap:20px;align-items:center;}
@@ -84,7 +87,7 @@
   .mobile-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);}
 
   /* Cinematic hero (scroll-scrubbed image sequence) */
-  .cine-hero{height:400vh;position:relative;background:#0b1f26;}
+  .cine-hero{height:400vh;position:relative;background:var(--green-dark);}
   .cine-sticky{
     position:sticky;top:0;height:100vh;overflow:hidden;
     display:flex;align-items:center;
@@ -340,6 +343,10 @@
       width:100%;padding:20px;gap:16px;border-bottom:1px solid var(--line);display:none;}
     nav.links.open{display:flex;}
     .mobile-toggle{display:block;}
+    .header-tagline{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      margin:0;padding:0;border:none;font-size:.72rem;white-space:nowrap;
+    }
     .about-grid{grid-template-columns:1fr;}
     .impact-grid, .stats-grid, .story-photos{grid-template-columns:1fr 1fr;}
     .amount-grid{grid-template-columns:repeat(2,1fr);}
@@ -378,6 +385,7 @@
   <div class="container nav-wrap">
     <div class="brand">
       <img src="assets/logo-icon.png" alt="ארוחה אחת" style="height:40px;width:auto;">
+      <span class="header-tagline">לכל אחד מגיעה ארוחה חמה</span>
     </div>
     <button class="mobile-toggle" id="mobileToggle" aria-label="menu">☰</button>
     <nav class="links" id="navLinks">
@@ -395,8 +403,6 @@
     </nav>
   </div>
 </header>
-
-<div class="tagline-bar">לכל אחד מגיעה ארוחה חמה</div>
 
 <section class="cine-hero" id="cineHero">
   <div class="cine-sticky" id="cineSticky">
