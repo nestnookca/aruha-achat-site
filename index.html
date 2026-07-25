@@ -94,12 +94,6 @@
   .cine-scrim{
     position:absolute;inset:0;z-index:1;background:rgba(10,22,28,0.3);
   }
-  .cine-badge{
-    position:absolute;top:18px;inset-inline-end:18px;z-index:3;
-    background:rgba(10,22,28,0.72);color:#fff;font-size:.74rem;font-weight:700;
-    padding:7px 13px;border-radius:20px;backdrop-filter:blur(6px);
-    border:1px solid rgba(255,255,255,0.25);
-  }
   .cine-overlay{position:relative;z-index:2;width:100%;text-align:center;}
   .cine-overlay h1{
     color:#fff;font-size:3rem;font-weight:800;line-height:1.25;margin:0 0 16px;
@@ -408,7 +402,6 @@
   <div class="cine-sticky" id="cineSticky">
     <canvas id="cineCanvas" aria-hidden="true"></canvas>
     <div class="cine-scrim"></div>
-    <div class="cine-badge" data-i18n="cine_disclosure">ארוחה אחת</div>
     <div class="cine-overlay">
       <div class="container">
         <div class="cine-stat-pill"><span>החודש חילקנו <b>4,585</b> ארוחות עם <b>86</b> מתנדבים בשטח</span></div>
@@ -671,7 +664,6 @@ const translations = {
   he: {
     dir:"rtl", brand:"ארוחה אחת",
     nav_about:"מי אנחנו", nav_impact:"איך עוזרים", nav_stories:"סיפורים", nav_contact:"צור קשר", nav_donate:"תרמו עכשיו",
-    cine_disclosure:"ארוחה אחת",
     hero_cta_donate:"כן, אני רוצה להאכיל מישהו היום ←",
     photo_placeholder:"כאן תהיה תמונה אמיתית שלנו — בדרך",
     photo_soon1:"בדרך", photo_soon2:"בדרך", photo_soon3:"בדרך",
@@ -707,7 +699,6 @@ const translations = {
   en: {
     dir:"ltr", brand:"One Meal",
     nav_about:"About Us", nav_impact:"How It Helps", nav_stories:"Stories", nav_contact:"Contact", nav_donate:"Donate Now",
-    cine_disclosure:"🎬 Illustrative rendering — not real footage",
     hero_cta_donate:"Fund a Meal",
     photo_placeholder:"A real photo of ours will go here — coming soon",
     photo_soon1:"Coming soon", photo_soon2:"Coming soon", photo_soon3:"Coming soon",
@@ -743,7 +734,6 @@ const translations = {
   fr: {
     dir:"ltr", brand:"Un Repas",
     nav_about:"Qui sommes-nous", nav_impact:"Notre impact", nav_stories:"Témoignages", nav_contact:"Contact", nav_donate:"Faire un don",
-    cine_disclosure:"🎬 Rendu illustratif — pas de vraies images",
     hero_cta_donate:"Financer un repas",
     photo_placeholder:"Une vraie photo de nous arrivera ici — bientôt",
     photo_soon1:"Bientôt", photo_soon2:"Bientôt", photo_soon3:"Bientôt",
@@ -779,7 +769,6 @@ const translations = {
   ar: {
     dir:"rtl", brand:"وجبة واحدة",
     nav_about:"من نحن", nav_impact:"كيف نساعد", nav_stories:"قصص", nav_contact:"اتصل بنا", nav_donate:"تبرع الآن",
-    cine_disclosure:"🎬 تصور توضيحي — ليس تصويرًا حقيقيًا",
     hero_cta_donate:"موّل وجبة",
     photo_placeholder:"صورة حقيقية لنا ستكون هنا — قريبًا",
     photo_soon1:"قريبًا", photo_soon2:"قريبًا", photo_soon3:"قريبًا",
