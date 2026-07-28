@@ -385,7 +385,7 @@
   <div class="container nav-wrap">
     <div class="brand">
       <img src="assets/logo-icon.png" alt="ארוחה אחת" style="height:40px;width:auto;">
-      <span class="header-tagline">לכל אחד מגיעה ארוחה חמה</span>
+      <span class="header-tagline" data-i18n="header_tagline">לכל אחד מגיעה ארוחה חמה</span>
     </div>
     <button class="mobile-toggle" id="mobileToggle" aria-label="menu">☰</button>
     <nav class="links" id="navLinks">
@@ -665,7 +665,7 @@
 <script>
 const translations = {
   he: {
-    dir:"rtl", brand:"ארוחה אחת",
+    dir:"rtl", brand:"ארוחה אחת", header_tagline:"לכל אחד מגיעה ארוחה חמה",
     nav_about:"מי אנחנו", nav_impact:"איך עוזרים", nav_stories:"סיפורים", nav_contact:"צור קשר", nav_donate:"תרמו עכשיו",
     hero_cta_donate:"כן, אני רוצה להאכיל מישהו היום ←",
     photo_placeholder:"כאן תהיה תמונה אמיתית שלנו — בדרך",
@@ -700,7 +700,7 @@ const translations = {
     invited_banner_tpl:"מישהו הזמין אתכם לתרום {amount} ₪ 🧡 הסכום כבר מוכן למטה"
   },
   en: {
-    dir:"ltr", brand:"One Meal",
+    dir:"ltr", brand:"One Meal", header_tagline:"Everyone deserves a hot meal",
     nav_about:"About Us", nav_impact:"How It Helps", nav_stories:"Stories", nav_contact:"Contact", nav_donate:"Donate Now",
     hero_cta_donate:"Fund a Meal",
     photo_placeholder:"A real photo of ours will go here — coming soon",
@@ -735,7 +735,7 @@ const translations = {
     invited_banner_tpl:"Someone invited you to donate ₪{amount} 🧡 The amount is ready below"
   },
   fr: {
-    dir:"ltr", brand:"Un Repas",
+    dir:"ltr", brand:"Un Repas", header_tagline:"Chacun mérite un repas chaud",
     nav_about:"Qui sommes-nous", nav_impact:"Notre impact", nav_stories:"Témoignages", nav_contact:"Contact", nav_donate:"Faire un don",
     hero_cta_donate:"Financer un repas",
     photo_placeholder:"Une vraie photo de nous arrivera ici — bientôt",
@@ -770,7 +770,7 @@ const translations = {
     invited_banner_tpl:"Quelqu'un vous invite à donner {amount} ₪ 🧡 Le montant est prêt ci-dessous"
   },
   ar: {
-    dir:"rtl", brand:"وجبة واحدة",
+    dir:"rtl", brand:"وجبة واحدة", header_tagline:"كل شخص يستحق وجبة ساخنة",
     nav_about:"من نحن", nav_impact:"كيف نساعد", nav_stories:"قصص", nav_contact:"اتصل بنا", nav_donate:"تبرع الآن",
     hero_cta_donate:"موّل وجبة",
     photo_placeholder:"صورة حقيقية لنا ستكون هنا — قريبًا",
@@ -1293,7 +1293,10 @@ document.getElementById('copyLink').addEventListener('click', ()=>{
   nextBtn.addEventListener('click', ()=>step(1));
 })();
 
-applyLang('he');
+// Lets a shared link open the site directly in a given language, e.g.
+// haimeal.com/index.html?lang=en (supported: he, en, fr, ar).
+const langParam = new URLSearchParams(window.location.search).get('lang');
+applyLang(translations[langParam] ? langParam : 'he');
 
 if(invitedAmount){
   selectAmountValue(invitedAmount);
