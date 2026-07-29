@@ -377,6 +377,8 @@ document.getElementById('donateForm').addEventListener('submit', (e)=>{
     localStorage.setItem('lastDonationMeals', String(meals));
   }catch(err){}
 
+  if(window.trackEvent) window.trackEvent('click', 'donate_checkout_button', {amount: selectedAmount});
+
   const btn = document.getElementById('checkoutBtn');
   btn.classList.add('loading');
   btn.disabled = true;
@@ -466,5 +468,6 @@ if(initialAmount > 0) selectAmount(initialAmount, false);
 })();
 </script>
 <script src="assets/accessibility.js" defer></script>
+<script src="assets/analytics.js" defer></script>
 </body>
 </html>

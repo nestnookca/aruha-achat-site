@@ -1079,6 +1079,10 @@ function showToast(msg){
 
 function goToCheckout(amount, btn, opts){
   opts = opts || {};
+  if(window.trackEvent){
+    const label = btn.id || (btn.classList.contains('impact-cta') ? 'impact_card_' + amount : 'donate_button');
+    window.trackEvent('click', label, {amount: amount});
+  }
   const original = btn.textContent;
   btn.textContent = 'רגע, טוענים…';
   btn.style.pointerEvents = 'none';
@@ -1391,5 +1395,6 @@ if(invitedAmount){
 }
 </script>
 <script src="assets/accessibility.js" defer></script>
+<script src="assets/analytics.js" defer></script>
 </body>
 </html>

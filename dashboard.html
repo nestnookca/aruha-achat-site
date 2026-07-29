@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>דשבורד אנליטיקס — ארוחה אחת</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="assets/logo-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  :root{
+    --cream:#F8F9FA; --cream-2:#EAF1F3;
+    --terracotta:#FF8C42; --terracotta-dark:#E06A1F;
+    --green:#1E8AA0; --green-dark:#155F70;
+    --ink:#2D3748; --muted:#5A6472; --white:#FFFFFF; --line:#E2E6EA;
+    --shadow: 0 4px 18px rgba(30,52,64,0.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:'Heebo',sans-serif; background:var(--cream); color:var(--ink);
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2{font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:700;margin:0;}
+  .container{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+  /* Login screen */
+  #loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .login-card{background:var(--white);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:36px;max-width:360px;width:100%;}
+  .login-card h1{font-size:1.4rem;margin-bottom:6px;text-align:center;}
+  .login-card p{color:var(--muted);font-size:.88rem;text-align:center;margin:0 0 22px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:.82rem;font-weight:700;color:var(--muted);margin-bottom:5px;}
+  .field input{
+    width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:9px;
+    font-size:.95rem;font-family:inherit;outline:none;transition:border-color .15s;
+  }
+  .field input:focus{border-color:var(--terracotta);}
+  .login-btn{
+    width:100%;background:var(--terracotta);color:#fff;border:none;border-radius:9px;
+    padding:13px;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;margin-top:6px;
+  }
+  .login-btn:hover{background:var(--terracotta-dark);}
+  .login-error{color:#c0392b;font-size:.85rem;text-align:center;margin-top:12px;display:none;}
+
+  /* Dashboard */
+  #dashboard{display:none;}
+  header{background:var(--white);border-bottom:1px solid var(--line);padding:16px 0;position:sticky;top:0;z-index:5;}
+  .header-row{display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-family:'Frank Ruhl Libre',Georgia,serif;}
+  .brand img{height:28px;}
+  .logout-btn{background:none;border:1.5px solid var(--line);border-radius:8px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer;color:var(--muted);font-family:inherit;}
+  .logout-btn:hover{border-color:var(--terracotta);color:var(--terracotta-dark);}
+
+  .range-row{display:flex;gap:8px;margin:24px 0 20px;flex-wrap:wrap;}
+  .range-btn{background:var(--white);border:1.5px solid var(--line);border-radius:8px;padding:9px 16px;font-size:.85rem;font-weight:700;cursor:pointer;color:var(--muted);font-family:inherit;}
+  .range-btn.active{border-color:var(--terracotta);color:var(--terracotta-dark);background:#FFF6EE;}
+
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:28px;}
+  .stat-card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);}
+  .stat-card .num{font-size:1.7rem;font-weight:800;font-family:'Frank Ruhl Libre',Georgia,serif;color:var(--green-dark);}
+  .stat-card .lbl{font-size:.8rem;color:var(--muted);margin-top:2px;}
+
+  .grid-2{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:20px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px;}
+  .panel{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow);}
+  .panel h2{font-size:1rem;margin-bottom:14px;}
+  .panel canvas{max-height:260px;}
+
+  table{width:100%;border-collapse:collapse;font-size:.85rem;}
+  th,td{text-align:start;padding:8px 6px;border-bottom:1px solid var(--line);}
+  th{color:var(--muted);font-weight:700;font-size:.78rem;}
+  .empty-note{color:var(--muted);font-size:.85rem;text-align:center;padding:20px 0;}
+
+  @media (max-width:900px){
+    .grid-2, .grid-3{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <div class="login-card">
+    <h1>ארוחה אחת</h1>
+    <p>דשבורד אנליטיקס — כניסה לאדמין בלבד</p>
+    <form id="loginForm">
+      <div class="field">
+        <label for="loginEmail">אימייל</label>
+        <input type="email" id="loginEmail" required autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="loginPassword">סיסמה</label>
+        <input type="password" id="loginPassword" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="login-btn">כניסה</button>
+      <p class="login-error" id="loginError">אימייל או סיסמה שגויים.</p>
+    </form>
+  </div>
+</div>
+
+<div id="dashboard">
+  <header>
+    <div class="container header-row">
+      <a class="brand" href="index.html"><img src="assets/logo-icon.png" alt=""><span>ארוחה אחת — אנליטיקס</span></a>
+      <button class="logout-btn" id="logoutBtn">התנתקות</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="range-row" id="rangeRow">
+      <button class="range-btn" data-days="7">7 ימים</button>
+      <button class="range-btn active" data-days="30">30 ימים</button>
+      <button class="range-btn" data-days="90">90 ימים</button>
+      <button class="range-btn" data-days="0">הכל</button>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num" id="statVisitors">–</div><div class="lbl">מבקרים ייחודיים</div></div>
+      <div class="stat-card"><div class="num" id="statPageviews">–</div><div class="lbl">צפיות דף</div></div>
+      <div class="stat-card"><div class="num" id="statClicks">–</div><div class="lbl">קליקים על כפתורים</div></div>
+      <div class="stat-card"><div class="num" id="statConversions">–</div><div class="lbl">המרות (תרומות)</div></div>
+      <div class="stat-card"><div class="num" id="statConvRate">–</div><div class="lbl">שיעור המרה</div></div>
+      <div class="stat-card"><div class="num" id="statAmount">–</div><div class="lbl">סה"כ תרומות מתועדות</div></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h2>מבקרים וצפיות לאורך זמן</h2>
+        <canvas id="timeChart"></canvas>
+      </div>
+      <div class="panel">
+        <h2>סוג מכשיר</h2>
+        <canvas id="deviceChart"></canvas>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="panel">
+        <h2>עמודים מובילים</h2>
+        <table id="topPagesTable"><thead><tr><th>עמוד</th><th>צפיות</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="panel">
+        <h2>מקורות UTM מובילים</h2>
+        <table id="topUtmTable"><thead><tr><th>מקור</th><th>אירועים</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="panel">
+        <h2>מדינות מובילות</h2>
+        <table id="topCountryTable"><thead><tr><th>מדינה</th><th>אירועים</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h2>דפדפן</h2>
+        <canvas id="browserChart"></canvas>
+      </div>
+      <div class="panel">
+        <h2>כפתורים / המרות מובילים</h2>
+        <table id="topEventsTable"><thead><tr><th>אירוע</th><th>כמות</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// TODO after you rotate the Supabase JWT secret: replace SUPABASE_ANON_KEY below
+// with the NEW anon key (rotating invalidates this one too, not just service_role).
+const SUPABASE_URL = 'https://owhbdakxthvnmcdbsyoo.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93aGJkYWt4dGh2bm1jZGJzeW9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzMjY2MzYsImV4cCI6MjEwMDkwMjYzNn0.tWKCeRJRHeZlews_Z2Ny4yW3wwr0saWOxZFPYCaYaMY';
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const loginScreen = document.getElementById('loginScreen');
+const dashboard = document.getElementById('dashboard');
+let charts = {};
+let currentDays = 30;
+
+async function checkSession(){
+  const { data } = await sb.auth.getSession();
+  if(data.session){
+    showDashboard();
+  } else {
+    loginScreen.style.display = 'flex';
+    dashboard.style.display = 'none';
+  }
+}
+
+document.getElementById('loginForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  if(error){
+    errEl.textContent = 'אימייל או סיסמה שגויים.';
+    errEl.style.display = 'block';
+    return;
+  }
+  showDashboard();
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async ()=>{
+  await sb.auth.signOut();
+  location.reload();
+});
+
+function showDashboard(){
+  loginScreen.style.display = 'none';
+  dashboard.style.display = 'block';
+  loadData(currentDays);
+}
+
+document.getElementById('rangeRow').addEventListener('click', (e)=>{
+  const btn = e.target.closest('.range-btn');
+  if(!btn) return;
+  document.querySelectorAll('.range-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentDays = Number(btn.getAttribute('data-days'));
+  loadData(currentDays);
+});
+
+async function loadData(days){
+  let query = sb.from('analytics_events').select('*').order('created_at', { ascending: true }).limit(20000);
+  if(days > 0){
+    const since = new Date(Date.now() - days * 86400000).toISOString();
+    query = query.gte('created_at', since);
+  }
+  const { data, error } = await query;
+  if(error){
+    console.error(error);
+    return;
+  }
+  render(data || []);
+}
+
+function render(rows){
+  const pageviews = rows.filter(r => r.event_type === 'pageview');
+  const clicks = rows.filter(r => r.event_type === 'click');
+  const conversions = rows.filter(r => r.event_type === 'conversion');
+  const uniqueVisitors = new Set(rows.map(r => r.visitor_id)).size;
+  const totalAmount = conversions.reduce((sum, r) => sum + (Number(r.amount) || 0), 0);
+  const convRate = pageviews.length ? ((conversions.length / pageviews.length) * 100).toFixed(1) + '%' : '–';
+
+  document.getElementById('statVisitors').textContent = uniqueVisitors.toLocaleString('he-IL');
+  document.getElementById('statPageviews').textContent = pageviews.length.toLocaleString('he-IL');
+  document.getElementById('statClicks').textContent = clicks.length.toLocaleString('he-IL');
+  document.getElementById('statConversions').textContent = conversions.length.toLocaleString('he-IL');
+  document.getElementById('statConvRate').textContent = convRate;
+  document.getElementById('statAmount').textContent = totalAmount ? ('₪' + totalAmount.toLocaleString('he-IL')) : '–';
+
+  renderTimeChart(pageviews);
+  renderBreakdownChart('deviceChart', countBy(pageviews, 'device_type'));
+  renderBreakdownChart('browserChart', countBy(pageviews, 'browser'));
+  renderTable('topPagesTable', countBy(pageviews, 'page_path'));
+  renderTable('topUtmTable', countBy(rows.filter(r => r.utm_source), 'utm_source'));
+  renderTable('topCountryTable', countBy(pageviews, 'country'));
+  renderTable('topEventsTable', countBy(clicks.concat(conversions), 'event_name'));
+}
+
+function countBy(rows, field){
+  const counts = {};
+  rows.forEach(r => {
+    const key = r[field] || 'לא ידוע';
+    counts[key] = (counts[key] || 0) + 1;
+  });
+  return Object.entries(counts).sort((a,b) => b[1] - a[1]);
+}
+
+function renderTable(id, entries){
+  const tbody = document.querySelector('#' + id + ' tbody');
+  tbody.innerHTML = '';
+  if(!entries.length){
+    tbody.innerHTML = '<tr><td colspan="2" class="empty-note">אין נתונים עדיין</td></tr>';
+    return;
+  }
+  entries.slice(0, 8).forEach(([name, count]) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${name}</td><td>${count.toLocaleString('he-IL')}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderTimeChart(pageviews){
+  const byDay = {};
+  pageviews.forEach(r => {
+    const day = r.created_at.slice(0, 10);
+    if(!byDay[day]) byDay[day] = new Set();
+    byDay[day].add(r.visitor_id);
+  });
+  const days = Object.keys(byDay).sort();
+  const visitorCounts = days.map(d => byDay[d].size);
+  const viewCounts = days.map(d => pageviews.filter(r => r.created_at.slice(0,10) === d).length);
+
+  drawChart('timeChart', 'line', {
+    labels: days,
+    datasets: [
+      { label: 'מבקרים ייחודיים', data: visitorCounts, borderColor: '#1E8AA0', backgroundColor: 'rgba(30,138,160,0.1)', tension: .3 },
+      { label: 'צפיות דף', data: viewCounts, borderColor: '#FF8C42', backgroundColor: 'rgba(255,140,66,0.1)', tension: .3 }
+    ]
+  });
+}
+
+function renderBreakdownChart(id, entries){
+  drawChart(id, 'doughnut', {
+    labels: entries.map(e => e[0]),
+    datasets: [{ data: entries.map(e => e[1]), backgroundColor: ['#1E8AA0','#FF8C42','#155F70','#E06A1F','#5A6472'] }]
+  });
+}
+
+function drawChart(canvasId, type, data){
+  if(charts[canvasId]) charts[canvasId].destroy();
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  charts[canvasId] = new Chart(ctx, { type, data, options: { responsive: true, plugins: { legend: { labels: { font: { family: 'Heebo' } } } } } });
+}
+
+checkSession();
+</script>
+</body>
+</html>
