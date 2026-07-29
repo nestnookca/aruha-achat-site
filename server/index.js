@@ -104,7 +104,11 @@ app.get('/session/:id', async (req, res) => {
 // lookup; the IP itself is never stored anywhere.
 const ANALYTICS_EVENT_TYPES = new Set(['pageview', 'click', 'conversion']);
 
-app.post('/track', async (req, res) => {
+// Deliberately not named /track, /collect, /analytics, or /beacon — those
+// path names are on EasyList/EasyPrivacy and get silently dropped by
+// ad blockers (uBlock Origin, AdBlock Plus, etc.) before the request even
+// leaves the browser.
+app.post('/hb', async (req, res) => {
   if (!supabaseAdmin) {
     return res.status(503).json({ error: 'analytics not configured' });
   }

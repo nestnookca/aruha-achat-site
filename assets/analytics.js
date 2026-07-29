@@ -99,7 +99,7 @@
       browser: getBrowser()
     }, attribution, extra || {});
 
-    const url = BACKEND_URL + '/track';
+    const url = BACKEND_URL + '/hb'; // not /track — ad blockers strip that path name
     const body = JSON.stringify(payload);
 
     // Plain fetch(keepalive) instead of sendBeacon: WebKit (Safari/iOS) has a
