@@ -102,12 +102,12 @@
     const url = BACKEND_URL + '/track';
     const body = JSON.stringify(payload);
 
-    if (navigator.sendBeacon) {
-      const blob = new Blob([body], { type: 'application/json' });
-      navigator.sendBeacon(url, blob);
-    } else {
-      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body, keepalive: true }).catch(() => {});
-    }
+    // Plain fetch(keepalive) instead of sendBeacon: WebKit (Safari/iOS) has a
+    // long-standing bug where sendBeacon silently drops cross-origin requests
+    // whose body isn't a CORS-safelisted content type (ours is JSON). None of
+    // these events fire on page unload, so sendBeacon's main advantage over
+    // fetch doesn't even apply here.
+    fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body, keepalive: true }).catch(() => {});
   }
 
   // Public API for pages to call on important clicks/conversions, e.g.:
